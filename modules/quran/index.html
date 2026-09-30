@@ -1,1 +1,363 @@
-<!doctype html><html lang="sq"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Enciklopedia e Kuranit | Drita Hanefi</title><link rel="stylesheet" href="../../assets/app.css"></head><body><header><a href="../../index.html">☾ Drita Hanefi</a><span>Enciklopedia e Kuranit</span></header><main><section class="hero"><h1>Enciklopedia e Kuranit</h1><p>Sure → Ajet → Tefsir • Fikh • Hadith • Texhvid • Hifz</p><div class="search"><input id="q" placeholder="Kërko sure ose ajet"><button id="searchBtn">Kërko</button></div></section><nav class="tabs"><button class="active">Kryesore</button><button>Burimet</button><button>Referencat</button></nav><section id="app" class="panel"><h2>Sistemi Enciklopedia e Kuranit</h2><p class="muted">Moduli është i ndarë nga sistemet e tjera. Të dhënat reale do të lexohen nga burimi/API përkatës; nuk shfaqen regjistrime të sajuara.</p><div id="results"></div></section></main><script src="../../assets/app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#041A15">
+<title>Enciklopedia e Kuranit – Drita Hanefi</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%;font-family:Arial,sans-serif;background:#041A15;color:#F6FFF9}
+body{
+  background:
+    radial-gradient(circle at top right,rgba(233,201,107,.09),transparent 28%),
+    linear-gradient(180deg,#03130f,#062d24 55%,#041a15)
+}
+.wrap{max-width:1080px;margin:auto;padding:12px 12px 90px}
+.hero{
+  border-radius:26px;padding:18px 15px;
+  border:1px solid rgba(233,201,107,.50);
+  background:radial-gradient(circle at 85% 10%,rgba(233,201,107,.14),transparent 28%),linear-gradient(145deg,#0D4A39,#062D24 62%,#041A15);
+  box-shadow:0 12px 32px rgba(0,0,0,.38)
+}
+.brand{text-align:center}
+.qicon{width:94px;height:94px;margin:auto;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #E9C96B;background:#082f25;font-size:49px;box-shadow:0 0 24px rgba(233,201,107,.22)}
+.arTitle{direction:rtl;font-family:"Times New Roman",serif;font-size:28px;color:#FFF4C4;margin-top:9px;font-weight:bold}
+h1{margin:4px 0;color:#F6DF92;font-size:29px}
+.sub{color:#E2F3EC;font-weight:bold}
+.mini{color:#9FCDBD;font-size:11px;margin-top:5px}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:12px}
+.badge{border:1px solid #806f3d;background:#0a392d;color:#ffe494;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:bold}
+.searchBox{margin-top:14px;padding:11px;border-radius:17px;background:rgba(0,0,0,.22);border:1px solid rgba(233,201,107,.28)}
+.searchRow{display:grid;grid-template-columns:1fr auto;gap:7px}
+.searchRow input{width:100%;padding:14px;border:1px solid #75978c;border-radius:13px;background:#fff;color:#14382e;font-size:14px;outline:none}
+.searchRow button{border:0;border-radius:13px;padding:0 15px;background:linear-gradient(#F6DF92,#D6B44E);color:#17382E;font-weight:bold}
+.sectionTitle{margin:18px 2px 9px;display:flex;justify-content:space-between;align-items:end;gap:10px}
+.sectionTitle h2{margin:0;color:#FFE28F;font-size:20px}
+.sectionTitle span{font-size:10px;color:#A9C9BE}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.card{background:linear-gradient(180deg,#fff,#f4faf7);color:#173a30;border-radius:18px;padding:13px;min-height:138px;box-shadow:0 7px 18px rgba(0,0,0,.24);border:1px solid #dce8e3;position:relative;overflow:hidden;cursor:pointer}
+.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(#E9C96B,#087557)}
+.card .ico{font-size:28px;margin-bottom:6px}
+.card h3{margin:0;color:#08694F;font-size:16px}
+.card p{margin:6px 0 0;color:#536A62;font-size:12px;line-height:1.4}
+.status{display:inline-block;margin-top:8px;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:bold;background:#E4F6EE;color:#0B6E53}
+.live{background:#DCF6E7;color:#087347}
+.sheet{background:#FFF0BD;color:#775900}
+.panel{display:none;margin-top:12px;background:#fff;color:#173A30;border-radius:20px;padding:14px;border:1px solid #DCE8E3;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.panel.active{display:block}
+.panelHead{position:sticky;top:0;z-index:4;background:#fff;padding:2px 0 10px;border-bottom:1px solid #e4ece8}
+.panelHead h3{margin:0;color:#08694F}
+.panelHead small{color:#71867e}
+.backBtn{border:0;border-radius:999px;background:#08694F;color:white;padding:8px 12px;font-weight:bold;float:right}
+.suraGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:12px}
+.sura{padding:11px;border-radius:14px;background:#f5faf8;border:1px solid #d9e7e1;cursor:pointer}
+.sura b{color:#087052;font-size:13px}
+.sura small{display:block;color:#71877f;margin-top:3px;font-size:10px}
+.ayah{padding:16px 0;border-bottom:1px solid #e0ebe6}
+.ayah:last-child{border-bottom:0}
+.ayah.clickable{cursor:pointer}
+.ayah-ar{direction:rtl;text-align:right;font-family:"Traditional Arabic","Times New Roman",serif;font-size:27px;line-height:2;color:#11382d}
+.ayah-sq{margin-top:8px;line-height:1.6;color:#3d5b51;font-size:13px}
+.footnotes{margin-top:6px;padding:8px;border-radius:10px;background:#f7f4e7;color:#665b31;font-size:11px;line-height:1.45}
+.ref{margin-top:6px;color:#9A7A1C;font-size:10px;font-weight:bold}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:9px 0 4px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;border:1px solid #c8d9d2;background:#eef7f3;color:#135744;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:bold}
+.tab.active{background:#09654e;color:#fff;border-color:#09654e}
+.sheetBlock{margin-top:10px;padding:12px;border-radius:14px;border:1px solid #dbe6e1;background:#f8fbfa}
+.sheetBlock h4{margin:0 0 7px;color:#08694F}
+.sheetBlock p{margin:5px 0;line-height:1.55;font-size:12px}
+.sheetText{position:relative}
+.sheetText.collapsed{max-height:170px;overflow:hidden}
+.sheetText.collapsed:after{content:"";position:absolute;left:0;right:0;bottom:0;height:48px;background:linear-gradient(transparent,#f8fbfa)}
+.moreBtn{margin-top:8px;border:0;border-radius:999px;padding:7px 11px;background:#08694F;color:#fff;font-size:10px;font-weight:bold}
+.source{margin-top:7px;padding:7px 9px;border-radius:9px;background:#fff6cf;color:#695000;font-size:10px;line-height:1.4}
+.empty{margin-top:10px;padding:13px;border-radius:13px;background:#fff6cf;color:#695000;border:1px solid #d8bd65;font-size:12px;line-height:1.5}
+.loading{text-align:center;padding:20px;color:#78978c;font-weight:bold}
+.hifzBox{background:linear-gradient(145deg,#0b5b47,#07392e);color:#fff;border-radius:16px;padding:14px;margin-top:10px}
+.hifzBox h4{color:#FFE28F;margin:0 0 8px}
+.hifzControls{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.hifzControls select,.hifzControls input{width:100%;padding:10px;border-radius:10px;border:0}
+.hifzButton{width:100%;margin-top:8px;border:0;border-radius:11px;padding:11px;background:#E9C96B;color:#18382f;font-weight:bold}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(3,19,15,.97);border-top:1px solid rgba(233,201,107,.35);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.bottom button{border:0;background:transparent;color:#BCD4CB;font-size:9px;font-weight:bold}
+.bottom span{display:block;font-size:19px;margin-bottom:2px}
+.bottom button:first-child{color:#FFE28F}
+@media(max-width:400px){
+  .grid,.suraGrid{grid-template-columns:1fr}
+  .searchRow{grid-template-columns:1fr}
+  .searchRow button{height:43px}
+  .ayah-ar{font-size:25px}
+}
+</style>
+</head>
+<body>
+<div class="wrap"><div style="text-align:right;margin:2px 2px 10px"><a href="../../index.html" style="color:#FFE28F;text-decoration:none;font-weight:800">⌂ Ballina</a></div>
+<section class="hero">
+  <div class="brand">
+    <div class="qicon">📖</div>
+    <div class="arTitle">القرآن الكريم</div>
+    <h1>Enciklopedia e Kuranit</h1>
+    <div class="sub">Drita Hanefi</div>
+    <div class="mini">Kurani • Tefsir • Texhvid • Hifz • Qiraete • Fjalor • Fikh • Abetare</div>
+  </div>
+  <div class="badges">
+    <span class="badge">114 Sure</span>
+    <span class="badge">Arabisht LIVE</span>
+    <span class="badge">Hasan Nahi</span>
+    <span class="badge">API LIVE</span>
+  </div>
+  <div class="searchBox">
+    <div class="searchRow">
+      <input id="searchInput" placeholder="Kërko sure ose ajet, p.sh. El-Bekare ose 2:255">
+      <button onclick="doSearch()">Kërko</button>
+    </div>
+  </div>
+</section>
+
+<div class="sectionTitle"><h2>Enciklopedia</h2><span>Zgjidh rubrikën</span></div>
+
+<div class="grid">
+  <div class="card" onclick="showSurahs()"><div class="ico">📖</div><h3>Suret & Ajetet</h3><p>114 sure me tekstin arab dhe përkthimin shqip.</p><span class="status live">API LIVE</span></div>
+  <div class="card" onclick="showInfo('TEMAT')"><div class="ico">🧭</div><h3>Ajetet sipas temës</h3><p>Besimi, namazi, familja, morali, sabri dhe tema të tjera.</p><span class="status sheet">API LIVE</span></div>
+  <div class="card" onclick="showInfo('PERSONALITETET')"><div class="ico">📜</div><h3>Personalitete</h3><p>Pejgamberë dhe persona të përmendur në Kuran.</p><span class="status sheet">API LIVE</span></div>
+  <div class="card" onclick="showInfo('FJALORI')"><div class="ico">📘</div><h3>Fjalor Kur'anor</h3><p>Fjalët arabe, rrënja dhe kuptimi në shqip.</p><span class="status sheet">API LIVE</span></div>
+  <div class="card" onclick="showInfo('TEFSIRI')"><div class="ico">📚</div><h3>Tefsiri</h3><p>Komente të ajeteve me dijetar, burim dhe referencë.</p><span class="status sheet">API LIVE</span></div>
+  <div class="card" onclick="showInfo('TEXHVIDI')"><div class="ico">🔤</div><h3>Texhvidi</h3><p>Rregullat e leximit të shpjeguara në shqip.</p><span class="status sheet">API LIVE</span></div>
+  <div class="card" onclick="showInfo('QIRAETET')"><div class="ico">🎙️</div><h3>Qiraetet</h3><p>Variantet e leximit vetëm me burime të kontrolluara.</p><span class="status sheet">API LIVE</span></div>
+  <div class="card" onclick="showInfo('ESBAB_EN_NUZUL')"><div class="ico">📌</div><h3>Shkaqet e Zbritjes</h3><p>Shkaku i zbritjes së ajeteve kur ka burim të saktë.</p><span class="status sheet">API LIVE</span></div>
+  <div class="card" onclick="showInfo('AJETE_JURIDIKE')"><div class="ico">⚖️</div><h3>Ajete Juridike</h3><p>Dispozita dhe lidhje me Fikhun Hanefi.</p><span class="status sheet">API LIVE</span></div>
+  <div class="card" onclick="showHifzHome()"><div class="ico">🧠</div><h3>Hifzi</h3><p>Plan ditor, përsëritje dhe progres në mësimin përmendësh.</p><span class="status">PLAN PERSONAL</span></div>
+  <div class="card" onclick="showInfo('ABETARJA_KURANORE')"><div class="ico">🔡</div><h3>Abetarja Kur’anore</h3><p>Shkronjat, shqiptimi, shembujt dhe ushtrimet hap pas hapi.</p><span class="status sheet">API LIVE</span></div>
+  <div class="card" onclick="showInfo('REFERENCAT')"><div class="ico">🔗</div><h3>Referencat</h3><p>Burimet dhe bibliografia e Enciklopedisë.</p><span class="status sheet">API LIVE</span></div>
+</div>
+
+<div id="panel" class="panel"></div>
+</div>
+
+<div class="bottom">
+  <button onclick="location.href='../../index.html'"><span>🏠</span>Ballina</button>
+  <button onclick="showSurahs()"><span>📖</span>Suret</button>
+  <button onclick="focusSearch()"><span>🔎</span>Kërko</button>
+  <button onclick="showHifzHome()"><span>🧠</span>Hifz</button>
+  <button onclick="showInfo('TEFSIRI')"><span>📚</span>Tefsir</button>
+</div>
+
+<script>
+const API_URL="https://script.google.com/macros/s/AKfycbxrUMs1edY-Fwd_qJWgVH6mVW_P_DTKzba7yT5QiLCZnn5y4_SzdT8tsH_2W7iwmxbq/exec";
+const QURANENC_KEY="albanian_nahi";
+const ARABIC_API="https://api.alquran.cloud/v1";
+const QURANENC_API="https://quranenc.com/api/v1";
+
+let surahs=[];
+let currentSurah=null;
+let currentAyah=null;
+
+function esc(v){
+  return String(v??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+function panel(){
+  const p=document.getElementById("panel");
+  p.classList.add("active");
+  setTimeout(()=>p.scrollIntoView({behavior:"smooth",block:"start"}),50);
+  return p;
+}
+function goTop(){window.scrollTo({top:0,behavior:"smooth"})}
+function focusSearch(){goTop();setTimeout(()=>document.getElementById("searchInput").focus(),300)}
+
+async function apiRead(sheetName,params={}){
+  const u=new URL(API_URL);
+  u.searchParams.set("sheet",sheetName);
+  Object.entries(params).forEach(([k,v])=>{
+    if(v!==""&&v!==null&&typeof v!=="undefined")u.searchParams.set(k,v);
+  });
+  u.searchParams.set("_",Date.now());
+  const r=await fetch(u.toString(),{cache:"no-store",redirect:"follow"});
+  if(!r.ok)throw new Error("HTTP "+r.status);
+  const j=await r.json();
+  if(!j.success)throw new Error(j.error||"API error");
+  return j;
+}
+
+async function loadSurahList(){
+  try{
+    const r=await fetch(ARABIC_API+"/surah",{cache:"no-store"});
+    const j=await r.json();
+    if(j&&j.data&&Array.isArray(j.data))surahs=j.data;
+  }catch(e){console.error(e)}
+}
+
+async function showSurahs(){
+  const p=panel();
+  p.innerHTML='<div class="loading">Duke ngarkuar 114 suret...</div>';
+  if(!surahs.length)await loadSurahList();
+  if(!surahs.length){p.innerHTML='<div class="empty">Nuk u arrit të merret lista e sureve.</div>';return}
+  p.innerHTML='<div class="panelHead"><h3>📖 114 Suret e Kuranit</h3><small>Prek një sure për ta hapur</small></div><div class="suraGrid">'+
+  surahs.map(s=>`<div class="sura" onclick="loadSurah(${s.number})"><b>${s.number}. ${esc(s.englishName)}</b><small>${esc(s.name)} • ${s.numberOfAyahs} ajete</small></div>`).join("")+
+  '</div>';
+}
+
+async function loadSurah(number){
+  currentSurah=number;
+  const p=panel();
+  p.innerHTML='<div class="loading">Duke ngarkuar suren...</div>';
+  try{
+    const [arR,sqR]=await Promise.all([
+      fetch(ARABIC_API+"/surah/"+number+"/quran-uthmani",{cache:"no-store"}),
+      fetch(QURANENC_API+"/translation/sura/"+QURANENC_KEY+"/"+number,{cache:"no-store"})
+    ]);
+    const arJ=await arR.json(),sqJ=await sqR.json();
+    const arData=arJ&&arJ.data?arJ.data:null;
+    const sqRows=Array.isArray(sqJ)?sqJ:(Array.isArray(sqJ.result)?sqJ.result:[]);
+    if(!arData||!Array.isArray(arData.ayahs))throw new Error("Teksti arab nuk u ngarkua.");
+
+    let html=`<div class="panelHead"><button class="backBtn" onclick="showSurahs()">← Suret</button><h3>${esc(arData.name)}</h3><small>${esc(arData.englishName)} • ${arData.numberOfAyahs} ajete</small></div>`;
+    arData.ayahs.forEach(a=>{
+      const ayaNr=a.numberInSurah;
+      const sq=sqRows.find(x=>Number(x.aya)===Number(ayaNr))||{};
+      html+=`<div class="ayah clickable" onclick="openAyah(${number},${ayaNr})">
+        <div class="ayah-ar">${esc(a.text)}</div>
+        <div class="ayah-sq">${esc(sq.translation||"")}</div>
+        ${sq.footnotes?`<div class="footnotes">${esc(sq.footnotes)}</div>`:""}
+        <div class="ref">${number}:${ayaNr} • Preke ajetin për Tefsir, Texhvid, Hifz dhe më shumë</div>
+      </div>`;
+    });
+    p.innerHTML=html;
+  }catch(e){
+    p.innerHTML='<div class="empty">Gabim gjatë ngarkimit të sures:<br>'+esc(e.message)+'</div>';
+  }
+}
+
+async function openAyah(sura,aya){
+  currentSurah=sura;currentAyah=aya;
+  const p=panel();
+  p.innerHTML='<div class="loading">Duke hapur ajetin...</div>';
+  try{
+    const [arR,sqR]=await Promise.all([
+      fetch(ARABIC_API+"/ayah/"+sura+":"+aya+"/quran-uthmani",{cache:"no-store"}),
+      fetch(QURANENC_API+"/translation/aya/"+QURANENC_KEY+"/"+sura+"/"+aya,{cache:"no-store"})
+    ]);
+    const arJ=await arR.json(),sqJ=await sqR.json();
+    const ar=arJ&&arJ.data?arJ.data:{};
+    const sq=sqJ&&sqJ.result?sqJ.result:sqJ;
+
+    p.innerHTML=`
+      <div class="panelHead">
+        <button class="backBtn" onclick="loadSurah(${sura})">← Surja</button>
+        <h3>📖 ${sura}:${aya}</h3><small>Enciklopedia e ajetit</small>
+      </div>
+      <div class="ayah">
+        <div class="ayah-ar">${esc(ar.text||"")}</div>
+        <div class="ayah-sq">${esc(sq.translation||"")}</div>
+        ${sq.footnotes?`<div class="footnotes">${esc(sq.footnotes)}</div>`:""}
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="showAyahTab(this,'TEFSIRI',${sura},${aya})">📚 Tefsiri</button>
+        <button class="tab" onclick="showAyahTab(this,'TEXHVIDI',${sura},${aya})">🔤 Texhvidi</button>
+        <button class="tab" onclick="showAyahTab(this,'QIRAETET',${sura},${aya})">🎙️ Qiraetet</button>
+        <button class="tab" onclick="showAyahTab(this,'FJALORI',${sura},${aya})">📘 Fjalori</button>
+        <button class="tab" onclick="showAyahTab(this,'TEMAT',${sura},${aya})">🧭 Tema</button>
+        <button class="tab" onclick="showAyahTab(this,'ESBAB_EN_NUZUL',${sura},${aya})">📌 Shkaku</button>
+        <button class="tab" onclick="showAyahTab(this,'AJETE_JURIDIKE',${sura},${aya})">⚖️ Fikhu Hanefi</button>
+        <button class="tab" onclick="showHifzForAyah(${sura},${aya})">🧠 Hifz</button>
+      </div>
+      <div id="ayahExtra"></div>`;
+    showAyahTab(p.querySelector(".tab"),"TEFSIRI",sura,aya);
+  }catch(e){p.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
+}
+
+async function showAyahTab(button,sheetName,sura,aya){
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  if(button)button.classList.add("active");
+  const box=document.getElementById("ayahExtra");if(!box)return;
+  box.innerHTML='<div class="loading">Duke marrë materialin LIVE...</div>';
+  try{
+    const j=await apiRead(sheetName,{sura:sura,ajet:aya});
+    const rows=j.data||[];
+    box.innerHTML=rows.length?renderSheetData(sheetName,rows):`<div class="empty">Nuk kemi ende material për ${sura}:${aya} në rubrikën <b>${esc(sheetName)}</b>.</div>`;
+  }catch(e){box.innerHTML='<div class="empty"><b>API LIVE:</b> '+esc(e.message)+'</div>'}
+}
+
+function textBlock(text){
+  const id="t"+Math.random().toString(36).slice(2);
+  const safe=esc(text||"");
+  const long=(text||"").length>420;
+  return `<div id="${id}" class="sheetText ${long?"collapsed":""}"><p>${safe}</p></div>${long?`<button class="moreBtn" onclick="toggleText('${id}',this)">Lexo të plotë</button>`:""}`;
+}
+function toggleText(id,btn){
+  const el=document.getElementById(id);if(!el)return;
+  const closed=el.classList.toggle("collapsed");
+  btn.textContent=closed?"Lexo të plotë":"Mbyll";
+}
+
+function renderSheetData(sheet,rows){
+  return rows.map(r=>{
+    if(sheet==="TEFSIRI")return `<div class="sheetBlock"><h4>📚 ${esc(r.LlojiKomentit||"Tefsir")}</h4>${textBlock(r.Teksti||"")}<div class="source">Burimi: ${esc(r.Dijetari_Burimi||"")}${r.Referenca?" • "+esc(r.Referenca):""}</div></div>`;
+    if(sheet==="TEXHVIDI")return `<div class="sheetBlock"><h4>🔤 ${esc(r.RregulliShqip||"Rregulli i leximit")}</h4>${r.PjesaAjetit?'<p><b>Pjesa:</b> '+esc(r.PjesaAjetit)+'</p>':""}${textBlock(r.ShpjegimiShqip||"")}${r.Shqiptimi_Praktik?'<p><b>Si lexohet:</b> '+esc(r.Shqiptimi_Praktik)+'</p>':""}${r.Burimi?'<div class="source">Burimi: '+esc(r.Burimi)+'</div>':""}</div>`;
+    if(sheet==="QIRAETET")return `<div class="sheetBlock"><h4>🎙️ ${esc(r.Kiraeti||"Qiraeti")}</h4><p><b>Transmetuesi:</b> ${esc(r.Transmetuesi||"")}</p><p><b>Varianti:</b> ${esc(r.VariantiLeximit||"")}</p>${textBlock(r.Shpjegimi||"")}${r.Burimi?'<div class="source">Burimi: '+esc(r.Burimi)+'</div>':""}</div>`;
+    if(sheet==="FJALORI")return `<div class="sheetBlock"><h4>📘 ${esc(r.FjalaArabisht||"")}</h4><p><b>Shqip:</b> ${esc(r.KuptimiShqip||"")}</p>${r.Rrenja?'<p><b>Rrënja:</b> '+esc(r.Rrenja)+'</p>':""}${textBlock(r.Shpjegimi||"")}</div>`;
+    if(sheet==="TEMAT")return `<div class="sheetBlock"><h4>🧭 ${esc(r.Tema||"Tema")}</h4><p><b>Nëntema:</b> ${esc(r.NenTema||"")}</p><p><b>${esc(r.SureNr||"")}:${esc(r.AjetNr||"")}</b></p>${textBlock(r.Pershkrimi||"")}${r.Burimi?'<div class="source">Burimi: '+esc(r.Burimi)+'</div>':""}</div>`;
+    if(sheet==="PERSONALITETET")return `<div class="sheetBlock"><h4>📜 ${esc(r.Emri||"")}</h4><p><b>Kategoria:</b> ${esc(r.Kategoria||"")}</p><p><b>${esc(r.SureNr||"")}:${esc(r.AjetNr||"")}</b></p>${textBlock(r.Pershkrimi||"")}${r.Burimi?'<div class="source">Burimi: '+esc(r.Burimi)+'</div>':""}</div>`;
+    if(sheet==="ESBAB_EN_NUZUL")return `<div class="sheetBlock"><h4>📌 Shkaku i zbritjes</h4>${textBlock(r.ShkakuZbritjes||"")}${r.VleresimiBurimit?'<p><b>Vlerësimi:</b> '+esc(r.VleresimiBurimit)+'</p>':""}${r.Burimi?'<div class="source">Burimi: '+esc(r.Burimi)+'</div>':""}</div>`;
+    if(sheet==="AJETE_JURIDIKE")return `<div class="sheetBlock"><h4>⚖️ ${esc(r.TemaFikhut||"Dispozita")}</h4>${textBlock(r.DispozitaHanefi||"")}<div class="source">Burimi Hanefi: ${esc(r.BurimiHanefi||"")}${r.Referenca?" • "+esc(r.Referenca):""}</div></div>`;
+    if(sheet==="ABETARJA_KURANORE")return `<div class="sheetBlock"><h4>🔡 ${esc(r.Titulli||r.Mesimi||r.Shkronja||r.Emri||"Mësim")}</h4>${r.Shkronja?'<div class="ayah-ar">'+esc(r.Shkronja)+'</div>':""}${textBlock(r.ShpjegimiShqip||r.Pershkrimi||r.Shpjegimi||"")}${r.Shqiptimi?'<p><b>Shqiptimi:</b> '+esc(r.Shqiptimi)+'</p>':""}${r.Shembull?'<p><b>Shembull:</b> '+esc(r.Shembull)+'</p>':""}${r.Ushtrimi?'<p><b>Ushtrim:</b> '+esc(r.Ushtrimi)+'</p>':""}${r.Burimi?'<div class="source">Burimi: '+esc(r.Burimi)+'</div>':""}</div>`;
+    if(sheet==="REFERENCAT")return `<div class="sheetBlock"><h4>🔗 ${esc(r.Titulli||"Referencë")}</h4><p><b>Autori:</b> ${esc(r.Autori||"")}</p><p>${esc(r.Lloji||"")} • ${esc(r.Vellimi||"")} ${esc(r.Faqja||"")}</p>${textBlock(r.Shenime||"")}${r.URL?'<div class="source">'+esc(r.URL)+'</div>':""}</div>`;
+    return `<div class="sheetBlock"><h4>${esc(r.Tema||r.Emri||"Pa titull")}</h4>${textBlock(r.Pershkrimi||r.Shpjegimi||"")}</div>`;
+  }).join("");
+}
+
+async function showInfo(sheetName){
+  const p=panel();
+  p.innerHTML='<div class="loading">Duke marrë '+esc(sheetName)+' nga API...</div>';
+  try{
+    const j=await apiRead(sheetName);
+    const rows=j.data||[];
+    p.innerHTML='<div class="panelHead"><h3>'+esc(sheetName)+'</h3><small>'+rows.length+' materiale</small></div>'+
+      (rows.length?renderSheetData(sheetName,rows):'<div class="empty">Rubrika është krijuar, por ende nuk ka materiale.</div>');
+  }catch(e){p.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
+}
+
+function showHifzHome(){
+  const p=panel();
+  p.innerHTML=`<div class="panelHead"><h3>🧠 Hifzi – Mësimi përmendësh</h3><small>Krijo planin tënd ditor</small></div>
+  <div class="hifzBox"><h4>Plani i ri</h4><div class="hifzControls">
+  <input id="hifzSura" type="number" min="1" max="114" placeholder="Sure Nr.">
+  <input id="hifzFrom" type="number" min="1" placeholder="Nga ajeti">
+  <input id="hifzTo" type="number" min="1" placeholder="Deri te ajeti">
+  <select id="hifzDaily"><option value="1">1 ajet në ditë</option><option value="2">2 ajete në ditë</option><option value="3">3 ajete në ditë</option><option value="5">5 ajete në ditë</option><option value="10">10 ajete në ditë</option></select>
+  </div><button class="hifzButton" onclick="makeLocalHifzPlan()">Krijo planin</button></div><div id="hifzResult"></div>`;
+}
+function showHifzForAyah(sura,aya){
+  const box=document.getElementById("ayahExtra");if(!box)return;
+  box.innerHTML=`<div class="hifzBox"><h4>🧠 Mëso ${sura}:${aya}</h4><p>1. Lexoje duke parë tekstin 5 herë.<br>2. Dëgjoje disa herë.<br>3. Lexoje pa parë.<br>4. Përsërite me ajetin para tij.<br>5. Kontrolloje përsëri pas disa orësh.</p></div>`;
+}
+function makeLocalHifzPlan(){
+  const s=Number(document.getElementById("hifzSura").value),from=Number(document.getElementById("hifzFrom").value),to=Number(document.getElementById("hifzTo").value),daily=Number(document.getElementById("hifzDaily").value),box=document.getElementById("hifzResult");
+  if(!s||!from||!to||to<from){box.innerHTML='<div class="empty">Plotëso saktë suren dhe ajetet.</div>';return}
+  const total=to-from+1,days=Math.ceil(total/daily);
+  box.innerHTML=`<div class="sheetBlock"><h4>📅 Plani yt</h4><p>Sure ${s} • Ajete ${from}–${to}</p><p>${daily} ajet(e) në ditë • ${days} ditë gjithsej.</p></div>`;
+}
+
+function doSearch(){
+  const value=document.getElementById("searchInput").value.trim();if(!value)return;
+  const m=value.match(/^(\d{1,3})\s*:\s*(\d{1,3})$/);
+  if(m){const s=Number(m[1]),a=Number(m[2]);if(s>=1&&s<=114&&a>=1){openAyah(s,a);return}}
+  const q=value.toLowerCase();
+  if(surahs.length){
+    const found=surahs.find(s=>String(s.englishName).toLowerCase().includes(q));
+    if(found){loadSurah(found.number);return}
+  }
+  const p=panel();p.innerHTML='<div class="empty">Kërko me emrin e sures ose me formatin <b>2:255</b>.</div>';
+}
+
+document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")doSearch()});
+loadSurahList();
+</script>
+</body>
+</html>
