@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#041A15">
 <title>Enciklopedia e Kuranit – Drita Hanefi</title>
 <style>
+.audioBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0;padding:12px;border:1px solid #e4bd5640;border-radius:14px;background:#06291F}.audioBar button,.audioBar select{padding:9px 11px;border:1px solid #e4bd5655;border-radius:10px;background:#0E5A45;color:#fff;font-weight:700}.audioBar select{background:#021D17}.hifzAyah{transition:.2s}.hifzAyah.active{outline:2px solid #FFE58B;box-shadow:0 0 24px #FFE58B33}.hifzDone{color:#FFE99B;font-weight:800}.hifzProgress{height:9px;background:#021D17;border-radius:999px;overflow:hidden;margin:10px 0}.hifzProgress i{display:block;height:100%;background:linear-gradient(90deg,#C9A33A,#FFE58B);width:0}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;min-height:100%;font-family:Arial,sans-serif;background:#041A15;color:#F6FFF9}
 body{
@@ -152,7 +153,7 @@ const QURANENC_API="https://quranenc.com/api/v1";
 
 let surahs=[];
 let currentSurah=null;
-let currentAyah=null;
+let currentAyah=null;let HIFZ={sura:0,from:0,to:0,repeat:3,index:0,round:0,rows:[],audio:null};
 
 function esc(v){
   return String(v??"")
@@ -324,26 +325,40 @@ async function showInfo(sheetName){
 }
 
 function showHifzHome(){
-  const p=panel();
-  p.innerHTML=`<div class="panelHead"><h3>🧠 Hifzi – Mësimi përmendësh</h3><small>Krijo planin tënd ditor</small></div>
-  <div class="hifzBox"><h4>Plani i ri</h4><div class="hifzControls">
-  <input id="hifzSura" type="number" min="1" max="114" placeholder="Sure Nr.">
-  <input id="hifzFrom" type="number" min="1" placeholder="Nga ajeti">
-  <input id="hifzTo" type="number" min="1" placeholder="Deri te ajeti">
-  <select id="hifzDaily"><option value="1">1 ajet në ditë</option><option value="2">2 ajete në ditë</option><option value="3">3 ajete në ditë</option><option value="5">5 ajete në ditë</option><option value="10">10 ajete në ditë</option></select>
-  </div><button class="hifzButton" onclick="makeLocalHifzPlan()">Krijo planin</button></div><div id="hifzResult"></div>`;
+ const p=panel(),saved=JSON.parse(localStorage.getItem("dh_hifz_plan")||"null");
+ p.innerHTML=`<div class="panelHead"><h3>🧠 Hifzi Premium</h3><small>Audio · përsëritje · progres · vazhdo aty ku mbete</small></div>
+ <div class="hifzBox"><h4>Krijo sesionin</h4><div class="hifzControls">
+ <input id="hifzSura" type="number" min="1" max="114" value="${saved?.sura||1}" placeholder="Sure">
+ <input id="hifzFrom" type="number" min="1" value="${saved?.from||1}" placeholder="Nga">
+ <select id="hifzCount"><option>1</option><option>3</option><option selected>5</option><option>10</option></select>
+ <select id="hifzRepeat"><option>1</option><option selected>3</option><option>5</option><option>10</option><option>20</option></select>
+ </div><button class="hifzButton" onclick="startHifz()">Nis Hifzin</button>${saved?'<button class="hifzButton" onclick="resumeHifz()">Vazhdo planin</button>':''}</div><div id="hifzResult"></div>`;
 }
-function showHifzForAyah(sura,aya){
-  const box=document.getElementById("ayahExtra");if(!box)return;
-  box.innerHTML=`<div class="hifzBox"><h4>🧠 Mëso ${sura}:${aya}</h4><p>1. Lexoje duke parë tekstin 5 herë.<br>2. Dëgjoje disa herë.<br>3. Lexoje pa parë.<br>4. Përsërite me ajetin para tij.<br>5. Kontrolloje përsëri pas disa orësh.</p></div>`;
+async function startHifz(force){
+ const s=Number(document.getElementById("hifzSura")?.value||force?.sura),from=Number(document.getElementById("hifzFrom")?.value||force?.from),count=Number(document.getElementById("hifzCount")?.value||force?.count||5),repeat=Number(document.getElementById("hifzRepeat")?.value||force?.repeat||3);
+ if(!s||!from)return;
+ const p=document.getElementById("hifzResult")||panel();p.innerHTML='<div class="loading">Duke përgatitur sesionin Hifz…</div>';
+ try{
+  const [arR,sqR]=await Promise.all([fetch(ARABIC_API+"/surah/"+s+"/quran-uthmani"),fetch(QURANENC_API+"/translation/sura/"+QURANENC_KEY+"/"+s)]);
+  const ar=(await arR.json()).data.ayahs,sqJ=await sqR.json(),sq=Array.isArray(sqJ)?sqJ:(sqJ.result||[]);
+  const rows=ar.filter(a=>a.numberInSurah>=from).slice(0,count).map(a=>({n:a.numberInSurah,global:a.number,ar:a.text,sq:(sq.find(x=>Number(x.aya)===a.numberInSurah)||{}).translation||""}));
+  HIFZ={sura:s,from,to:rows.at(-1)?.n||from,repeat,index:0,round:0,rows,audio:null};
+  localStorage.setItem("dh_hifz_plan",JSON.stringify({sura:s,from,count,repeat,index:0}));
+  renderHifz(); playHifz();
+ }catch(e){p.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
 }
-function makeLocalHifzPlan(){
-  const s=Number(document.getElementById("hifzSura").value),from=Number(document.getElementById("hifzFrom").value),to=Number(document.getElementById("hifzTo").value),daily=Number(document.getElementById("hifzDaily").value),box=document.getElementById("hifzResult");
-  if(!s||!from||!to||to<from){box.innerHTML='<div class="empty">Plotëso saktë suren dhe ajetet.</div>';return}
-  const total=to-from+1,days=Math.ceil(total/daily);
-  box.innerHTML=`<div class="sheetBlock"><h4>📅 Plani yt</h4><p>Sure ${s} • Ajete ${from}–${to}</p><p>${daily} ajet(e) në ditë • ${days} ditë gjithsej.</p></div>`;
+function resumeHifz(){const x=JSON.parse(localStorage.getItem("dh_hifz_plan")||"null");if(x)startHifz(x)}
+function renderHifz(){
+ const box=document.getElementById("hifzResult")||panel(),pct=HIFZ.rows.length?Math.round((HIFZ.index/HIFZ.rows.length)*100):0;
+ box.innerHTML=`<div class="sheetBlock"><h4>Sure ${HIFZ.sura} · ${HIFZ.from}–${HIFZ.to}</h4><div class="hifzProgress"><i style="width:${pct}%"></i></div><div class="audioBar"><button onclick="playHifz()">▶ Luaj</button><button onclick="pauseHifz()">⏸ Pauzë</button><button onclick="prevHifz()">⏮</button><button onclick="nextHifz()">⏭</button><span>🔁 ${HIFZ.repeat}× grupi</span></div></div>`+HIFZ.rows.map((r,i)=>`<div class="ayah hifzAyah ${i===HIFZ.index?'active':''}" id="hz${i}"><div class="ayah-ar">${esc(r.ar)}</div><div class="ayah-sq">${esc(r.sq)}</div><div class="ref">${HIFZ.sura}:${r.n} ${i<HIFZ.index?'<span class="hifzDone">✓ mësuar</span>':''}</div></div>`).join("");
+ document.getElementById("hz"+HIFZ.index)?.scrollIntoView({behavior:"smooth",block:"center"});
 }
-
+function audioUrl(r){return "https://cdn.islamic.network/quran/audio/128/ar.alafasy/"+r.global+".mp3"}
+function playHifz(){if(!HIFZ.rows.length)return;pauseHifz();const r=HIFZ.rows[HIFZ.index];HIFZ.audio=new Audio(audioUrl(r));HIFZ.audio.onended=()=>{if(HIFZ.index<HIFZ.rows.length-1){HIFZ.index++;renderHifz();playHifz()}else{HIFZ.round++;if(HIFZ.round<HIFZ.repeat){HIFZ.index=0;renderHifz();playHifz()}else{localStorage.setItem("dh_hifz_plan",JSON.stringify({sura:HIFZ.sura,from:HIFZ.to+1,count:HIFZ.rows.length,repeat:HIFZ.repeat,index:0}));renderHifz()}}};HIFZ.audio.play().catch(()=>{});renderHifz()}
+function pauseHifz(){if(HIFZ.audio){HIFZ.audio.pause();HIFZ.audio=null}}
+function nextHifz(){pauseHifz();HIFZ.index=Math.min(HIFZ.rows.length-1,HIFZ.index+1);renderHifz()}
+function prevHifz(){pauseHifz();HIFZ.index=Math.max(0,HIFZ.index-1);renderHifz()}
+function showHifzForAyah(sura,aya){showHifzHome();setTimeout(()=>{document.getElementById("hifzSura").value=sura;document.getElementById("hifzFrom").value=aya;document.getElementById("hifzCount").value="1";startHifz()},50)}
 function doSearch(){
   const value=document.getElementById("searchInput").value.trim();if(!value)return;
   const m=value.match(/^(\d{1,3})\s*:\s*(\d{1,3})$/);
