@@ -197,7 +197,7 @@ async function loadSurahList(){
 async function showSurahs(){
   const p=panel();
   p.innerHTML='<div class="loading">Duke ngarkuar 114 suret...</div>';
-  if(!surahs.length)await loadSurahList();
+  if(!surahs.length)await if(location.hash==="#hifz")setTimeout(showHifzHome,150);loadSurahList();
   if(!surahs.length){p.innerHTML='<div class="empty">Nuk u arrit të merret lista e sureve.</div>';return}
   p.innerHTML='<div class="panelHead"><h3>📖 114 Suret e Kuranit</h3><small>Prek një sure për ta hapur</small></div><div class="suraGrid">'+
   surahs.map(s=>`<div class="sura" onclick="loadSurah(${s.number})"><b>${s.number}. ${esc(s.englishName)}</b><small>${esc(s.name)} • ${s.numberOfAyahs} ajete</small></div>`).join("")+
