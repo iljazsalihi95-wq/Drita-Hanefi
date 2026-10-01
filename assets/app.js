@@ -1,1 +1,7 @@
-document.addEventListener("click",e=>{if(e.target.matches(".tabs button")){document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));e.target.classList.add("active")}});document.getElementById("searchBtn")?.addEventListener("click",()=>{const q=document.getElementById("q").value.trim();const r=document.getElementById("results");r.innerHTML=q?`<div class="result">Kërkimi: <strong>${q.replace(/[<>]/g,"")}</strong><br><span class="muted">Në pritje të lidhjes me dataset/API-n real të këtij moduli.</span></div>`:""});
+(()=>{"use strict";
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+document.addEventListener("click",e=>{const b=e.target.closest(".tabs button");if(b){b.parentElement.querySelectorAll("button").forEach(x=>x.classList.remove("active"));b.classList.add("active")}});
+const btn=document.getElementById("searchBtn"),q=document.getElementById("q"),r=document.getElementById("results");
+if(btn&&q&&r)btn.addEventListener("click",()=>{const v=q.value.trim();if(v)location.href=(location.pathname.includes("/modules/")?"../tema/index.html":"modules/tema/index.html")+"?q="+encodeURIComponent(v)});
+window.DH={esc};
+})();
