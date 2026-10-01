@@ -1,11 +1,20 @@
 {
-  "name": "Drita Hanefi",
-  "short_name": "Drita Hanefi",
-  "description": "Enciklopedi digjitale islame Hanefi-Maturidije",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#061b17",
-  "theme_color": "#0b2c25",
-  "lang": "sq"
+ "name":"Drita Hanefi — Enciklopedia Hanefi–Maturidije",
+ "short_name":"Drita Hanefi",
+ "description":"Enciklopedi digjitale islame Hanefi–Maturidije",
+ "id":"./",
+ "start_url":"./index.html",
+ "scope":"./",
+ "display":"standalone",
+ "orientation":"any",
+ "background_color":"#031510",
+ "theme_color":"#062d24",
+ "lang":"sq",
+ "icons":[{"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
+ "shortcuts":[
+  {"name":"Kurani","url":"modules/quran/index.html"},
+  {"name":"Hadithi","url":"modules/hadith/index.html"},
+  {"name":"Fikhu Hanefi","url":"modules/fikh/index.html"},
+  {"name":"Hifzi","url":"modules/quran/index.html#hifz"}
+ ]
 }
