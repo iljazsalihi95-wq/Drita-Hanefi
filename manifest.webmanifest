@@ -1,0 +1,11 @@
+{
+  "name": "Drita Hanefi",
+  "short_name": "Drita Hanefi",
+  "description": "Enciklopedi digjitale islame Hanefi-Maturidije",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#061b17",
+  "theme_color": "#0b2c25",
+  "lang": "sq"
+}
