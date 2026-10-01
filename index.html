@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="sq"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Drita Hanefi</title><style>
+<title>Drita Hanefi</title><meta name="theme-color" content="#0b2c25"><link rel="manifest" href="manifest.webmanifest"><style>
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial;background:#071c18;color:#eefbf6}.wrap{max-width:1180px;margin:auto;padding:24px}.hero{padding:32px;border:1px solid #285b4d;border-radius:24px;background:linear-gradient(135deg,#0d382e,#0a2520)}h1{margin:0 0 8px;font-size:clamp(32px,6vw,64px)}p{color:#b9d8cf}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:22px}.card{display:block;padding:20px;border-radius:18px;background:#0e2b25;border:1px solid #245347;color:#fff;text-decoration:none;font-weight:800}.card small{display:block;color:#9fc8bc;margin-top:7px;font-weight:500}.card:hover{transform:translateY(-2px);background:#123a31}</style></head>
 <body><main class="wrap"><section class="hero"><div>Drita Hanefi</div><h1>Biblioteka & Sistemet</h1><p>Ballina qendrore. Çdo rubrikë hap sistemin e vet të pavarur.</p></section><section class="grid">
 <a class="card" href="modules/fikh/index.html">Fikhu Hanefi<small>Kategori → Temë → Nëntemë → Dispozitë</small></a>
@@ -15,4 +15,4 @@
 <a class="card" href="modules/abetare/index.html">Abetarja Kuranore<small>Mësime interaktive dhe progres</small></a>
 <a class="card" href="modules/tema/index.html">Më bëj një temë<small>Kërkim ndërmjet sistemeve</small></a>
 <a class="card" href="admin/index.html">Admini<small>Kontroll i të gjitha sistemeve</small></a>
-</section></main></body></html>
+</section><p style="text-align:center;margin-top:24px"><button id="installBtn" hidden style="padding:13px 20px;border:0;border-radius:14px;background:#d7b35d;font-weight:900">Instalo Drita Hanefi</button></p></main><script>if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));let dip;addEventListener("beforeinstallprompt",e=>{e.preventDefault();dip=e;installBtn.hidden=false});installBtn.onclick=async()=>{if(!dip)return;dip.prompt();await dip.userChoice;dip=null;installBtn.hidden=true};</script></body></html>
