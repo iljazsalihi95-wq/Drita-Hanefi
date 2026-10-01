@@ -331,8 +331,8 @@ function showHifzHome(){
  <input id="hifzSura" type="number" min="1" max="114" value="${saved?.sura||1}" placeholder="Sure">
  <input id="hifzFrom" type="number" min="1" value="${saved?.from||1}" placeholder="Nga">
  <select id="hifzCount"><option>1</option><option>3</option><option selected>5</option><option>10</option></select>
- <select id="hifzRepeat"><option>1</option><option selected>3</option><option>5</option><option>10</option><option>20</option></select>
- </div><button class="hifzButton" onclick="startHifz()">Nis Hifzin</button>${saved?'<button class="hifzButton" onclick="resumeHifz()">Vazhdo planin</button>':''}</div><div id="hifzResult"></div>`;
+ <select id="hifzRepeat"><option>1</option><option selected>3</option><option>5</option><option>10</option><option>20</option><option value="0">∞ pa kufi</option></select>
+ </div><button class="hifzButton" onclick="startHifz()">Nis Hifzin</button><button class="hifzButton" onclick="toggleHifzText()">Fshih/Shfaq tekstin</button>${saved?'<button class="hifzButton" onclick="resumeHifz()">Vazhdo planin</button>':''}</div><div id="hifzResult"></div>`;
 }
 async function startHifz(force){
  const s=Number(document.getElementById("hifzSura")?.value||force?.sura),from=Number(document.getElementById("hifzFrom")?.value||force?.from),count=Number(document.getElementById("hifzCount")?.value||force?.count||5),repeat=Number(document.getElementById("hifzRepeat")?.value||force?.repeat||3);
@@ -350,11 +350,12 @@ async function startHifz(force){
 function resumeHifz(){const x=JSON.parse(localStorage.getItem("dh_hifz_plan")||"null");if(x)startHifz(x)}
 function renderHifz(){
  const box=document.getElementById("hifzResult")||panel(),pct=HIFZ.rows.length?Math.round((HIFZ.index/HIFZ.rows.length)*100):0;
- box.innerHTML=`<div class="sheetBlock"><h4>Sure ${HIFZ.sura} · ${HIFZ.from}–${HIFZ.to}</h4><div class="hifzProgress"><i style="width:${pct}%"></i></div><div class="audioBar"><button onclick="playHifz()">▶ Luaj</button><button onclick="pauseHifz()">⏸ Pauzë</button><button onclick="prevHifz()">⏮</button><button onclick="nextHifz()">⏭</button><span>🔁 ${HIFZ.repeat}× grupi</span></div></div>`+HIFZ.rows.map((r,i)=>`<div class="ayah hifzAyah ${i===HIFZ.index?'active':''}" id="hz${i}"><div class="ayah-ar">${esc(r.ar)}</div><div class="ayah-sq">${esc(r.sq)}</div><div class="ref">${HIFZ.sura}:${r.n} ${i<HIFZ.index?'<span class="hifzDone">✓ mësuar</span>':''}</div></div>`).join("");
+ box.innerHTML=`<div class="sheetBlock"><h4>Sure ${HIFZ.sura} · ${HIFZ.from}–${HIFZ.to}</h4><div class="hifzProgress"><i style="width:${pct}%"></i></div><div class="audioBar"><button onclick="playHifz()">▶ Luaj</button><button onclick="pauseHifz()">⏸ Pauzë</button><button onclick="prevHifz()">⏮</button><button onclick="nextHifz()">⏭</button><span>🔁 ${HIFZ.repeat===0?"∞":HIFZ.repeat+"×"} grupi</span></div></div>`+HIFZ.rows.map((r,i)=>`<div class="ayah hifzAyah ${i===HIFZ.index?'active':''}" id="hz${i}"><div class="ayah-ar">${esc(r.ar)}</div><div class="ayah-sq">${esc(r.sq)}</div><div class="ref">${HIFZ.sura}:${r.n} ${i<HIFZ.index?'<span class="hifzDone">✓ mësuar</span>':''}</div></div>`).join("");
  document.getElementById("hz"+HIFZ.index)?.scrollIntoView({behavior:"smooth",block:"center"});
 }
 function audioUrl(r){return "https://cdn.islamic.network/quran/audio/128/ar.alafasy/"+r.global+".mp3"}
-function playHifz(){if(!HIFZ.rows.length)return;pauseHifz();const r=HIFZ.rows[HIFZ.index];HIFZ.audio=new Audio(audioUrl(r));HIFZ.audio.onended=()=>{if(HIFZ.index<HIFZ.rows.length-1){HIFZ.index++;renderHifz();playHifz()}else{HIFZ.round++;if(HIFZ.round<HIFZ.repeat){HIFZ.index=0;renderHifz();playHifz()}else{localStorage.setItem("dh_hifz_plan",JSON.stringify({sura:HIFZ.sura,from:HIFZ.to+1,count:HIFZ.rows.length,repeat:HIFZ.repeat,index:0}));renderHifz()}}};HIFZ.audio.play().catch(()=>{});renderHifz()}
+function playHifz(){if(!HIFZ.rows.length)return;pauseHifz();const r=HIFZ.rows[HIFZ.index];HIFZ.audio=new Audio(audioUrl(r));HIFZ.audio.onended=()=>{if(HIFZ.index<HIFZ.rows.length-1){HIFZ.index++;renderHifz();playHifz()}else{HIFZ.round++;if(HIFZ.repeat===0||HIFZ.round<HIFZ.repeat){HIFZ.index=0;renderHifz();playHifz()}else{localStorage.setItem("dh_hifz_plan",JSON.stringify({sura:HIFZ.sura,from:HIFZ.to+1,count:HIFZ.rows.length,repeat:HIFZ.repeat,index:0}));renderHifz()}}};HIFZ.audio.play().catch(()=>{});renderHifz()}
+function toggleHifzText(){document.querySelectorAll(".hifzAyah .ayah-ar,.hifzAyah .ayah-sq").forEach(x=>{x.style.visibility=x.style.visibility==="hidden"?"visible":"hidden"})}
 function pauseHifz(){if(HIFZ.audio){HIFZ.audio.pause();HIFZ.audio=null}}
 function nextHifz(){pauseHifz();HIFZ.index=Math.min(HIFZ.rows.length-1,HIFZ.index+1);renderHifz()}
 function prevHifz(){pauseHifz();HIFZ.index=Math.max(0,HIFZ.index-1);renderHifz()}
