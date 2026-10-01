@@ -1,1 +1,69 @@
-<!doctype html><html lang="sq"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Abetarja Kuranore | Drita Hanefi</title><link rel="stylesheet" href="../../assets/app.css"></head><body><header><a href="../../index.html">☾ Drita Hanefi</a><span>Abetarja Kuranore</span></header><main><section class="hero"><h1>Abetarja Kuranore</h1><p>Mësim → Shkronjë → Shqiptim → Ushtrim → Progres</p><div class="search"><input id="q" placeholder="Kërko mësim"><button id="searchBtn">Kërko</button></div></section><nav class="tabs"><button class="active">Kryesore</button><button>Burimet</button><button>Referencat</button></nav><section id="app" class="panel"><h2>Sistemi Abetarja Kuranore</h2><p class="muted">Moduli është i ndarë nga sistemet e tjera. Të dhënat reale do të lexohen nga burimi/API përkatës; nuk shfaqen regjistrime të sajuara.</p><div id="results"></div></section></main><script src="../../assets/app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#041A15">
+<title>Abetarja Kuranore – Drita Hanefi</title>
+<style>
+:root{--bg:#041A15;--p:#07392E;--p2:#0B4638;--gold:#E4BD56;--gold2:#FFE99B;--text:#F6FFF9;--muted:#BDD2CA;--line:rgba(228,189,86,.34);--ok:#8FE0B3}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+body{background:radial-gradient(circle at top right,rgba(228,189,86,.14),transparent 28%),linear-gradient(180deg,#041A15,#062B22 62%,#02120E)}
+.page{max-width:920px;margin:auto;padding:12px 11px 38px}
+.back{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#0E5A45;color:#fff;font-weight:bold;font-size:11px;margin-bottom:10px}
+.hero{border:1px solid var(--line);border-radius:27px;padding:19px 16px;background:radial-gradient(circle at 85% 10%,rgba(255,232,146,.12),transparent 28%),linear-gradient(145deg,#0C5844,#07392E 65%,#05271F);box-shadow:0 16px 38px #0005}
+.brand{display:flex;gap:13px;align-items:center}.ico{width:64px;height:64px;min-width:64px;border:2px solid var(--gold);border-radius:19px;background:#052D24;display:grid;place-items:center;font-size:35px}
+h1{margin:0;color:var(--gold2);font-size:28px}.brand p{margin:4px 0 0;color:#D7E7E1;font-size:12px}
+.hero-desc{text-align:center;color:#D5E4DF;line-height:1.55;font-size:13px;margin:15px auto 0}
+.search{display:flex;gap:7px;margin-top:15px;padding:6px;border:1px solid var(--line);border-radius:16px;background:#021D17}.search input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#fff;padding:11px}.search button{border:0;border-radius:11px;background:linear-gradient(135deg,#FFE58B,#C9A33A);color:#173027;font-weight:bold;padding:0 14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:11px}.stat{border:1px solid rgba(228,189,86,.25);border-radius:14px;background:#06291F;padding:9px;text-align:center}.stat span{display:block;color:#ABC4BA;font-size:10px}.stat strong{display:block;color:var(--gold2);font-size:20px;margin-top:2px}
+.filter-panel{margin:15px 0 12px;border:1px solid var(--line);border-radius:16px;background:#06291F;overflow:hidden}.filter-toggle{width:100%;border:0;background:#07392E;color:#FFE99B;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:bold}.filters{display:none;padding:7px 9px 10px}.filter-panel.open .filters{display:block}.filter{display:flex;width:100%;justify-content:space-between;border:0;border-bottom:1px solid rgba(228,189,86,.14);background:transparent;color:#D5E5DF;padding:9px 7px;text-align:left}.filter.active{color:#FFE99B;font-weight:bold;background:rgba(13,88,68,.45);border-radius:8px}
+.heading{display:flex;justify-content:space-between;align-items:center;margin:18px 3px 10px}.heading h2{margin:0;color:var(--gold2);font-size:20px}.heading span{font-size:10px;color:#9EB8AE}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#0B4033,#06291F);padding:13px;box-shadow:0 9px 22px #0004;cursor:pointer}.card h3{margin:0;color:#FFF0AC;font-size:17px}.meta{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.pill{padding:4px 7px;border-radius:999px;background:#021D17;border:1px solid rgba(255,229,139,.18);font-size:10px;color:#E5D38E}.arabic{direction:rtl;text-align:right;font-family:"Traditional Arabic","Noto Naskh Arabic",serif;font-size:28px;line-height:1.7;color:#FFF4C5;margin:8px 0}.desc{color:#D1E1DB;font-size:12.5px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}.task{margin-top:8px;padding-top:8px;border-top:1px solid rgba(228,189,86,.15);color:#AFC8BF;font-size:11px}
+.progress-wrap{margin-top:9px}.progress{height:7px;border-radius:999px;background:#021D17;overflow:hidden;border:1px solid rgba(228,189,86,.14)}.bar{height:100%;background:linear-gradient(90deg,#0E9C73,#E4BD56);width:0}.done{margin-top:7px;width:100%;border:1px solid rgba(228,189,86,.24);border-radius:9px;background:#0E5A45;color:#fff;padding:7px;font-size:10px;font-weight:bold}.done.completed{background:#886C25;color:#FFF0AC}
+.empty,.status{padding:14px;border:1px solid rgba(228,189,86,.24);border-radius:14px;background:#06291F;color:#ABC4BA;text-align:center}.empty{padding:27px}.status{margin-top:12px;font-size:10.5px}
+.modal{position:fixed;inset:0;background:#000c;display:none;z-index:50;padding:12px;overflow:auto}.modal.show{display:block}.dialog{max-width:840px;margin:24px auto;border:1px solid var(--line);border-radius:21px;background:#06291F;overflow:hidden}.dh{display:flex;justify-content:space-between;align-items:center;padding:13px;background:#0B4638}.dh h2{margin:0;color:#FFE99B;font-size:19px}.close{width:38px;height:38px;border:1px solid rgba(228,189,86,.3);border-radius:10px;background:#021D17;color:#fff;font-size:21px}.db{padding:13px}.field{padding:11px;margin:8px 0;border:1px solid rgba(228,189,86,.18);border-radius:12px;background:#021D17}.field b{display:block;color:#FFE99B;font-size:12px;margin-bottom:6px}.field div{white-space:pre-wrap;line-height:1.65;color:#E1EEE9}
+@media(max-width:680px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body><div style="max-width:1100px;margin:10px auto 0;padding:0 14px"><a href="../../index.html" style="color:#FFE99B;text-decoration:none;font-weight:800">⌂ Ballina</a></div>
+<div class="page">
+<button class="back" onclick="location.href='../quran/index.html'">← Kurani</button>
+<section class="hero">
+<div class="brand"><div class="ico">ا ب</div><div><h1>Abetarja Kuranore</h1><p>Osman Abazi & Jusuf Kastrati · Drita Hanefi</p></div></div>
+<div class="hero-desc">Sistem mësimor i lidhur me rubrikën Kurani. Mësimet nxirren nga libri “Abetarja kuranore” dhe nga baza LIVE <b>ABETARJA_KURANORE</b>.</div>
+<div class="search"><input id="q" placeholder="Kërko: Elif, sukun, hemze, zgjatime..."><button onclick="clearQ()">Pastro</button></div>
+<div class="stats"><div class="stat"><span>MËSIME</span><strong id="n">0</strong></div><div class="stat"><span>NIVELE</span><strong id="levels">0</strong></div><div class="stat"><span>PËRFUNDUAR</span><strong id="doneN">0</strong></div></div>
+</section>
+
+<div class="filter-panel" id="fp"><button class="filter-toggle" id="ft"><span id="fl">Mësimet · Të gjitha</span><span>⌄</span></button><div class="filters" id="filters"></div></div>
+<div class="heading"><h2>Mësimet</h2><span>LIVE nga Google Sheet</span></div>
+<div class="cards" id="cards"><div class="empty">Po ngarkohen mësimet...</div></div>
+<div class="status" id="status">Po lidhem me ABETARJA_KURANORE...</div>
+</div>
+
+<div class="modal" id="modal"><div class="dialog"><div class="dh"><h2 id="mt">Mësimi</h2><button class="close" onclick="closeM()">×</button></div><div class="db" id="mb"></div></div></div>
+
+<script>
+const SID="1jUwddiDBN4OxRS5qQM6UNa9IzQBDQ4G5L6_os2_ZxuA",SHEET="ABETARJA_KURANORE";
+let ALL=[],active="Të gjitha";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+function csv(t){let R=[],r=[],c="",q=false;for(let i=0;i<t.length;i++){let h=t[i],n=t[i+1];if(h=='"'&&q&&n=='"'){c+='"';i++;continue}if(h=='"'){q=!q;continue}if(h==','&&!q){r.push(c);c="";continue}if((h=='\n'||h=='\r')&&!q){if(h=='\r'&&n=='\n')i++;r.push(c);if(r.some(v=>v!==""))R.push(r);r=[];c="";continue}c+=h}if(c||r.length){r.push(c);R.push(r)}return R}
+function obj(a){if(!a.length)return[];let h=a[0].map(x=>String(x||"").trim());return a.slice(1).filter(r=>r.some(v=>String(v||"").trim())).map(r=>{let o={};h.forEach((k,i)=>{if(k)o[k]=r[i]??""});return o})}
+function doneSet(){try{return new Set(JSON.parse(localStorage.getItem("dh_abetarja_done")||"[]"))}catch(e){return new Set()}}
+function saveDone(s){localStorage.setItem("dh_abetarja_done",JSON.stringify([...s]))}
+async function load(){try{let u=`https://docs.google.com/spreadsheets/d/${SID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET)}&_=${Date.now()}`;let r=await fetch(u,{cache:"no-store"});ALL=obj(csv(await r.text())).filter(x=>x.ID);$("#n").textContent=ALL.length;$("#levels").textContent=new Set(ALL.map(x=>x.Niveli).filter(Boolean)).size;updateDone();buildFilters();render();$("#status").textContent="✓ U ngarkuan "+ALL.length+" mësime nga baza LIVE."}catch(e){$("#cards").innerHTML='<div class="empty">Nuk u lexua baza.</div>';$("#status").textContent="Gabim lidhjeje."}}
+function category(x){return x.Mesimi||"Të tjera"}
+function buildFilters(){let cs=["Të gjitha",...new Set(ALL.map(category))];$("#filters").innerHTML=cs.map(c=>`<button class="filter ${active===c?"active":""}" data-c="${esc(c)}">${esc(c)}</button>`).join("");$("#fl").textContent="Mësimet · "+active;document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{active=b.dataset.c;buildFilters();render();$("#fp").classList.remove("open")})}
+function filtered(){let q=$("#q").value.toLowerCase().trim();return ALL.filter(x=>(active==="Të gjitha"||category(x)===active)&&(!q||JSON.stringify(x).toLowerCase().includes(q)))}
+function render(){let a=filtered(),ds=doneSet();$("#cards").innerHTML=a.length?a.map(x=>`<article class="card" data-id="${esc(x.ID)}"><h3>${esc(x.Mesimi||x.Emri||x.ID)}</h3><div class="meta"><span class="pill">Niveli ${esc(x.Niveli)}</span>${x.Status?`<span class="pill">${esc(x.Status)}</span>`:""}</div>${x.ShkronjaArabe?`<div class="arabic">${esc(x.ShkronjaArabe)}</div>`:""}<div class="desc">${esc(x.Shpjegimi||"")}</div>${x.Ushtrimi?`<div class="task">✎ ${esc(x.Ushtrimi)}</div>`:""}<div class="progress-wrap"><div class="progress"><div class="bar" style="width:${ds.has(x.ID)?100:0}%"></div></div><button class="done ${ds.has(x.ID)?"completed":""}" data-done="${esc(x.ID)}">${ds.has(x.ID)?"✓ Përfunduar":"Shëno si të përfunduar"}</button></div></article>`).join(""):'<div class="empty">Nuk u gjet mësim.</div>';document.querySelectorAll(".card").forEach(c=>c.onclick=e=>{if(e.target.dataset.done)return;openItem(c.dataset.id)});document.querySelectorAll("[data-done]").forEach(b=>b.onclick=e=>{e.stopPropagation();toggleDone(b.dataset.done)})}
+function updateDone(){$("#doneN").textContent=doneSet().size}
+function toggleDone(id){let s=doneSet();s.has(id)?s.delete(id):s.add(id);saveDone(s);updateDone();render()}
+function openItem(id){let x=ALL.find(v=>v.ID===id);if(!x)return;$("#mt").textContent=x.Mesimi||x.Emri||x.ID;let order=["ID","Niveli","Mesimi","ShkronjaArabe","Emri","ShqiptimiShqip","FormaFillim","FormaMes","FormaFund","Shembull","Shpjegimi","Ushtrimi","Burimi","Status"];$("#mb").innerHTML=order.filter(k=>x[k]&&String(x[k]).trim()).map(k=>`<div class="field"><b>${esc(k)}</b><div class="${/Shkronja|Forma|Shembull/.test(k)?"arabic":""}">${esc(x[k])}</div></div>`).join("");$("#modal").classList.add("show")}
+function closeM(){$("#modal").classList.remove("show")}
+$("#modal").onclick=e=>{if(e.target.id==="modal")closeM()};$("#ft").onclick=()=>$("#fp").classList.toggle("open");$("#q").oninput=render;function clearQ(){$("#q").value="";render();$("#q").focus()}load();
+</script>
+</body></html>
