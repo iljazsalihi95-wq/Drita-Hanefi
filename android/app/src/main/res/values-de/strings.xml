@@ -1,0 +1,7 @@
+<resources>
+ <string name="app_name">Drita Hanefi</string>
+ <string name="app_subtitle">Hanafitisch-maturidische Enzyklopädie</string>
+ <string name="loading">Wird geladen…</string>
+ <string name="no_connection">Keine Internetverbindung</string>
+ <string name="retry">Erneut versuchen</string>
+</resources>
