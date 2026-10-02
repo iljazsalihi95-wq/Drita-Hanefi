@@ -207,7 +207,7 @@ function openItem(o){
       f.append(l,a);root.appendChild(f);
     } else addField(root,k,val);
   });
-  $("#modal").classList.add("open");$("#modal").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+  const topic=encodeURIComponent(o.Tema||o.Sure||"");if(topic){const nav=document.createElement("section");nav.className="field";nav.innerHTML='<div class="label">LIDHJE STUDIMI</div><div><a class="source-link" href="../quran/index.html">📖 Kurani</a> · <a class="source-link" href="../fikh/index.html?q='+topic+'">⚖️ Fikhu Hanefi</a> · <a class="source-link" href="../hadith/index.html?q='+topic+'">📜 Hadithi</a></div>';root.appendChild(nav)}$("#modal").classList.add("open");$("#modal").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
 }
 function closeModal(){
   $("#modal").classList.remove("open");$("#modal").setAttribute("aria-hidden","true");document.body.style.overflow="";
@@ -222,13 +222,13 @@ async function load(){
     all=Array.isArray(j.data)?j.data:[];
     filtered=[...all];
     $("#count").textContent=`${all.length} materiale të publikuara`;
-    populateCats();render();
+    populateCats();if(initialQ)apply();else render();
   }catch(e){
     $("#count").textContent="Lidhja dështoi";
     const s=$("#state");s.className="error";s.textContent="Nuk u ngarkua baza LIVE. Kontrollo MASTER API-n dhe vendosjen e tij si Web App. Detaj: "+e.message;
   }
 }
-$("#q").addEventListener("input",apply);
+const initialQ=new URLSearchParams(location.search).get("q");if(initialQ)$("#q").value=initialQ;$("#q").addEventListener("input",apply);
 $("#cat").addEventListener("change",apply);
 $("#close").addEventListener("click",closeModal);
 $("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
