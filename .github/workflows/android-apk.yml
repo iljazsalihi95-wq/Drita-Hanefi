@@ -1,11 +1,15 @@
 name: Build Android APK
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Deploy Web to GitHub Pages"]
+    types: [completed]
   push:
     paths:
       - "android/**"
 jobs:
   apk:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     defaults:
       run:
