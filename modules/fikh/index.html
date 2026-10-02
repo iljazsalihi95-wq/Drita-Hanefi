@@ -9,5 +9,5 @@ function openM(o){document.getElementById("mt").textContent=title(o);document.ge
 function closeM(){document.getElementById("modal").classList.remove("on")}
 function filter(){let q=document.getElementById("q").value.toLowerCase(),c=document.getElementById("cat").value;VIEW=ALL.filter(o=>(!q||Object.values(o).join(" ").toLowerCase().includes(q))&&(!c||category(o)===c));draw()}
 async function load(){try{let r=await fetch(API+"?type="+encodeURIComponent(TYPE)+"&_="+Date.now(),{cache:"no-store"}),j=await r.json();if(!j.ok)throw Error(j.error||"API");ALL=Array.isArray(j.data)?j.data:[];VIEW=[...ALL];document.getElementById("count").textContent=ALL.length+" regjistrime të publikuara";let cs=[...new Set(ALL.map(category))].sort();document.getElementById("cat").innerHTML='<option value="">Të gjitha kategoritë</option>'+cs.map(x=>'<option>'+esc(x)+'</option>').join("");draw()}catch(e){document.getElementById("state").textContent="Baza LIVE nuk u ngarkua: "+e.message}}
-document.getElementById("q").oninput=filter;document.getElementById("cat").onchange=filter;load();
+const qp=new URLSearchParams(location.search).get("q");if(qp)document.getElementById("q").value=qp;document.getElementById("q").oninput=filter;document.getElementById("cat").onchange=filter;load().then?.(()=>filter());
 </script></body></html>
