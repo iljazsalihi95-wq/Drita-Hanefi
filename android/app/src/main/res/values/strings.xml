@@ -1,0 +1,7 @@
+<resources>
+ <string name="app_name">Drita Hanefi</string>
+ <string name="app_subtitle">Enciklopedia Hanefi–Maturidije</string>
+ <string name="loading">Duke u ngarkuar…</string>
+ <string name="no_connection">Nuk ka lidhje me internetin</string>
+ <string name="retry">Provo përsëri</string>
+</resources>
