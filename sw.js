@@ -1,4 +1,4 @@
-const CACHE="drita-hanefi-v3";
+const CACHE="drita-hanefi-v4";
 const CORE=["./","./index.html","./manifest.webmanifest","./assets/app.css","./assets/app.js","./assets/icon.svg","./modules/quran/index.html","./modules/hadith/index.html","./modules/fikh/index.html","./modules/tefsir/index.html","./modules/akide/index.html","./modules/texhvid/index.html","./modules/abetare/index.html","./modules/hudbe/index.html","./modules/pedagogji/index.html","./modules/histori/index.html","./modules/tema/index.html","./admin/index.html"];
 self.addEventListener("install",e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)))});
 self.addEventListener("activate",e=>{e.waitUntil(Promise.all([self.clients.claim(),caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k))))]))});
