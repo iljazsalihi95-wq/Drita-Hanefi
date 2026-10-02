@@ -101,7 +101,7 @@ input:focus,select:focus{border-color:var(--gold)}
 
 <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
   <article class="sheet">
-    <div class="mhead"><h2 id="mtitle">Materiali</h2><button class="close" id="close" aria-label="Mbyll">×</button></div>
+    <div class="mhead"><h2 id="mtitle">Akide Maturidije</h2><button class="close" id="close" aria-label="Mbyll">×</button></div>
     <div id="mcontent" class="content"></div>
   </article>
 </div>
@@ -127,7 +127,7 @@ function categoryOf(o){
   return first(o, CONFIG.category_keys) || "Të tjera";
 }
 function titleOf(o){
-  return first(o, CONFIG.title_keys) || o.ID || "Material";
+  return first(o, CONFIG.title_keys) || o.ID || "Pa titull";
 }
 function previewOf(o){
   return first(o, CONFIG.summary_keys) || first(o, ["Përmbledhje","Teksti i plotë shqip","Përkthimi Shqip","Përkthimi i Plotë","Tefsiri i plotë"]) || "";
@@ -222,12 +222,13 @@ async function load(){
     all=Array.isArray(j.data)?j.data:[];
     filtered=[...all];
     $("#count").textContent=`${all.length} materiale të publikuara`;
-    populateCats();render();
+    populateCats();if(initialQ)apply();else render();
   }catch(e){
     $("#count").textContent="Lidhja dështoi";
     const s=$("#state");s.className="error";s.textContent="Nuk u ngarkua baza LIVE. Kontrollo MASTER API-n dhe vendosjen e tij si Web App. Detaj: "+e.message;
   }
 }
+const initialQ=new URLSearchParams(location.search).get("q");if(initialQ)$("#q").value=initialQ;
 $("#q").addEventListener("input",apply);
 $("#cat").addEventListener("change",apply);
 $("#close").addEventListener("click",closeModal);
