@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
  private ProgressBar progress;
  private LinearLayout offlinePanel;
  private Button retryButton;
- private static final String HOME="https://iljazsalihi95-wq.github.io/Drita-Hanefi/";
+ private static final String HOME="file:///android_asset/site/index.html";
 
  @Override public void onCreate(Bundle b){
   super.onCreate(b);
@@ -53,7 +53,11 @@ public class MainActivity extends Activity {
   settings.setDomStorageEnabled(true);
   settings.setMediaPlaybackRequiresUserGesture(false);
   settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-  settings.setAllowFileAccess(false);
+  // The audited web application is bundled with the APK. These two file-URL
+  // settings let its relative JSON catalogs load while remote API/audio stay HTTPS.
+  settings.setAllowFileAccess(true);
+  settings.setAllowFileAccessFromFileURLs(true);
+  settings.setAllowUniversalAccessFromFileURLs(true);
   settings.setAllowContentAccess(false);
   settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
 
