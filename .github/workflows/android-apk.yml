@@ -7,6 +7,13 @@ on:
   push:
     paths:
       - "android/**"
+      - "admin/**"
+      - "assets/**"
+      - "data/**"
+      - "modules/**"
+      - "index.html"
+      - "manifest.webmanifest"
+      - "sw.js"
 jobs:
   apk:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
@@ -23,6 +30,14 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.9"
+      - name: Bundle audited web application
+        working-directory: .
+        run: |
+          mkdir -p android/app/src/main/assets/site
+          rsync -a --delete \
+            --exclude='.git' --exclude='.github' --exclude='android' \
+            --exclude='tests' --exclude='README.md' ./ \
+            android/app/src/main/assets/site/
       - run: gradle :app:assembleDebug
       - uses: actions/upload-artifact@v4
         with:
