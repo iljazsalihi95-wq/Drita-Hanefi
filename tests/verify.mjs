@@ -123,7 +123,11 @@ assert(manifest.shortcuts?.some(x => x.url?.endsWith("#hifz")), "Manifestit i mu
 const quran = await readFile(resolve(ROOT, "modules/quran/index.html"), "utf8");
 assert(quran.includes('location.hash!=="#hifz"'), "Moduli i Kuranit nuk trajton #hifz");
 assert(quran.includes('tefsir/index.html?verse=${encodeURIComponent(key)}'), "Kurani nuk krijon lidhje të saktë ajet → Tefsir");
-assert(quran.includes('new URLSearchParams(location.search).get("verse")'), "Kurani nuk hap ajetin e kërkuar nga modulet e tjera");
+assert(quran.includes('params.get("verse")'), "Kurani nuk hap ajetin e kërkuar nga modulet e tjera");
+assert(quran.includes('Array.from({length:604}') && quran.includes('fetchPublicPage'), "Kurani nuk ka navigim real të 604 faqeve të Mushafit");
+assert(quran.includes('touchstart') && quran.includes('touchend'), "Mushafi nuk kthen faqet me swipe");
+assert(quran.includes('Ghamadi_40kbps') && quran.includes('Mëso këtë ajet'), "Mushafi nuk ka recituesit dhe mësimin e ajetit");
+assert(quran.includes('showTranslation') && quran.includes('showTranslit'), "Mushafi nuk kontrollon shtresat e përkthimit/transkriptimit");
 const hadithPage = await readFile(resolve(ROOT, "modules/hadith/index.html"), "utf8");
 const verifiedHadith = JSON.parse(await readFile(resolve(ROOT, "data/hadith-verified.json"), "utf8"));
 assert(hadithPage.includes("../../data/hadith-verified.json"), "Hadithi nuk e ngarkon katalogun e audituar");
@@ -163,7 +167,7 @@ const texhvidPage = await readFile(resolve(ROOT, "modules/texhvid/index.html"), 
 assert(texhvidPage.includes('title:raw(r,"Rregulli","RregulliShqip","Titulli")||first(r,"ruling","title")'), "Texhvidi: rregulli real nuk ka përparësi ndaj titullit të përgjithshëm");
 assert(texhvidPage.includes("Audio shfaqet vetëm kur baza jep URL reale."), "Texhvidi: politika e audios reale nuk është e dukshme");
 const serviceWorker = await readFile(resolve(ROOT, "sw.js"), "utf8");
-assert(serviceWorker.includes('drita-hanefi-v12'), "PWA: cache nuk u ngrit pas përditësimit të moduleve");
+assert(serviceWorker.includes('drita-hanefi-v13'), "PWA: cache nuk u ngrit pas lexuesit Mushaf");
 assert(serviceWorker.includes('"./data/akide-verified.json"'), "PWA nuk ruan katalogun e Akides për përdorim offline");
 assert(serviceWorker.includes('"./data/hudbe-verified.json"'), "PWA nuk ruan katalogun e Hudbeve për përdorim offline");
 const androidActivity = await readFile(resolve(ROOT, "android/app/src/main/java/com/dritahanefi/app/MainActivity.java"), "utf8");
