@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
     ((TextView)v.findViewById(R.id.sectionTitle)).setText(title);
     ((TextView)v.findViewById(R.id.sectionSubtitle)).setText(subtitle);
     v.setOnClickListener(x->{
-      Intent i=new Intent(this, SectionActivity.class);
+      Intent i=new Intent(this, "quran".equals(type)?QuranActivity.class:SectionActivity.class);
       i.putExtra("title",title); i.putExtra("type",type);
       startActivity(i);
     });
