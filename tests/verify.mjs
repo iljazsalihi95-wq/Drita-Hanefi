@@ -158,7 +158,8 @@ const androidActivity = await readFile(resolve(ROOT, "android/app/src/main/java/
 const androidManifest = await readFile(resolve(ROOT, "android/app/src/main/AndroidManifest.xml"), "utf8");
 const splashBackground = await readFile(resolve(ROOT, "android/app/src/main/res/drawable/splash_background.xml"), "utf8");
 assert(androidActivity.includes("package com.dritahanefi.app;"), "Paketa Android nuk përputhet me applicationId");
-assert(androidActivity.includes("https://iljazsalihi95-wq.github.io/Drita-Hanefi/"), "Android nuk hap faqen zyrtare");
+assert(androidActivity.includes("file:///android_asset/site/index.html"), "Android nuk hap aplikacionin web të paketuar");
+assert(androidActivity.includes("setAllowFileAccessFromFileURLs(true)") && androidActivity.includes("setAllowUniversalAccessFromFileURLs(true)"), "Android nuk lejon katalogët lokalë dhe API-të HTTPS nga paketa");
 assert(androidManifest.includes('android.permission.INTERNET'), "Androidit i mungon leja INTERNET");
 assert(androidManifest.includes('android:usesCleartextTraffic="false"'), "Android lejon trafik të pasigurt");
 assert(androidManifest.includes('android:theme="@style/SplashTheme"'), "Androidit i mungon tema native e nisjes");
