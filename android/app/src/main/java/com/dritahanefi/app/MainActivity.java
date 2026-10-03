@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,7 +28,7 @@ public class MainActivity extends Activity {
     super.onCreate(b);
     setTheme(R.style.AppTheme);
     setContentView(R.layout.activity_main);
-    LinearLayout list=findViewById(R.id.sectionList);
+    GridLayout list=findViewById(R.id.sectionGrid);
     for(String[] s:SECTIONS) list.addView(card(s[0],s[1],s[2]));
   }
 
@@ -40,6 +41,10 @@ public class MainActivity extends Activity {
       i.putExtra("title",title); i.putExtra("type",type);
       startActivity(i);
     });
+    GridLayout.LayoutParams lp=new GridLayout.LayoutParams();
+    lp.width=0; lp.height=GridLayout.LayoutParams.WRAP_CONTENT; lp.columnSpec=GridLayout.spec(GridLayout.UNDEFINED,1f); lp.setMargins(dp(5),dp(5),dp(5),dp(5)); v.setLayoutParams(lp);
     return v;
   }
+
+  private int dp(int n){ return Math.round(n*getResources().getDisplayMetrics().density); }
 }
