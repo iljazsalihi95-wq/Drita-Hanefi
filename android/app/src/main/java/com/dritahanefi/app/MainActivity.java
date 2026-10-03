@@ -11,10 +11,14 @@ import android.webkit.WebViewClient;
 import android.content.Intent;
 import android.net.Uri;
 import android.widget.ProgressBar;
+import android.widget.LinearLayout;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
  private WebView web;
  private ProgressBar progress;
+ private LinearLayout offlinePanel;
+ private Button retryButton;
  private static final String HOME="https://iljazsalihi95-wq.github.io/Drita-Hanefi/";
 
  @Override public void onCreate(Bundle b){
@@ -23,6 +27,9 @@ public class MainActivity extends Activity {
   setContentView(R.layout.activity_main);
   web=findViewById(R.id.web);
   progress=findViewById(R.id.progress);
+  offlinePanel=findViewById(R.id.offlinePanel);
+  retryButton=findViewById(R.id.retryButton);
+  retryButton.setOnClickListener(v->{ offlinePanel.setVisibility(View.GONE); web.setVisibility(View.VISIBLE); web.loadUrl(HOME); });
 
   web.setWebChromeClient(new WebChromeClient(){
    @Override public void onProgressChanged(WebView view,int value){
@@ -31,6 +38,8 @@ public class MainActivity extends Activity {
    }
   });
   web.setWebViewClient(new WebViewClient(){
+   @Override public void onPageFinished(WebView v,String url){ offlinePanel.setVisibility(View.GONE); web.setVisibility(View.VISIBLE); }
+   @Override public void onReceivedError(WebView v, WebResourceRequest r, android.webkit.WebResourceError e){ if(r.isForMainFrame()){ web.setVisibility(View.GONE); offlinePanel.setVisibility(View.VISIBLE); progress.setVisibility(View.GONE); } }
    @Override public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest r){
     Uri u=r.getUrl(); String scheme=u.getScheme();
     if("http".equals(scheme)||"https".equals(scheme)) return false;
