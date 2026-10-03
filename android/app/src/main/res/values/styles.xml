@@ -4,4 +4,10 @@
   <item name="android:navigationBarColor">#031510</item><item name="android:statusBarColor">#031510</item>
   <item name="android:windowLightStatusBar">false</item>
  </style>
+ <style name="SplashTheme" parent="android:style/Theme.Material.Light.NoActionBar">
+  <item name="android:windowBackground">@drawable/splash_background</item>
+  <item name="android:statusBarColor">#031510</item>
+  <item name="android:navigationBarColor">#031510</item>
+  <item name="android:windowLightStatusBar">false</item>
+ </style>
 </resources>
