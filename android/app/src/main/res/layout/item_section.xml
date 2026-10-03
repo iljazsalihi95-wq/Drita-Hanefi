@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:padding="18dp" android:layout_marginBottom="12dp" android:background="@drawable/native_card" android:clickable="true" android:focusable="true" android:layout_width="match_parent" android:layout_height="wrap_content">
+ <TextView android:id="@+id/sectionTitle" android:textColor="#FFF0B4" android:textSize="22sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+ <TextView android:id="@+id/sectionSubtitle" android:textColor="#B8CEC5" android:textSize="14sp" android:layout_marginTop="7dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+</LinearLayout>
