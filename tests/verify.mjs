@@ -122,6 +122,8 @@ assert(manifest.display === "standalone", "Manifesti nuk është PWA standalone"
 assert(manifest.shortcuts?.some(x => x.url?.endsWith("#hifz")), "Manifestit i mungon shkurtorja Hifz");
 const quran = await readFile(resolve(ROOT, "modules/quran/index.html"), "utf8");
 assert(quran.includes('location.hash!=="#hifz"'), "Moduli i Kuranit nuk trajton #hifz");
+assert(quran.includes('tefsir/index.html?verse=${encodeURIComponent(key)}'), "Kurani nuk krijon lidhje të saktë ajet → Tefsir");
+assert(quran.includes('new URLSearchParams(location.search).get("verse")'), "Kurani nuk hap ajetin e kërkuar nga modulet e tjera");
 const hadithPage = await readFile(resolve(ROOT, "modules/hadith/index.html"), "utf8");
 const verifiedHadith = JSON.parse(await readFile(resolve(ROOT, "data/hadith-verified.json"), "utf8"));
 assert(hadithPage.includes("../../data/hadith-verified.json"), "Hadithi nuk e ngarkon katalogun e audituar");
@@ -131,6 +133,8 @@ assert(verifiedHadith.rows.every(row => [row.id,row.arabic,row.albanian,row.narr
 const tefsirPage = await readFile(resolve(ROOT, "modules/tefsir/index.html"), "utf8");
 const verifiedTefsir = JSON.parse(await readFile(resolve(ROOT, "data/tefsir-verified.json"), "utf8"));
 assert(tefsirPage.includes("../../data/tefsir-verified.json"), "Tefsiri nuk e ngarkon katalogun e audituar");
+assert(tefsirPage.includes('verse?x.key===verse'), "Tefsiri nuk filtron me referencën e saktë sure:ajet");
+assert(tefsirPage.includes('quran/index.html?verse=${encodeURIComponent(x.key)}'), "Tefsiri nuk kthehet te ajeti i saktë në Kuran");
 assert(verifiedTefsir.source?.spreadsheetId === "1Wj8Qz5WfmlAW29WdQB4wadfUV8K1vMfrzQcr_ybKIzI", "Tefsiri: mungon identiteti i Sheet-it burimor");
 assert(verifiedTefsir.rows?.length === 3, "Tefsiri: priten 3 komente të audituara");
 assert(verifiedTefsir.rows.every(row => [row.id,row.surah,row.ayah,row.arabic,row.transliteration,row.albanian,row.tafsir,row.author,row.work,row.section,row.reference,row.status,row.verified,row.url].every(Boolean)), "Tefsiri: koment i audituar i paplotë");
@@ -159,7 +163,7 @@ const texhvidPage = await readFile(resolve(ROOT, "modules/texhvid/index.html"), 
 assert(texhvidPage.includes('title:raw(r,"Rregulli","RregulliShqip","Titulli")||first(r,"ruling","title")'), "Texhvidi: rregulli real nuk ka përparësi ndaj titullit të përgjithshëm");
 assert(texhvidPage.includes("Audio shfaqet vetëm kur baza jep URL reale."), "Texhvidi: politika e audios reale nuk është e dukshme");
 const serviceWorker = await readFile(resolve(ROOT, "sw.js"), "utf8");
-assert(serviceWorker.includes('drita-hanefi-v11'), "PWA: cache nuk u ngrit pas përditësimit të moduleve");
+assert(serviceWorker.includes('drita-hanefi-v12'), "PWA: cache nuk u ngrit pas përditësimit të moduleve");
 assert(serviceWorker.includes('"./data/akide-verified.json"'), "PWA nuk ruan katalogun e Akides për përdorim offline");
 assert(serviceWorker.includes('"./data/hudbe-verified.json"'), "PWA nuk ruan katalogun e Hudbeve për përdorim offline");
 const androidActivity = await readFile(resolve(ROOT, "android/app/src/main/java/com/dritahanefi/app/MainActivity.java"), "utf8");
