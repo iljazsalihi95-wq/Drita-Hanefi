@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
     {"Texhvidi","Rregulla • shembuj • mësim","texhvid"},
     {"Abetarja Kuranore","Mësime • shkronja • ushtrime","abetare"},
     {"Hudbet","Hudbe • kërkim • burime","hudbe"},
-    {"Pedagogjia Islame","Edukim dhe materiale mësimore","pedagogji"},
+    {"Pedagogjia Islame","Edukim • mësime • burime","pedagogji"},
     {"Historia Islame","Ngjarje • figura • burime","histori"},
     {"Më bëj një temë","Përgatitje teme nga burimet","tema"},
     {"Admini","Kontrolli i sistemeve","admin"}

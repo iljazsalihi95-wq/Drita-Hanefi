@@ -7,7 +7,7 @@ android {
         applicationId = "com.dritahanefi.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 5
-        versionName = "0.3.0-native"
+        versionCode = 6
+        versionName = "0.3.1-native"
     }
 }
