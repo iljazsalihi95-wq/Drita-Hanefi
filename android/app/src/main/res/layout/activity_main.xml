@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
- android:layout_width="match_parent" android:layout_height="match_parent">
+ android:layout_width="match_parent" android:layout_height="match_parent"
+ android:background="#031510">
  <WebView android:id="@+id/web" android:layout_width="match_parent" android:layout_height="match_parent"/>
  <ProgressBar android:id="@+id/progress" style="?android:attr/progressBarStyleHorizontal"
   android:layout_width="match_parent" android:layout_height="3dp" android:layout_gravity="top"
   android:max="100"/>
+ <LinearLayout android:id="@+id/offlinePanel" android:visibility="gone"
+  android:orientation="vertical" android:gravity="center" android:padding="28dp"
+  android:background="#031510" android:layout_width="match_parent" android:layout_height="match_parent">
+  <ImageView android:layout_width="92dp" android:layout_height="92dp"
+   android:src="@drawable/splash_mark" android:contentDescription="@string/app_name"/>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+   android:layout_marginTop="18dp" android:text="@string/no_connection"
+   android:textColor="#F8F5E9" android:textSize="20sp" android:textStyle="bold"/>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+   android:layout_marginTop="8dp" android:text="@string/app_subtitle"
+   android:textColor="#B8CEC5" android:textSize="13sp"/>
+  <Button android:id="@+id/retryButton" android:layout_width="wrap_content" android:layout_height="wrap_content"
+   android:layout_marginTop="22dp" android:text="@string/retry" android:textAllCaps="false"/>
+ </LinearLayout>
 </FrameLayout>
