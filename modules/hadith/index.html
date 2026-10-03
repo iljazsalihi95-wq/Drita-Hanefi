@@ -27,6 +27,7 @@ footer{text-align:center;color:#6f9d92;padding:28px 10px}
 <footer>Drita Hanefi • Hadithi</footer><script>
 const API="https://script.google.com/macros/s/AKfycbyZWyxCfIvU_tXY_TYZ6R4qUFO_NLS6mCBcpMIB3yh7hmCW-_S332dwb1gnKiaaje6K/exec";
 const ACTION="hadith.list";
+const HADITH_4872_ACTION="hadith4872.list";
 const VERIFIED="../../data/hadith-verified.json";
 const STORE="drita_hanefi_hadith_mesim_v2";
 let ALL=[],progress=readProgress();
@@ -44,7 +45,7 @@ function readProgress(){try{return JSON.parse(localStorage.getItem(STORE)||'{"st
 function saveProgress(){localStorage.setItem(STORE,JSON.stringify(progress));updateStats()}
 function stateOf(id){return progress.states?.[id]||''}
 function setState(id,state){progress.states=progress.states||{};if(state)progress.states[id]=state;else delete progress.states[id];progress.last=id;saveProgress();render(ALL)}
-function complete(r){const f=factsOf(r),required=[idOf(r),titleOf(r),f.topic,f.subtopic,arabicOf(r),albanianOf(r),f.collection,f.source,f.book,f.number,f.narrator,f.grade,f.reference],audit=[titleOf(r),arabicOf(r),albanianOf(r),f.reference,f.comment].join(' ');return required.every(Boolean)&&/^PUBLIKUAR\b/i.test(f.status)&&!/^(?:Material|Përmbledhje tematike)$/i.test(titleOf(r))&&!/PROVIZOR|PËR VERIFIKIM|DO TË PLOTËSOHET|PËR T[.’']?U SHTUAR|PLACEHOLDER|DEMO/i.test(audit)}
+function complete(r){const f=factsOf(r),audit=[titleOf(r),arabicOf(r),albanianOf(r),f.reference,f.comment].join(' ');return !!(idOf(r)&&arabicOf(r)&&albanianOf(r)&&(f.collection||f.source||f.book||f.reference))&&!/^(?:Material|Përmbledhje tematike)$/i.test(titleOf(r))&&!/PROVIZOR|DO TË PLOTËSOHET|PËR T[.’']?U SHTUAR|PLACEHOLDER|DEMO/i.test(audit)}
 function updateStats(){const ids=new Set(ALL.map(idOf)),vals=Object.entries(progress.states||{}).filter(([id])=>ids.has(id)).map(([,state])=>state);$('#totalHadith').textContent=ALL.length;$('#audioHadith').textContent=ALL.filter(audioOf).length;$('#learningHadith').textContent=vals.filter(x=>x==='learning').length;$('#learnedHadith').textContent=vals.filter(x=>x==='learned').length;$('#reviewHadith').textContent=vals.filter(x=>x==='review').length}
 function render(rows){
  const q=($('#q').value||'').toLocaleLowerCase('sq');
