@@ -162,7 +162,7 @@ assert(androidActivity.includes("https://iljazsalihi95-wq.github.io/Drita-Hanefi
 assert(androidManifest.includes('android.permission.INTERNET'), "Androidit i mungon leja INTERNET");
 assert(androidManifest.includes('android:usesCleartextTraffic="false"'), "Android lejon trafik të pasigurt");
 assert(androidManifest.includes('android:theme="@style/SplashTheme"'), "Androidit i mungon tema native e nisjes");
-assert(splashBackground.includes('android:drawable="@drawable/splash_mark"') && !/<item[^>]*>\s*<layer-list>/s.test(splashBackground), "Splash-i Android përdor drawable të pavlefshëm");
+assert(splashBackground.includes('android:drawable="@color/launcher_background"') && splashBackground.includes('android:drawable="@drawable/splash_mark"') && !/<item[^>]*>\s*<layer-list>/s.test(splashBackground), "Splash-i Android përdor drawable të pavlefshëm");
 for (const density of ["mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"]) {
   assert(await exists(resolve(ROOT, `android/app/src/main/res/mipmap-${density}/ic_launcher.png`)), `Mungon ikona Android ${density}`);
 }
