@@ -10,7 +10,11 @@
  "background_color":"#031510",
  "theme_color":"#062d24",
  "lang":"sq",
- "icons":[{"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
+ "icons":[
+  {"src":"assets/icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+  {"src":"assets/icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+  {"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}
+ ],
  "shortcuts":[
   {"name":"Kurani","url":"modules/quran/index.html"},
   {"name":"Hadithi","url":"modules/hadith/index.html"},

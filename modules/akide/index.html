@@ -1,240 +1,59 @@
-<!doctype html>
-<html lang="sq">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#062d24">
-<title>Akide Maturidije – Drita Hanefi</title>
-<style>
-:root{
-  --bg:#041a15;--bg2:#062d24;--panel:#0a3b2f;--panel2:#0d4939;
-  --gold:#d9b83e;--gold2:#f0d56b;--ink:#f6fff9;--muted:#bdd2ca;
-  --line:rgba(217,184,62,.32);--soft:rgba(255,255,255,.06);--danger:#efb6ad
-}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:
- radial-gradient(circle at 92% 0,rgba(217,184,62,.11),transparent 32%),var(--bg);color:var(--ink)}
-body{padding-bottom:36px}
-.top{position:sticky;top:0;z-index:20;background:rgba(4,26,21,.94);backdrop-filter:blur(10px);
- border-bottom:1px solid var(--line)}
-.topin{max-width:1120px;margin:auto;padding:14px 14px 12px;display:flex;gap:12px;align-items:center}
-.logo{width:48px;height:48px;border:1px solid var(--gold);border-radius:14px;display:grid;place-items:center;
- background:linear-gradient(145deg,var(--panel2),var(--bg2));font-size:26px;box-shadow:0 8px 22px #0005}
-.brand h1{font-size:20px;margin:0;color:var(--gold2)}
-.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}
-.wrap{max-width:1120px;margin:auto;padding:18px 14px}
-.hero{padding:20px;border:1px solid var(--line);border-radius:24px;background:
- linear-gradient(145deg,rgba(13,73,57,.95),rgba(6,45,36,.95));box-shadow:0 18px 45px #0004}
-.hero h2{margin:0;font-size:28px}
-.hero p{color:var(--muted);margin:8px 0 0;line-height:1.55}
-.stats{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
-.stat{background:#041a1588;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:13px}
-.controls{display:grid;grid-template-columns:minmax(0,2fr) minmax(170px,1fr);gap:10px;margin:16px 0}
-input,select{width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--line);
- background:#082d25;color:white;outline:none;font-size:15px}
-input:focus,select:focus{border-color:var(--gold)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.card{border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#0a392e,#072b23);
- padding:17px;box-shadow:0 12px 28px #0003;display:flex;flex-direction:column;min-height:205px}
-.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px}
-.badge{font-size:11px;padding:5px 8px;border-radius:999px;background:rgba(217,184,62,.12);
- border:1px solid rgba(217,184,62,.3);color:var(--gold2)}
-.card h3{font-size:19px;line-height:1.3;margin:0 0 9px;color:#fff}
-.preview{color:#d8e6e1;line-height:1.55;font-size:14px;display:-webkit-box;-webkit-line-clamp:4;
- -webkit-box-orient:vertical;overflow:hidden;white-space:pre-line;flex:1}
-.actions{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:8px}
-.id{font-size:11px;color:#97b5aa}
-.read{border:0;border-radius:12px;background:linear-gradient(135deg,#caa936,#eed066);color:#14261f;
- font-weight:800;padding:10px 14px;cursor:pointer}
-.empty,.loading,.error{padding:34px 20px;text-align:center;border:1px dashed var(--line);
- border-radius:20px;color:var(--muted);background:#082b2355}
-.error{color:var(--danger)}
-.pager{display:flex;justify-content:center;align-items:center;gap:9px;margin:20px 0}
-.pager button{border:1px solid var(--line);background:#0b3b30;color:white;padding:9px 12px;border-radius:10px}
-.pager button:disabled{opacity:.35}
-.modal{position:fixed;inset:0;z-index:100;background:#00100cdc;display:none;padding:14px;overflow:auto}
-.modal.open{display:block}
-.sheet{max-width:900px;margin:18px auto;background:#f8fbf9;color:#17352c;border-radius:24px;
- overflow:hidden;box-shadow:0 30px 80px #0009}
-.mhead{position:sticky;top:0;background:#083a2f;color:white;padding:15px 18px;border-bottom:3px solid var(--gold);
- display:flex;gap:10px;justify-content:space-between;align-items:center;z-index:3}
-.mhead h2{font-size:19px;margin:0;line-height:1.25}
-.close{border:0;background:#ffffff17;color:white;width:40px;height:40px;border-radius:50%;font-size:25px;cursor:pointer}
-.content{padding:18px}
-.field{padding:15px 0;border-bottom:1px solid #dbe6e1}
-.field:last-child{border:0}
-.label{font-size:12px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;color:#56736a;margin-bottom:7px}
-.value{font-size:16px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere}
-.arabic{font-family:"Noto Naskh Arabic","Amiri","Traditional Arabic",serif;direction:rtl;text-align:right;
- font-size:23px;line-height:2}
-.source-link{display:inline-block;margin-top:6px;color:#086b50;font-weight:700;text-decoration:none;word-break:break-all}
-.note{font-size:12px;color:#789086;margin-top:20px;text-align:center}
-@media(max-width:720px){
- .grid{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.hero h2{font-size:23px}
- .topin{padding:10px 12px}.logo{width:43px;height:43px}.content{padding:14px}.value{font-size:15px}.arabic{font-size:21px}
-}
-</style>
-</head>
-<body><div style="max-width:1120px;margin:10px auto 0;padding:0 14px"><a href="../../index.html" style="color:#f0d56b;text-decoration:none;font-weight:800">⌂ Ballina</a></div>
-<header class="top"><div class="topin">
-  <div class="logo">📚</div>
-  <div class="brand"><h1>Drita Hanefi</h1><p>Bibliotekë & Enciklopedi Digjitale</p></div>
-</div></header>
-
-<main class="wrap">
-<section class="hero">
-  <h2>Akide Maturidije</h2>
-  <p>Enciklopedia e Akides Maturidije</p>
-  <div class="stats"><span class="stat" id="count">Duke u ngarkuar…</span><span class="stat">Vetëm materiale me status PUBLIKUAR</span></div>
-</section>
-
-<div class="controls">
-  <input id="q" type="search" placeholder="Kërko në materiale…" autocomplete="off">
-  <select id="cat"><option value="">Të gjitha temat</option></select>
-</div>
-
-<div id="state" class="loading">Po ngarkohen materialet nga baza LIVE…</div>
-<div id="grid" class="grid" hidden></div>
-<div id="pager" class="pager" hidden></div>
-<div class="note">Drita Hanefi • Lexim publik • Administrimi nuk është i ekspozuar në këtë faqe.</div>
-</main>
-
-<div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-  <article class="sheet">
-    <div class="mhead"><h2 id="mtitle">Akide Maturidije</h2><button class="close" id="close" aria-label="Mbyll">×</button></div>
-    <div id="mcontent" class="content"></div>
-  </article>
-</div>
-
-<script>
-const API = "https://script.google.com/macros/s/AKfycbxJwhkJzGIXDRDJkHv4Oc1bLueZdccq0rZirfrnAWJFqaeOerV3qDG9O0A3cs5_WIBJ/exec";
-const CONFIG = {"title": "Akide Maturidije", "subtitle": "Enciklopedia e Akides Maturidije", "icon": "📚", "title_keys": ["Titulli", "Tema"], "category_keys": ["Tema", "Nëntema"], "summary_keys": ["Teksti i plotë shqip", "Koment redaksional"], "detail_fields": ["ID", "Tema", "Nëntema", "Titulli", "Teksti i plotë shqip", "Teksti arab", "Transkriptimi", "Autor/Dijetar", "Vepra", "Kitab/Bab/Fasl", "Referenca", "Argumentet", "Koment redaksional", "Burime plotësuese", "Fjalë kyçe", "Lidhje të ndërlidhura", "Version"], "type": "akide"};
-const PAGE_SIZE = 20;
-let all = [], filtered = [], page = 1;
-
-const $ = s => document.querySelector(s);
-const esc = v => String(v ?? "");
-const nonempty = v => v !== undefined && v !== null && String(v).trim() !== "";
-
-function first(obj, keys){
-  for(const k of keys){ if(nonempty(obj[k])) return String(obj[k]).trim(); }
-  return "";
-}
-function isArabicKey(k){
-  return /arab|عرب|teksti arab/i.test(k);
-}
-function categoryOf(o){
-  return first(o, CONFIG.category_keys) || "Të tjera";
-}
-function titleOf(o){
-  return first(o, CONFIG.title_keys) || o.ID || "Pa titull";
-}
-function previewOf(o){
-  return first(o, CONFIG.summary_keys) || first(o, ["Përmbledhje","Teksti i plotë shqip","Përkthimi Shqip","Përkthimi i Plotë","Tefsiri i plotë"]) || "";
-}
-function uniqueCats(){
-  return [...new Set(all.map(categoryOf).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"sq"));
-}
-function populateCats(){
-  const s=$("#cat"); s.innerHTML='<option value="">Të gjitha temat</option>';
-  uniqueCats().forEach(c=>{
-    const op=document.createElement("option"); op.value=c; op.textContent=c; s.appendChild(op);
-  });
-}
-function apply(){
-  const q=$("#q").value.trim().toLocaleLowerCase("sq");
-  const c=$("#cat").value;
-  filtered=all.filter(o=>{
-    const hay=Object.values(o).join(" ").toLocaleLowerCase("sq");
-    return (!q || hay.includes(q)) && (!c || categoryOf(o)===c);
-  });
-  page=1; render();
-}
-function render(){
-  const grid=$("#grid"), state=$("#state"), pager=$("#pager");
-  if(!filtered.length){
-    grid.hidden=true; pager.hidden=true; state.hidden=false;
-    state.className="empty";
-    state.textContent=all.length ? "Nuk u gjet asnjë material me këtë kërkim." : "Nuk ka ende materiale të publikuara në këtë rubrikë.";
-    return;
-  }
-  state.hidden=true; grid.hidden=false; grid.innerHTML="";
-  const start=(page-1)*PAGE_SIZE, items=filtered.slice(start,start+PAGE_SIZE);
-  items.forEach(o=>{
-    const card=document.createElement("article"); card.className="card";
-    const badges=document.createElement("div"); badges.className="badges";
-    CONFIG.category_keys.forEach(k=>{
-      if(nonempty(o[k])){
-        const b=document.createElement("span");b.className="badge";b.textContent=o[k];badges.appendChild(b);
-      }
-    });
-    const h=document.createElement("h3");h.textContent=titleOf(o);
-    const p=document.createElement("div");p.className="preview";p.textContent=previewOf(o);
-    const a=document.createElement("div");a.className="actions";
-    const id=document.createElement("span");id.className="id";id.textContent=o.ID||o.id||"";
-    const btn=document.createElement("button");btn.className="read";btn.textContent="Lexo të plotë";btn.onclick=()=>openItem(o);
-    a.append(id,btn); card.append(badges,h,p,a);grid.appendChild(card);
-  });
-  const pages=Math.ceil(filtered.length/PAGE_SIZE);
-  if(pages>1){
-    pager.hidden=false;pager.innerHTML="";
-    const prev=document.createElement("button");prev.textContent="‹ Mbrapa";prev.disabled=page<=1;prev.onclick=()=>{page--;render();scrollTo(0,0)};
-    const txt=document.createElement("span");txt.textContent=`Faqja ${page} / ${pages}`;
-    const next=document.createElement("button");next.textContent="Para ›";next.disabled=page>=pages;next.onclick=()=>{page++;render();scrollTo(0,0)};
-    pager.append(prev,txt,next);
-  } else pager.hidden=true;
-}
-function addField(root,label,value){
-  if(!nonempty(value)) return;
-  const f=document.createElement("section"); f.className="field";
-  const l=document.createElement("div");l.className="label";l.textContent=label;
-  const v=document.createElement("div");v.className="value"+(isArabicKey(label)?" arabic":"");
-  v.textContent=value;
-  f.append(l,v);root.appendChild(f);
-}
-function openItem(o){
-  $("#mtitle").textContent=titleOf(o);
-  const root=$("#mcontent");root.innerHTML="";
-  const keys=CONFIG.detail_fields.length ? CONFIG.detail_fields : Object.keys(o);
-  keys.forEach(k=>{
-    if(k==="Statusi" || k==="Status") return;
-    const val=o[k];
-    if(!nonempty(val)) return;
-    if(/URL|Link/i.test(k) && /^https?:\/\//i.test(String(val))){
-      const f=document.createElement("section");f.className="field";
-      const l=document.createElement("div");l.className="label";l.textContent=k;
-      const a=document.createElement("a");a.className="source-link";a.href=val;a.target="_blank";a.rel="noopener";a.textContent="Hap burimin";
-      f.append(l,a);root.appendChild(f);
-    } else addField(root,k,val);
-  });
-  $("#modal").classList.add("open");$("#modal").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
-}
-function closeModal(){
-  $("#modal").classList.remove("open");$("#modal").setAttribute("aria-hidden","true");document.body.style.overflow="";
+<!doctype html><html lang="sq"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Akide Maturidije • Drita Hanefi</title><style>
+*{box-sizing:border-box}html,body{margin:0;background:#06151d;color:#eef7f4;font-family:Arial,sans-serif}
+body{min-height:100vh;background:linear-gradient(180deg,#071b26,#041016)}
+.top{position:sticky;top:0;z-index:20;background:rgba(5,20,28,.97);border-bottom:1px solid #1f6254;padding:12px}
+.topin{max-width:1050px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{font-weight:900;font-size:22px}.sub{font-size:12px;color:#b9d8cf;margin-top:2px}
+.wrap{max-width:1050px;margin:auto;padding:16px 16px 90px}
+.hero{background:linear-gradient(135deg,#0b3b32,#0b2432);border:1px solid #277763;border-radius:24px;padding:22px;box-shadow:0 14px 36px #0006}
+.hero h1{margin:0 0 8px;font-size:30px;color:#ffe28b}.hero p{margin:0;color:#d7ebe5;line-height:1.6}
+.tools{display:flex;gap:9px;margin:14px 0;position:sticky;top:70px;z-index:15;background:#06151dee;padding:8px 0}
+.search{flex:1;border:1px solid #285d58;border-radius:15px;background:#fff;color:#15231f;padding:13px 15px;font-size:16px;outline:none}
+.btn{border:0;border-radius:15px;padding:0 18px;font-weight:900;background:#e7c35f;color:#15231f}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:15px}
+.card{display:block;text-decoration:none;color:#fff;background:#0a2730;border:1px solid #285d58;border-radius:19px;padding:16px;box-shadow:0 8px 22px #0003}
+.card:active{transform:scale(.985)}.card h3{margin:5px 0 8px;color:#ffe28b}.card p{margin:0;color:#c7ded8;line-height:1.5}
+.ico{font-size:32px}.status{padding:14px;border:1px dashed #285d58;border-radius:16px;color:#b9d8cf;text-align:center;margin:14px 0}
+.group{margin:20px 0}.group h2{color:#ffe28b;border-bottom:1px solid #285d58;padding-bottom:9px}.subgroup{margin:15px 0}.subgroup h3{font-size:15px;color:#b9d8cf;margin:0 0 9px}.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:11px}.item{background:#0a2730;border:1px solid #285d58;border-radius:18px;padding:16px;box-shadow:0 8px 22px #0003}
+.item h3{margin:0 0 8px;color:#ffe28b;font-size:19px}.item p{margin:8px 0;line-height:1.65;color:#d7ebe5}.label{color:#d8c878;font-size:11px;text-transform:uppercase;font-weight:900;letter-spacing:.05em}.sourcebox{margin-top:13px;padding:12px;border:1px solid #6e683b;border-radius:13px;background:#102e2b}.sourcebox b{display:block;margin-top:3px}.meta{font-size:12px;color:#8fb8ae;margin-top:8px}.arabic{direction:rtl;text-align:right;font-size:23px;line-height:1.9}.verify{display:inline-block;margin-top:10px;border:1px solid #367268;border-radius:999px;padding:5px 8px;font-size:10px;color:#cbe4dd}
+.back,.sourcelink{color:#ffe28b;text-decoration:none;font-weight:800}.sourcelink{display:inline-block;margin-top:9px}.chips{display:flex;gap:7px;overflow:auto;padding:12px 0}.chip{white-space:nowrap;padding:9px 12px;border:1px solid #285d58;border-radius:999px;color:#d7ebe5}
+footer{text-align:center;color:#6f9d92;padding:28px 10px}
+</style></head><body>
+<header class="top"><div class="topin"><div><div class="brand">☪️ Drita Hanefi</div><div class="sub">Enciklopedia Hanefi–Maturidije</div></div><a class="back" href="../../index.html">⌂ Ballina</a></div></header><main class="wrap"><section class="hero"><h1>🧭 Akide Maturidije</h1><p>Tema → Nëntema → mësimi i plotë, me argumente, autor, vepër, referencë dhe status verifikimi nga baza LIVE.</p></section>
+<div class="tools"><input id="q" class="search" placeholder="Kërko në Akide Maturidije…"><button class="btn" onclick="render(ALL)">Kërko</button></div>
+<div id="status" class="status">Duke u lidhur…</div><div id="count" class="meta"></div><div id="chips" class="chips"></div><section id="list"></section></main>
+<footer>Drita Hanefi • Akide Maturidije</footer><script>
+const API="https://script.google.com/macros/s/AKfycbyZWyxCfIvU_tXY_TYZ6R4qUFO_NLS6mCBcpMIB3yh7hmCW-_S332dwb1gnKiaaje6K/exec";
+const ACTION="akide";
+const VERIFIED="../../data/akide-verified.json";
+let ALL=[];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function val(o,keys){for(const k of keys){if(o&&o[k]!==undefined&&o[k]!==null&&String(o[k]).trim())return o[k]}return ''}
+function raw(r,keys){return val(r&&r.raw?r.raw:{},keys)}
+function model(r){const editorial=val(r,['editorial','commentary'])||raw(r,['Koment redaksional']);return{id:val(r,['id'])||raw(r,['ID']),topic:val(r,['topic'])||raw(r,['Tema']),subtopic:val(r,['subtopic'])||raw(r,['Nëntema']),title:val(r,['title'])||raw(r,['Titulli']),text:val(r,['albanian'])||raw(r,['Teksti i plotë shqip']),arabic:val(r,['arabic'])||raw(r,['Teksti arab']),translit:val(r,['transliteration'])||raw(r,['Transkriptimi']),arguments:val(r,['arguments'])||raw(r,['Argumentet']),editorial,author:val(r,['author'])||raw(r,['Autori']),work:val(r,['work'])||raw(r,['Vepra']),section:val(r,['section'])||raw(r,['Kitab/Bab/Fasl']),reference:val(r,['reference'])||raw(r,['Referenca']),additional:val(r,['additional'])||raw(r,['Burime plotësuese']),keywords:val(r,['keywords'])||raw(r,['Fjalë kyçe']),status:val(r,['status'])||raw(r,['Statusi']),verified:val(r,['verified'])||raw(r,['Data verifikimit']),url:val(r,['url'])||raw(r,['URL burimi']),sourceType:val(r,['sourceType'])||(/nuk paraqitet si citim literal/i.test(editorial)?'përmbledhje e burimit':'tekst i audituar')}}
+function complete(r){const audit=[r.title,r.text,r.arguments,r.editorial,r.reference,r.additional].join(' ');return r.id&&r.topic&&r.subtopic&&r.title&&r.text&&r.author&&r.work&&r.reference&&!/PROVIZOR|PËR VERIFIKIM|PËR T.U SHTUAR|DO TË PLOTËSOHET|PËRMBLEDHJE TEMATIKE/i.test(audit)&&/PUBLIKUAR/i.test(r.status)}
+function safeUrl(url){try{const u=new URL(url);return u.protocol==='https:'?u.href:''}catch{return ''}}
+function render(rows){
+ const q=($('#q').value||'').toLocaleLowerCase('sq');
+ const a=rows.filter(r=>!q||JSON.stringify(r).toLocaleLowerCase('sq').includes(q));
+ const excerpts=a.filter(r=>r.sourceType==='fragment klasik').length;
+ $('#count').textContent=a.length+' mësime të publikuara • '+excerpts+' fragmente klasike të audituara';
+ const topics=[...new Set(rows.map(r=>r.topic))].sort((a,b)=>a.localeCompare(b,'sq'));
+ $('#chips').innerHTML=topics.map(t=>`<button class="chip" onclick="pick(decodeURIComponent('${encodeURIComponent(t)}'))">${esc(t)}</button>`).join('');
+ const groups=a.reduce((o,r)=>((o[r.topic]??=[]).push(r),o),{});
+ $('#list').innerHTML=a.length?Object.entries(groups).sort(([a],[b])=>a.localeCompare(b,'sq')).map(([name,items])=>{const subs=items.reduce((o,r)=>((o[r.subtopic]??=[]).push(r),o),{});return `<section class="group"><h2>${esc(name)}</h2>${Object.entries(subs).sort(([a],[b])=>a.localeCompare(b,'sq')).map(([sub,records])=>`<section class="subgroup"><h3>${esc(sub)}</h3><div class="items">${records.sort((a,b)=>a.title.localeCompare(b.title,'sq')).map(r=>{const url=safeUrl(r.url);return `<article class="item"><div class="label">${esc(r.sourceType)}</div><h3>${esc(r.title)}</h3>${r.arabic?`<p class="arabic">${esc(r.arabic)}</p>`:''}${r.translit?`<p><i>${esc(r.translit)}</i></p>`:''}<p>${esc(r.text)}</p>${r.arguments?`<div class="label">Argumentet</div><p>${esc(r.arguments)}</p>`:''}${r.editorial?`<div class="label">Shënim redaksional</div><p>${esc(r.editorial)}</p>`:''}<div class="sourcebox"><span class="label">Burimi</span><b>${esc(r.author)}</b><div>${esc(r.work)}</div>${r.section?`<div class="meta">${esc(r.section)}</div>`:''}<div class="meta">${esc(r.reference)}</div>${r.additional?`<div class="meta">Burime plotësuese: ${esc(r.additional)}</div>`:''}${url?`<a class="sourcelink" href="${esc(url)}" target="_blank" rel="noopener">Hap burimin ↗</a>`:''}</div>${r.verified?`<span class="verify">Verifikuar: ${esc(r.verified)}</span>`:''}</article>`}).join('')}</div></section>`).join('')}</section>`}).join(''):'<div class="status">Nuk u gjet mësim me këtë kërkim.</div>';
 }
 async function load(){
-  try{
-    const url=API+"?type="+encodeURIComponent(CONFIG.type)+"&_="+Date.now();
-    const r=await fetch(url,{cache:"no-store"});
-    if(!r.ok) throw new Error("HTTP "+r.status);
-    const j=await r.json();
-    if(!j.ok) throw new Error(j.error||"Gabim API");
-    all=Array.isArray(j.data)?j.data:[];
-    filtered=[...all];
-    $("#count").textContent=`${all.length} materiale të publikuara`;
-    populateCats();if(initialQ)apply();else render();
-  }catch(e){
-    $("#count").textContent="Lidhja dështoi";
-    const s=$("#state");s.className="error";s.textContent="Nuk u ngarkua baza LIVE. Kontrollo MASTER API-n dhe vendosjen e tij si Web App. Detaj: "+e.message;
-  }
+ $('#status').textContent='Duke lexuar bazën LIVE…';
+ try{
+   const u=API+'?action='+encodeURIComponent(ACTION)+'&limit=2000&_='+Date.now();
+   const [x,v]=await Promise.all([fetch(u,{cache:'no-store'}),fetch(VERIFIED,{cache:'no-store'})]); const j=await x.json(), verified=await v.json();
+   const local=(verified.rows||[]).map(model).filter(complete), live=(Array.isArray(j.rows)?j.rows:Array.isArray(j.data)?j.data:Array.isArray(j.items)?j.items:[]).map(model).filter(complete);
+   ALL=[...new Map([...live,...local].map(r=>[r.id,r])).values()];
+   if(!ALL.length)throw Error('empty');$('#status').style.display='none'; render(ALL);
+ }catch(e){$('#status').textContent='Nuk u arrit lidhja me bazën LIVE.'}
 }
-const initialQ=new URLSearchParams(location.search).get("q");if(initialQ)$("#q").value=initialQ;
-$("#q").addEventListener("input",apply);
-$("#cat").addEventListener("change",apply);
-$("#close").addEventListener("click",closeModal);
-$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
-load();
-</script>
-</body>
-</html>
+function pick(topic){$('#q').value=topic;render(ALL)}
+const initialQ=new URLSearchParams(location.search).get('q');if(initialQ)$('#q').value=initialQ;$('#q').addEventListener('input',()=>render(ALL)); load();
+</script></body></html>

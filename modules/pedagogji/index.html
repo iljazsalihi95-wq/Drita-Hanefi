@@ -1,58 +1,50 @@
-<!DOCTYPE html>
-<html lang="sq">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#052f27">
-<title>Pedagogji Islame – Drita Hanefi</title>
-<style>
-:root{--bg:#041a15;--p:#072f27;--p2:#0a4537;--gold:#e7c667;--gold2:#f5dfa0;--text:#f7fff9;--muted:#b7d5c8;--line:rgba(231,198,103,.32)}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:linear-gradient(180deg,#07382d,#041a15);color:var(--text)}
-.wrap{max-width:1100px;margin:auto;padding:14px 14px 80px}.hero{border:1px solid var(--line);border-radius:25px;padding:20px;background:radial-gradient(circle at top right,rgba(231,198,103,.13),transparent 31%),linear-gradient(145deg,#0d4a39,#062d24);box-shadow:0 14px 34px #0005}
-.head{display:flex;align-items:center;gap:14px}.ico{width:64px;height:64px;border:1px solid var(--line);border-radius:18px;display:grid;place-items:center;font-size:32px;background:#082b23}
-h1{margin:0;color:var(--gold2);font-size:clamp(25px,5vw,39px)}.sub{color:var(--muted);margin-top:6px;line-height:1.5}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.chip{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px}
-.tools{display:grid;grid-template-columns:1fr auto;gap:10px;margin:15px 0}.search,.btn{min-height:48px;border:1px solid var(--line);border-radius:14px;background:#082f26;color:#fff;padding:0 14px}.search::placeholder{color:#a9c7ba}.btn{cursor:pointer;background:linear-gradient(180deg,#b79439,#856821);font-weight:700}
-.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}.stat{background:#082e25;border:1px solid var(--line);border-radius:15px;padding:12px}.stat span{font-size:12px;color:var(--muted)}.stat b{display:block;color:var(--gold2);font-size:22px;margin-top:3px}
-.layout{display:grid;grid-template-columns:250px 1fr;gap:12px}.side,.main{border:1px solid var(--line);background:#062d24db;border-radius:20px;padding:13px}.side h2,.main h2{font-size:16px;color:var(--gold2);margin:2px 0 11px}
-.cats{display:flex;flex-direction:column;gap:7px}.cat{border:1px solid #ffffff15;background:#082f26;color:#fff;border-radius:11px;padding:10px;text-align:left;cursor:pointer}.cat.active{border-color:var(--gold);background:#0d4939}.cat small{float:right;color:var(--muted)}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{border:1px solid #e7c66730;border-radius:15px;padding:13px;background:linear-gradient(180deg,#09372c,#072a22);cursor:pointer}.card:hover{border-color:var(--gold)}
-.ctop{display:flex;justify-content:space-between;gap:8px}.card h3{font-size:16px;margin:0}.id{font-size:11px;color:var(--gold2);white-space:nowrap}.meta{display:flex;gap:5px;flex-wrap:wrap;margin:9px 0}.pill{font-size:11px;padding:4px 7px;border:1px solid #ffffff12;border-radius:999px;background:#0c4436}.desc{font-size:13px;line-height:1.46;color:#cce1d8;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-.status{font-size:12px;color:var(--muted);padding-top:10px}.ok{color:#92dfb3}.err{color:#ff9b9b}.empty{padding:30px;text-align:center;color:var(--muted)}
-.modal{position:fixed;inset:0;background:#000b;display:none;padding:14px;z-index:99;overflow:auto}.modal.show{display:block}.dialog{max-width:900px;margin:28px auto;background:#062d24;border:1px solid var(--line);border-radius:22px;overflow:hidden}.dh{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:15px;background:#0a4033;border-bottom:1px solid var(--line)}.dh h2{margin:0;color:var(--gold2);font-size:21px}.close{width:40px;height:40px;border-radius:11px;border:1px solid var(--line);background:#082f26;color:white;font-size:21px}.db{padding:16px}.field{border:1px solid #e7c66726;border-radius:14px;padding:12px;margin:9px 0;background:#072a22}.field b{display:block;color:var(--gold2);font-size:13px;margin-bottom:7px}.field div{white-space:pre-wrap;line-height:1.64}.arabic{direction:rtl;text-align:right;font-family:"Amiri","Noto Naskh Arabic",serif;font-size:23px;line-height:1.9}
-footer{position:fixed;left:0;right:0;bottom:0;background:#031e19f2;border-top:1px solid var(--line);padding:9px;text-align:center;color:#a8c7ba;font-size:11px}
-@media(max-width:760px){.layout{grid-template-columns:1fr}.cats{display:grid;grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}}
-</style>
-</head>
-<body><div style="max-width:1100px;margin:10px auto 0;padding:0 14px"><a href="../../index.html" style="color:#FFE99B;text-decoration:none;font-weight:800">⌂ Ballina</a></div>
-<div class="wrap">
-<section class="hero"><div class="head"><div class="ico">🎓</div><div><h1>Pedagogji Islame</h1><div class="sub">Mësime edukative, metodika, këshilla dhe tema të pedagogjisë islame nga baza e verifikuar.</div><div class="chips"><span class="chip">Drita Hanefi</span><span class="chip">LIVE Google Sheet</span><span class="chip">Apps Script + Publish to Web</span></div></div></div></section>
-<div class="tools"><input id="q" class="search" placeholder="Kërko në këtë rubrikë…"><button id="reload" class="btn">↻ Rifresko LIVE</button></div>
-<div class="statrow"><div class="stat"><span>Mësime</span><b id="n">0</b></div><div class="stat"><span>Kategori/tema</span><b id="nc">0</b></div><div class="stat"><span>Status LIVE</span><b id="live">—</b></div></div>
-<div class="layout"><aside class="side"><h2>Kategoritë</h2><div class="cats" id="cats"></div></aside><main class="main"><h2 id="ttl">Mësimet<//h2><div class="cards" id="cards"><div class="empty">Duke ngarkuar…</div></div><div id="status" class="status"></div></main></div>
-</div>
-<div class="modal" id="modal"><div class="dialog"><div class="dh"><h2 id="mt"></h2><button id="x" class="close">×</button></div><div class="db" id="mb"></div></div></div>
-<footer>Pedagogji Islame · Drita Hanefi · të dhënat lexohen LIVE nga baza e publikuar</footer>
-<script>
-const CFG={title:"Pedagogji Islame",sid:"1tk7FW0evCQ-FCrAiojYMYglYt05aMWX5DnEz_vhMRVM",sheet:"PEDAGOGJI_ISLAME",api:"https://script.google.com/macros/s/AKfycbzRVEgbL7GqjNKFltJwK6nCx-FmQ4WFNRKqp_Z_ERGuQ5yt8R6gdjOYthFmBa3vXXe0/exec"};
-let ALL=[],active="";
+<!doctype html><html lang="sq"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Pedagogji Islame • Drita Hanefi</title><style>
+*{box-sizing:border-box}html,body{margin:0;background:#06151d;color:#eef7f4;font-family:Arial,sans-serif}
+body{min-height:100vh;background:linear-gradient(180deg,#071b26,#041016)}
+.top{position:sticky;top:0;z-index:20;background:rgba(5,20,28,.97);border-bottom:1px solid #1f6254;padding:12px}
+.topin{max-width:1050px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{font-weight:900;font-size:22px}.sub{font-size:12px;color:#b9d8cf;margin-top:2px}
+.wrap{max-width:1050px;margin:auto;padding:16px 16px 90px}
+.hero{background:linear-gradient(135deg,#0b3b32,#0b2432);border:1px solid #277763;border-radius:24px;padding:22px;box-shadow:0 14px 36px #0006}
+.hero h1{margin:0 0 8px;font-size:30px;color:#ffe28b}.hero p{margin:0;color:#d7ebe5;line-height:1.6}
+.tools{display:flex;gap:9px;margin:14px 0;position:sticky;top:70px;z-index:15;background:#06151dee;padding:8px 0}
+.search{flex:1;border:1px solid #285d58;border-radius:15px;background:#fff;color:#15231f;padding:13px 15px;font-size:16px;outline:none}
+.btn{border:0;border-radius:15px;padding:0 18px;font-weight:900;background:#e7c35f;color:#15231f}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:15px}
+.card{display:block;text-decoration:none;color:#fff;background:#0a2730;border:1px solid #285d58;border-radius:19px;padding:16px;box-shadow:0 8px 22px #0003}
+.card:active{transform:scale(.985)}.card h3{margin:5px 0 8px;color:#ffe28b}.card p{margin:0;color:#c7ded8;line-height:1.5}
+.ico{font-size:32px}.status{padding:14px;border:1px dashed #285d58;border-radius:16px;color:#b9d8cf;text-align:center;margin:14px 0}
+.group{margin:20px 0}.group h2{color:#ffe28b;border-bottom:1px solid #285d58;padding-bottom:9px}.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:11px}.item{background:#0a2730;border:1px solid #285d58;border-radius:18px;padding:16px;box-shadow:0 8px 22px #0003}.item h3{margin:5px 0 8px;color:#ffe28b;font-size:19px}.item p{margin:8px 0;line-height:1.65;color:#d7ebe5}.label{color:#d8c878;font-size:11px;text-transform:uppercase;font-weight:900;letter-spacing:.05em}.sourcebox{margin-top:13px;padding:12px;border:1px solid #6e683b;border-radius:13px;background:#102e2b}.meta{font-size:12px;color:#8fb8ae;margin-top:7px}.method{display:inline-block;margin:4px 4px 0 0;border:1px solid #367268;border-radius:999px;padding:5px 8px;font-size:10px;color:#cbe4dd}
+.back{color:#ffe28b;text-decoration:none;font-weight:800}.chips{display:flex;gap:7px;overflow:auto;padding:12px 0}.chip{white-space:nowrap;padding:9px 12px;border:1px solid #285d58;border-radius:999px;color:#d7ebe5}
+footer{text-align:center;color:#6f9d92;padding:28px 10px}
+</style></head><body>
+<header class="top"><div class="topin"><div><div class="brand">☪️ Drita Hanefi</div><div class="sub">Enciklopedia Hanefi–Maturidije</div></div><a class="back" href="../../index.html">⌂ Ballina</a></div></header><main class="wrap"><section class="hero"><h1>🎓 Pedagogji Islame</h1><p>Kategori → Temë → Nëntemë → mësim, me tekstin e plotë, metodën, argumentet, autorin/përgatitësin, faqen dhe burimin real.</p></section>
+<div class="tools"><input id="q" class="search" placeholder="Kërko në Pedagogji Islame…"><button class="btn" onclick="render(ALL)">Kërko</button></div>
+<div id="status" class="status">Duke u lidhur…</div><div id="count" class="meta"></div><section id="list"></section></main>
+<footer>Drita Hanefi • Pedagogji Islame</footer><script>
+const API="https://script.google.com/macros/s/AKfycbyZWyxCfIvU_tXY_TYZ6R4qUFO_NLS6mCBcpMIB3yh7hmCW-_S332dwb1gnKiaaje6K/exec";
+const ACTION="pedagogji";
+let ALL=[];
 const $=s=>document.querySelector(s);
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const norm=s=>String(s??"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-function csv(txt){let rows=[],r=[],c="",q=false;for(let i=0;i<txt.length;i++){let ch=txt[i],nx=txt[i+1];if(ch=='"'&&q&&nx=='"'){c+='"';i++;continue}if(ch=='"'){q=!q;continue}if(ch==','&&!q){r.push(c);c="";continue}if((ch=='\n'||ch=='\r')&&!q){if(ch=='\r'&&nx=='\n')i++;r.push(c);if(r.some(v=>v!==""))rows.push(r);r=[];c="";continue}c+=ch}if(c||r.length){r.push(c);rows.push(r)}return rows}
-function obj(rows){if(!Array.isArray(rows)||!rows.length)return[];if(!Array.isArray(rows[0]))return rows;let h=rows[0].map(v=>String(v||"").trim());return rows.slice(1).filter(r=>r.some(v=>String(v||"").trim())).map(r=>{let o={};h.forEach((k,i)=>{if(k)o[k]=r[i]??""});return o})}
-function unpack(p){if(Array.isArray(p))return obj(p);if(!p||typeof p!="object")return[];for(const k of ["data","items","rows","result","results","records","values"]){let v=p[k];if(Array.isArray(v))return obj(v);if(v&&typeof v=="object"){for(const z of ["data","items","rows","records","values"])if(Array.isArray(v[z]))return obj(v[z])}}return[]}
-async function apiRead(){const urls=[`${CFG.api}?action=list&sheet=${encodeURIComponent(CFG.sheet)}&t=${Date.now()}`,`${CFG.api}?action=read&sheet=${encodeURIComponent(CFG.sheet)}&t=${Date.now()}`,`${CFG.api}?sheet=${encodeURIComponent(CFG.sheet)}&t=${Date.now()}`];for(const u of urls){try{let r=await fetch(u,{cache:"no-store"});if(!r.ok)continue;let p=await r.json();let a=unpack(p);if(a.length)return{rows:a,via:"SCRIPT"}}catch(e){}}throw new Error("Script pa rezultat")}
-async function publishedRead(){let u=`https://docs.google.com/spreadsheets/d/${CFG.sid}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(CFG.sheet)}&t=${Date.now()}`;let r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error("Sheet HTTP "+r.status);let a=obj(csv(await r.text()));if(!a.length)throw new Error("Sheet bosh");return{rows:a,via:"SHEET"}}
-function vals(o){return Object.entries(o).filter(([k,v])=>String(v??"").trim()!=="")}
-function pick(o,keys){for(const k of keys)if(o[k]!=null&&String(o[k]).trim()!=="")return String(o[k]);return""}
-function model(o,i){let id=pick(o,["ID","Id","id"])||("MAT-"+(i+1));let title=pick(o,["Titulli","Tema","Nëntema","Nentema","Sure","Kategoria","Libri / Kapitulli","Koleksioni"])||id;let cat=pick(o,["Kategoria","Tema","Tematika Kryesore","Nëntema","Nentema","Sure","Koleksioni","Lloji Materialit"])||"Të tjera";let desc=pick(o,["Dispozita / Përmbledhja","Teksti i plotë shqip","Përkthimi Shqip","Përkthimi i Plotë","Shqip","Komentet / Verifikimi","Përmbledhje","Permbledhje","Shënime","Shenime","Argumentet"]);let status=pick(o,["Statusi","Status","Status Verifikimi Origjinal"]);return{id,title,cat,desc,status,raw:o}}
-async function load(){$("#cards").innerHTML='<div class="empty">Duke ngarkuar LIVE…</div>';$("#status").textContent="";try{let r;try{r=await apiRead()}catch(e){r=await publishedRead()}ALL=r.rows.map(model).filter(x=>x.title||x.desc);$("#live").textContent="LIVE";$("#live").style.color="#92dfb3";$("#status").innerHTML=`<span class="ok">${r.via}</span> · ${ALL.length} mësime`;buildCats();render();stats()}catch(e){$("#live").textContent="GABIM";$("#live").style.color="#ff9b9b";$("#cards").innerHTML=`<div class="empty err">Nuk u lexua baza LIVE.<br><br>${esc(e.message)}<br><br>Sigurohu që Sheet-i është Publish to web.</div>`;$("#status").innerHTML='<span class="err">Lidhja dështoi.</span>'}}
-function cmap(){let m=new Map();ALL.forEach(x=>m.set(x.cat,(m.get(x.cat)||0)+1));return[...m.entries()].sort((a,b)=>a[0].localeCompare(b[0],"sq"))}
-function buildCats(){let c=cmap();$("#cats").innerHTML=`<button class="cat ${!active?"active":""}" data-c="">Të gjitha <small>${ALL.length}</small></button>`+c.map(([k,n])=>`<button class="cat ${active==k?"active":""}" data-c="${esc(k)}">${esc(k)} <small>${n}</small></button>`).join("");document.querySelectorAll(".cat").forEach(b=>b.onclick=()=>{active=b.dataset.c||"";buildCats();render()})}
-function filt(){let q=norm($("#q").value);return ALL.filter(x=>(!active||x.cat==active)&&(!q||norm(JSON.stringify(x.raw)).includes(q)))}
-function render(){let a=filt();$("#ttl").textContent=(active||"Mësimet")+" · "+a.length;$("#cards").innerHTML=a.length?a.map(x=>`<article class="card" data-id="${esc(x.id)}"><div class="ctop"><h3>${esc(x.title)}</h3><span class="id">${esc(x.id)}</span></div><div class="meta"><span class="pill">${esc(x.cat)}</span>${x.status?`<span class="pill">${esc(x.status)}</span>`:""}</div><div class="desc">${esc(x.desc||"Hape mësimin për tekstin dhe burimet.")}</div></article>`).join(""):'<div class="empty">Nuk u gjet mësim.</div>';document.querySelectorAll(".card").forEach(c=>c.onclick=()=>openItem(c.dataset.id))}
-function stats(){$("#n").textContent=ALL.length;$("#nc").textContent=cmap().length}
-function openItem(id){let x=ALL.find(v=>v.id==id);if(!x)return;$("#mt").textContent=x.title;$("#mb").innerHTML=vals(x.raw).map(([k,v])=>`<div class="field"><b>${esc(k)}</b><div class="${/arab/i.test(k)?"arabic":""}">${esc(v)}</div></div>`).join("");$("#modal").classList.add("show")}
-function close(){$("#modal").classList.remove("show")}
-$("#x").onclick=close;$("#modal").onclick=e=>{if(e.target.id=="modal")close()};document.addEventListener("keydown",e=>{if(e.key=="Escape")close()});$("#q").oninput=render;$("#reload").onclick=load;load();
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function val(o,keys){for(const k of keys){if(o&&o[k]!==undefined&&o[k]!==null&&String(o[k]).trim())return o[k]}return ''}
+function raw(r,keys){return val(r&&r.raw?r.raw:{},keys)}
+function model(r){return{id:val(r,['id'])||raw(r,['ID']),category:val(r,['category'])||raw(r,['Kategoria']),topic:val(r,['topic'])||raw(r,['Tema']),subtopic:val(r,['subtopic'])||raw(r,['Nëntema']),title:val(r,['title'])||raw(r,['Titulli']),intro:raw(r,['Përmbledhje']),text:val(r,['albanian'])||raw(r,['Teksti i plotë shqip']),source:raw(r,['Burimi kryesor']),author:raw(r,['Autori/Përgatitësi']),reference:val(r,['reference'])||raw(r,['Referenca']),page:raw(r,['Faqja/Kapitulli']),quran:raw(r,['Argument kuranor']),hadith:raw(r,['Argument nga Hadithi']),method:raw(r,['Metoda/Termat kyç']),editorial:raw(r,['Koment redaksional']),keywords:val(r,['keywords'])||raw(r,['Fjalë kyçe']),status:val(r,['status'])||raw(r,['Statusi']),verified:raw(r,['Status Verifikimi']),file:raw(r,['URL/Skedari'])}}
+function complete(r){const audit=[r.title,r.intro,r.text,r.source,r.reference,r.editorial].join(' ');return r.id&&r.category&&r.topic&&r.subtopic&&r.title&&r.text&&r.source&&r.author&&(r.reference||r.page)&&!/PROVIZOR|PËR VERIFIKIM|PËR T.U SHTUAR|DO TË PLOTËSOHET|PËRMBLEDHJE TEMATIKE|JO CITIM/i.test(audit)&&(!r.status||/PUBLIKUAR/i.test(r.status))}
+function render(rows){
+ const q=($('#q').value||'').toLocaleLowerCase('sq');
+ const a=rows.filter(r=>!q||JSON.stringify(r).toLocaleLowerCase('sq').includes(q));
+ $('#count').textContent=a.length+' mësime';const groups=a.reduce((o,r)=>((o[r.category]??=[]).push(r),o),{});
+ $('#list').innerHTML=a.length?Object.entries(groups).sort(([a],[b])=>a.localeCompare(b,'sq')).map(([name,items])=>{const topics=items.reduce((o,r)=>((o[r.topic]??=[]).push(r),o),{});return `<section class="group"><h2>${esc(name)}</h2>${Object.entries(topics).sort(([a],[b])=>a.localeCompare(b,'sq')).map(([topic,records])=>`<h3>${esc(topic)}</h3><div class="items">${records.sort((a,b)=>a.subtopic.localeCompare(b.subtopic,'sq')).map(r=>`<article class="item"><div class="label">${esc(r.subtopic)}</div><h3>${esc(r.title)}</h3>${r.intro?`<p>${esc(r.intro)}</p>`:''}<div class="label">Mësimi i plotë</div><p>${esc(r.text)}</p>${r.quran?`<div class="label">Argument kuranor</div><p>${esc(r.quran)}</p>`:''}${r.hadith?`<div class="label">Argument nga Hadithi</div><p>${esc(r.hadith)}</p>`:''}${r.method?`<span class="method">${esc(r.method)}</span>`:''}<div class="sourcebox"><span class="label">Burimi</span><b>${esc(r.source)}</b><div>${esc(r.author)}</div><div class="meta">${esc([r.reference,r.page].filter(Boolean).join(' • '))}</div>${r.file?`<div class="meta">Dokumenti burimor: ${esc(r.file)}</div>`:''}${r.verified?`<div class="meta">Verifikuar: ${esc(r.verified)}</div>`:''}</div></article>`).join('')}</div>`).join('')}</section>`}).join(''):'<div class="status">Nuk u gjet mësim me këtë kërkim.</div>';
+}
+async function load(){
+ $('#status').textContent='Duke lexuar bazën LIVE…';
+ try{
+   const u=API+'?action='+encodeURIComponent(ACTION)+'&limit=2000&_='+Date.now();
+   const x=await fetch(u,{cache:'no-store'}); const j=await x.json();
+   ALL=(Array.isArray(j.rows)?j.rows:Array.isArray(j.data)?j.data:Array.isArray(j.items)?j.items:[]).map(model).filter(complete);
+   if(!ALL.length)throw Error('empty');$('#status').style.display='none'; render(ALL);
+ }catch(e){$('#status').textContent='Nuk u arrit lidhja me bazën LIVE.'}
+}
+$('#q').addEventListener('input',()=>render(ALL)); load();
 </script></body></html>
