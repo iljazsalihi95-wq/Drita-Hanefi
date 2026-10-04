@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "title": "Enciklopedia e Kuranit – Drita Hanefi",
+  "canonical": {"surahs":114,"ayahs":6236,"mushafPages":604,"juz":30,"riwayah":"Hafs an Asim"},
+  "structure": ["juz","page","surah","ayah","word"],
+  "layers": {
+    "uthmaniArabic":{"required":true,"source":"existing-quran-api"},
+    "albanianTranslation":{"required":true,"source":"existing-audited-albanian-base"},
+    "albanianTranscription":{"required":true,"policy":"Albanian phonetic transcription only; never English transliteration"},
+    "wordByWord":{"required":true,"source":"quran.word","globalCountsOnlyWhenDatasetComplete":true},
+    "tajweed":{"required":true,"policy":"rule-backed colorization only; EasyQuran/Tajweed Mushaf is visual/reference source, not blindly copied page imagery"},
+    "tafsir":{"required":true,"source":"existing verified tafsir data"},
+    "hanafiFiqh":{"required":true,"source":"existing verified Hanafi fiqh data"},
+    "asbabNuzul":{"required":true,"policy":"show only when a verified source exists"},
+    "themes":{"required":true,"policy":"show sourced/indexed themes; no fabricated labels"}
+  },
+  "audio": {
+    "arabic":{"mode":"ayah","providers":["EveryAyah"],"reciters":["Abdul Basit","Mahmud Khalil Al-Husary","Mishary Alafasy","Saad Al-Ghamidi"]},
+    "albanian":{"catalog":"albanian-audio-esat-teliti.json","mode":"surah","label":"Shqip – Esat Teliti"}
+  },
+  "mushaf": {"portraitPages":1,"landscapePages":2,"tapAyah":true,"tapWord":true,"pageSwipe":true,"bookmark":true,"layersInPlace":true},
+  "hifz": {"dailyGoals":[1,3,5],"phases":["Dëgjo","Ndiq","Përsërit","Testo"],"reviewDays":[1,3,7,30],"repeat":true,"perAyahProgress":true},
+  "statistics": {"letterCount":true,"wordCount":true,"surfaceFormCount":true,"lemmaRootCount":true,"policy":"Never mix exact surface-form counts with lemma/root counts."}
+}
