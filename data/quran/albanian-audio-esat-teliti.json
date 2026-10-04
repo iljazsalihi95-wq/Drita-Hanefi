@@ -1,0 +1,29 @@
+{
+  "id": "esat-teliti-sq",
+  "title": "Kurani në Shqip – Esat Teliti",
+  "language": "sq",
+  "type": "translation-audio",
+  "status": "partial-verified",
+  "verifiedSurahs": 99,
+  "quranSurahs": 114,
+  "missingSurahs": 15,
+  "note": "Arkivi publik i identifikuar nga përdoruesi ekspozon 99 skedarë VBR MP3. Emërtimi i skedarëve ndjek numrin e sures, p.sh. 001_Fatiha.mp3, 002_Bekare.mp3, 003_Ali_Imran.mp3. URL-ja bazë e Internet Archive duhet verifikuar para aktivizimit të streaming-ut. Mos gjenero URL ose audio për suret që mungojnë.",
+  "filenamePattern": "NNN_SURE.mp3",
+  "examples": [
+    {"surah":1,"file":"001_Fatiha.mp3"},
+    {"surah":2,"file":"002_Bekare.mp3"},
+    {"surah":3,"file":"003_Ali_Imran.mp3"},
+    {"surah":4,"file":"004_Nisa.mp3"},
+    {"surah":5,"file":"005_Maide.mp3"},
+    {"surah":36,"file":"036_Ja_Sin.mp3"},
+    {"surah":55,"file":"055_Rrahman.mp3"},
+    {"surah":67,"file":"067_Mulk.mp3"}
+  ],
+  "integration": {
+    "mode": "surah-stream",
+    "label": "Shqip – Esat Teliti",
+    "ayahSync": false,
+    "fallback": "disabled",
+    "licenseReviewRequired": true
+  }
+}
