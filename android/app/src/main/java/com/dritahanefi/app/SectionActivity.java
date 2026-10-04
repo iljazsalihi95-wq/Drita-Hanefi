@@ -29,7 +29,7 @@ public class SectionActivity extends Activity {
   settings.setAllowUniversalAccessFromFileURLs(true);
   settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
   webView.setWebViewClient(new WebViewClient());
-  webView.loadUrl(assetUrl(type));
+  String url=assetUrl(type); int surah=getIntent().getIntExtra("surah",0), ayah=getIntent().getIntExtra("ayah",0); if(surah>0&&ayah>0){ String sep=url.contains("?")?"&":"?"; url+=sep+"surah="+surah+"&ayah="+ayah+"&q="+surah+"%3A"+ayah; } webView.loadUrl(url);
  }
 
  private String assetUrl(String type){
