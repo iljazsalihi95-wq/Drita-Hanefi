@@ -1,0 +1,134 @@
+{
+  "source": {
+    "title": "Drita Hanefi – Hadith 4872 LIVE",
+    "spreadsheetId": "12i8lAsSDHumk8NiYajhqVth34DRtWnjoba43v5HZZWE",
+    "sheet": "Drita Hanefi – Hadith 4872 LIVE"
+  },
+  "baseTotal": 4872,
+  "total": 4873,
+  "translated": 11,
+  "graded": 4564,
+  "editorialExtras": 1,
+  "collections": [
+    {
+      "id": "bulugh",
+      "title": "Bulug el-Meram",
+      "file": "bulugh.json",
+      "total": 50,
+      "translated": 0,
+      "graded": 2
+    },
+    {
+      "id": "forty",
+      "title": "Dyzet Hadithet e Neveviut",
+      "file": "forty.json",
+      "total": 30,
+      "translated": 0,
+      "graded": 0
+    },
+    {
+      "id": "adab",
+      "title": "El-Edeb el-Mufred",
+      "file": "adab.json",
+      "total": 463,
+      "translated": 0,
+      "graded": 461
+    },
+    {
+      "id": "shamail",
+      "title": "Esh-Shemail el-Muhammedije",
+      "file": "shamail.json",
+      "total": 331,
+      "translated": 0,
+      "graded": 318
+    },
+    {
+      "id": "hisn",
+      "title": "Hisn el-Muslim",
+      "file": "hisn.json",
+      "total": 10,
+      "translated": 0,
+      "graded": 0
+    },
+    {
+      "id": "mishkat",
+      "title": "Mishkat el-Mesabih",
+      "file": "mishkat.json",
+      "total": 51,
+      "translated": 0,
+      "graded": 51
+    },
+    {
+      "id": "ahmad",
+      "title": "Musned Ahmed",
+      "file": "ahmad.json",
+      "total": 68,
+      "translated": 0,
+      "graded": 18
+    },
+    {
+      "id": "malik",
+      "title": "Muvatta Malik",
+      "file": "malik.json",
+      "total": 486,
+      "translated": 0,
+      "graded": 486
+    },
+    {
+      "id": "riyadussalihin",
+      "title": "Rijad es-Salihin",
+      "file": "riyadussalihin.json",
+      "total": 60,
+      "translated": 0,
+      "graded": 0
+    },
+    {
+      "id": "muslim",
+      "title": "Sahih Muslim",
+      "file": "muslim.json",
+      "total": 571,
+      "translated": 1,
+      "graded": 571
+    },
+    {
+      "id": "bukhari",
+      "title": "Sahih el-Buhari",
+      "file": "bukhari.json",
+      "total": 936,
+      "translated": 3,
+      "graded": 916
+    },
+    {
+      "id": "abudawud",
+      "title": "Sunen Ebu Davud",
+      "file": "abudawud.json",
+      "total": 430,
+      "translated": 4,
+      "graded": 422
+    },
+    {
+      "id": "ibnmajah",
+      "title": "Sunen Ibn Maxhe",
+      "file": "ibnmajah.json",
+      "total": 379,
+      "translated": 1,
+      "graded": 360
+    },
+    {
+      "id": "nasai",
+      "title": "Sunen en-Nesai",
+      "file": "nasai.json",
+      "total": 520,
+      "translated": 1,
+      "graded": 497
+    },
+    {
+      "id": "tirmidhi",
+      "title": "Xhami et-Tirmidhi",
+      "file": "tirmidhi.json",
+      "total": 488,
+      "translated": 1,
+      "graded": 462
+    }
+  ]
+}

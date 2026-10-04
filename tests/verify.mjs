@@ -130,10 +130,19 @@ assert(quran.includes('Ghamadi_40kbps') && quran.includes('Mëso këtë ajet'), 
 assert(quran.includes('showTranslation') && quran.includes('showTranslit'), "Mushafi nuk kontrollon shtresat e përkthimit/transkriptimit");
 const hadithPage = await readFile(resolve(ROOT, "modules/hadith/index.html"), "utf8");
 const verifiedHadith = JSON.parse(await readFile(resolve(ROOT, "data/hadith-verified.json"), "utf8"));
-assert(hadithPage.includes("../../data/hadith-verified.json"), "Hadithi nuk e ngarkon katalogun e audituar");
+const hadithManifest = JSON.parse(await readFile(resolve(ROOT, "data/hadith/manifest.json"), "utf8"));
+assert(hadithPage.includes("../../data/hadith/manifest.json"), "Hadithi nuk e ngarkon katalogun e plotë");
+assert(hadithPage.includes("Kërko në të gjitha") && hadithPage.includes("PAGE_SIZE=20"), "Hadithi nuk ka kërkim global dhe faqosje");
 assert(verifiedHadith.source?.spreadsheetId === "12i8lAsSDHumk8NiYajhqVth34DRtWnjoba43v5HZZWE", "Hadithi: mungon identiteti i bazës 4872 LIVE");
 assert(verifiedHadith.source?.auditedRows === 4872 && verifiedHadith.rows?.length === 3, "Hadithi: katalogu i audituar nuk përputhet me bazën");
 assert(verifiedHadith.rows.every(row => [row.id,row.arabic,row.albanian,row.narrator,row.grade,row.source,row.reference,row.status].every(Boolean)), "Hadithi: rekord i audituar i paplotë");
+assert(hadithManifest.source?.spreadsheetId === "12i8lAsSDHumk8NiYajhqVth34DRtWnjoba43v5HZZWE", "Hadithi: manifesti nuk ruan identitetin e Sheet-it");
+assert(hadithManifest.baseTotal === 4872 && hadithManifest.collections?.length === 15, "Hadithi: baza e paketuar nuk ka 4,872 rekorde / 15 koleksione");
+const hadithCollections = await Promise.all(hadithManifest.collections.map(async collection => JSON.parse(await readFile(resolve(ROOT, `data/hadith/${collection.file}`), "utf8"))));
+const packagedHadiths = hadithCollections.flatMap(collection => collection.rows || []);
+assert(packagedHadiths.filter(row => !row.editorialExtra).length === 4872, "Hadithi: numri i rekordeve burimore të paketuara nuk është 4,872");
+assert(packagedHadiths.every(row => [row.id,row.collection,row.collectionLabel,row.number,row.arabic,row.reference].every(Boolean)), "Hadithi: rekord burimor i paplotë në paketë");
+assert(packagedHadiths.filter(row => row.albanian).length === hadithManifest.translated, "Hadithi: numri i përkthimeve shqip nuk përputhet");
 const tefsirPage = await readFile(resolve(ROOT, "modules/tefsir/index.html"), "utf8");
 const verifiedTefsir = JSON.parse(await readFile(resolve(ROOT, "data/tefsir-verified.json"), "utf8"));
 assert(tefsirPage.includes("../../data/tefsir-verified.json"), "Tefsiri nuk e ngarkon katalogun e audituar");
@@ -167,9 +176,10 @@ const texhvidPage = await readFile(resolve(ROOT, "modules/texhvid/index.html"), 
 assert(texhvidPage.includes('title:raw(r,"Rregulli","RregulliShqip","Titulli")||first(r,"ruling","title")'), "Texhvidi: rregulli real nuk ka përparësi ndaj titullit të përgjithshëm");
 assert(texhvidPage.includes("Audio shfaqet vetëm kur baza jep URL reale."), "Texhvidi: politika e audios reale nuk është e dukshme");
 const serviceWorker = await readFile(resolve(ROOT, "sw.js"), "utf8");
-assert(serviceWorker.includes('drita-hanefi-v13'), "PWA: cache nuk u ngrit pas lexuesit Mushaf");
+assert(serviceWorker.includes('drita-hanefi-v14'), "PWA: cache nuk u ngrit pas bibliotekës së Hadithit");
 assert(serviceWorker.includes('"./data/akide-verified.json"'), "PWA nuk ruan katalogun e Akides për përdorim offline");
 assert(serviceWorker.includes('"./data/hudbe-verified.json"'), "PWA nuk ruan katalogun e Hudbeve për përdorim offline");
+assert(serviceWorker.includes('"./data/hadith/manifest.json"'), "PWA nuk ruan manifestin e bibliotekës së Hadithit");
 const androidActivity = await readFile(resolve(ROOT, "android/app/src/main/java/com/dritahanefi/app/MainActivity.java"), "utf8");
 const androidSection = await readFile(resolve(ROOT, "android/app/src/main/java/com/dritahanefi/app/SectionActivity.java"), "utf8");
 const androidManifest = await readFile(resolve(ROOT, "android/app/src/main/AndroidManifest.xml"), "utf8");
@@ -195,4 +205,4 @@ const abetareVerified = await verifyAbetareSheet();
 
 console.log(`PASS: ${pages.length} faqe, skriptet inline, lidhjet lokale, PWA dhe skeleti Android`);
 console.log(`PASS LIVE: ${apiResults.join(" • ")}`);
-console.log(`PASS SHEET: ABETARJA_KURANORE=${abetareVerified} mësime • HADITH 4872 LIVE=${verifiedHadith.rows.length} hadithe • TEFSIR=${verifiedTefsir.rows.length} komente • AKIDE=${verifiedAkide.source.auditedPublishedRows} rekorde/${verifiedAkide.rows.length} fragmente klasike • HUDBE=${verifiedHudbe.rows.length} publike/${verifiedHudbe.source.excluded.length} e fshehur`);
+console.log(`PASS SHEET: ABETARJA_KURANORE=${abetareVerified} mësime • HADITH=${hadithManifest.baseTotal} bazë/${hadithManifest.translated} shqip/${hadithManifest.collections.length} koleksione • TEFSIR=${verifiedTefsir.rows.length} komente • AKIDE=${verifiedAkide.source.auditedPublishedRows} rekorde/${verifiedAkide.rows.length} fragmente klasike • HUDBE=${verifiedHudbe.rows.length} publike/${verifiedHudbe.source.excluded.length} e fshehur`);

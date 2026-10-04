@@ -7,7 +7,7 @@ android {
         applicationId = "com.dritahanefi.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 8
-        versionName = "0.3.3-mushaf-preview"
+        versionCode = 9
+        versionName = "0.3.4-hadith-library"
     }
 }
