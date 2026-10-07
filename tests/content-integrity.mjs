@@ -34,6 +34,16 @@ const hadith = fs.readFileSync(path.join(ROOT,'modules','hadith','index.html'),'
 for (const required of ['Arabisht','Shqip','Grad','Burim']) {
   if (!new RegExp(required,'i').test(hadith)) failures.push(`hadith: mungon fusha/funksioni ${required}`);
 }
+const hadithModelFile = path.join(ROOT,'modules','hadith','catalog-model.js');
+if (!fs.existsSync(hadithModelFile)) {
+  failures.push('hadith: mungon catalog-model.js');
+} else {
+  const model = fs.readFileSync(hadithModelFile,'utf8');
+  for (const required of ['collection','book','chapter','topics','hanafiGrade','hanafiGrader','hanafiGradeSource','originalGrade','audioArabic','audioAlbanian','downloadUrl','serverUrl']) {
+    if (!model.includes(required)) failures.push(`hadith model: mungon ${required}`);
+  }
+  if (!/basis:\s*'hanafi'/.test(model) || !/basis:\s*'original'/.test(model)) failures.push('hadith model: mungon prioriteti Hanafi/original');
+}
 
 const fikh = fs.readFileSync(path.join(ROOT,'modules','fikh','index.html'),'utf8');
 for (const required of ['kategori','tem','dispoz','burim']) {
@@ -50,4 +60,4 @@ if (failures.length) {
   failures.forEach(x=>console.error(' - '+x));
   process.exit(1);
 }
-console.log(`CONTENT INTEGRITY: OK — ${modules.length} rubrika pa demo/placeholder dhe me burim real të lidhur.`);
+console.log(`CONTENT INTEGRITY: OK — ${modules.length} rubrika pa demo/placeholder dhe me burim real të lidhur; modeli i Hadithit ruan hierarkinë burimore dhe gradimin Hanafi veçmas.`);
