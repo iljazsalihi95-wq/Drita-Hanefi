@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -31,15 +32,22 @@ public class MainActivity extends Activity {
     GridLayout list=findViewById(R.id.sectionGrid);
     for(String[] s:SECTIONS) list.addView(card(s[0],s[1],s[2]));
     findViewById(R.id.continueCard).setOnClickListener(v->openLast());
-    findViewById(R.id.searchButton).setOnClickListener(v->{
-      EditText q=findViewById(R.id.globalSearch); String text=q.getText().toString().trim();
-      Intent i=sectionIntent("Më bëj një temë","tema"); if(!text.isEmpty()) i.putExtra("query",text); startActivity(i);
+    findViewById(R.id.searchButton).setOnClickListener(v->search());
+    EditText search=findViewById(R.id.globalSearch);
+    search.setOnEditorActionListener((v,actionId,event)->{
+      boolean enter=event!=null&&event.getKeyCode()==KeyEvent.KEYCODE_ENTER&&event.getAction()==KeyEvent.ACTION_UP;
+      if(actionId!=0||enter){ search(); return true; }
+      return false;
     });
-    findViewById(R.id.globalSearch).setOnKeyListener((v,key,event)->{ if(event.getAction()==1 && key==66){ findViewById(R.id.searchButton).performClick(); return true; } return false; });
     refreshContinue();
   }
 
   @Override protected void onResume(){ super.onResume(); refreshContinue(); }
+
+  private void search(){
+    EditText q=findViewById(R.id.globalSearch); String text=q.getText().toString().trim();
+    Intent i=sectionIntent("Më bëj një temë","tema"); if(!text.isEmpty()) i.putExtra("query",text); startActivity(i);
+  }
 
   private View card(String title,String subtitle,String type){
     View v=getLayoutInflater().inflate(R.layout.item_section,null,false);
@@ -49,14 +57,19 @@ public class MainActivity extends Activity {
   }
 
   private void open(String title,String type){
-    getSharedPreferences(PREFS,MODE_PRIVATE).edit().putString("last_type",type).putString("last_title",title).apply(); startActivity(sectionIntent(title,type));
+    getSharedPreferences(PREFS,MODE_PRIVATE).edit().putString("last_type",type).putString("last_title",title).remove("last_url").apply(); startActivity(sectionIntent(title,type));
   }
 
   private Intent sectionIntent(String title,String type){
     Intent i=new Intent(this,SectionActivity.class); i.putExtra("title",title); i.putExtra("type",type); return i;
   }
 
-  private void openLast(){ SharedPreferences p=getSharedPreferences(PREFS,MODE_PRIVATE); open(p.getString("last_title","Kurani"),p.getString("last_type","quran")); }
+  private void openLast(){
+    SharedPreferences p=getSharedPreferences(PREFS,MODE_PRIVATE);
+    Intent i=sectionIntent(p.getString("last_title","Kurani"),p.getString("last_type","quran"));
+    String url=p.getString("last_url",""); if(url.startsWith("file:///android_asset/site/")) i.putExtra("resume_url",url);
+    startActivity(i);
+  }
 
   private void refreshContinue(){ SharedPreferences p=getSharedPreferences(PREFS,MODE_PRIVATE); String title=p.getString("last_title","Kurani"); ((TextView)findViewById(R.id.continueTitle)).setText("Vazhdo: "+title); }
 
