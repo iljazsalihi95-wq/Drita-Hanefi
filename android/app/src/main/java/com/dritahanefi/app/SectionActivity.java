@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -17,6 +16,7 @@ import android.widget.TextView;
 
 public class SectionActivity extends Activity {
  private static final String PREFS="drita_hanefi_native";
+ private static final String ASSET_SITE="file:///android_asset/site/";
  private WebView webView;
  private String type;
  private String moduleRoot;
@@ -41,8 +41,8 @@ public class SectionActivity extends Activity {
   webView.setWebChromeClient(new WebChromeClient());
   webView.setDownloadListener((url,userAgent,contentDisposition,mimeType,contentLength)->openExternal(Uri.parse(url)));
   webView.setWebViewClient(new WebViewClient(){
-   @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request){ return openExternalIfNeeded(request.getUrl()); }
-   @Override public boolean shouldOverrideUrlLoading(WebView view, String url){ return openExternalIfNeeded(Uri.parse(url)); }
+   @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request){ return handleNavigation(request.getUrl()); }
+   @Override public boolean shouldOverrideUrlLoading(WebView view, String url){ return handleNavigation(Uri.parse(url)); }
    @Override public void onPageStarted(WebView view,String url,Bitmap favicon){ super.onPageStarted(view,url,favicon); persistLocation(url); }
    @Override public void onPageFinished(WebView view,String url){ super.onPageFinished(view,url); persistLocation(url); }
   });
@@ -64,11 +64,38 @@ public class SectionActivity extends Activity {
   if(!"file".equalsIgnoreCase(scheme)) return false;
   return url.startsWith(moduleRoot==null?assetUrl(type):moduleRoot);
  }
- private boolean openExternalIfNeeded(Uri uri){
+ private boolean handleNavigation(Uri uri){
   if(uri==null) return false;
+  String url=uri.toString();
+  if(url.startsWith(ASSET_SITE)){
+   String target=typeFromAssetUrl(url);
+   if(target!=null&&!target.equals(type)){
+    Intent i=new Intent(this,SectionActivity.class);
+    i.putExtra("type",target);
+    String targetRoot=assetUrl(target);
+    if(url.startsWith(targetRoot)) i.putExtra("resume_url",url);
+    startActivity(i);
+    return true;
+   }
+   if(url.startsWith(ASSET_SITE+"index.html")){ goHome(); return true; }
+   return false;
+  }
   String scheme=uri.getScheme();
-  if(scheme==null||"file".equalsIgnoreCase(scheme)||"http".equalsIgnoreCase(scheme)||"https".equalsIgnoreCase(scheme)) return false;
+  if(scheme==null) return false;
+  if("http".equalsIgnoreCase(scheme)||"https".equalsIgnoreCase(scheme)) return false;
+  if("file".equalsIgnoreCase(scheme)) return false;
   openExternal(uri); return true;
+ }
+ private String typeFromAssetUrl(String url){
+  if(url.startsWith(ASSET_SITE+"admin/")) return "admin";
+  String prefix=ASSET_SITE+"modules/";
+  if(!url.startsWith(prefix)) return null;
+  String rest=url.substring(prefix.length());
+  int slash=rest.indexOf('/');
+  if(slash<=0) return null;
+  String candidate=rest.substring(0,slash);
+  String safe=safeType(candidate);
+  return safe.equals(candidate)?safe:null;
  }
  private void openExternal(Uri uri){
   if(uri==null) return;
@@ -78,7 +105,7 @@ public class SectionActivity extends Activity {
   if(value==null) return "quran";
   switch(value){case "quran":case "hadith":case "fikh":case "tefsir":case "akide":case "texhvid":case "abetare":case "hudbe":case "pedagogji":case "histori":case "tema":case "admin":return value;default:return "quran";}
  }
- private String assetUrl(String type){ if("admin".equals(type)) return "file:///android_asset/site/admin/index.html"; return "file:///android_asset/site/modules/"+type+"/index.html"; }
+ private String assetUrl(String type){ if("admin".equals(type)) return ASSET_SITE+"admin/index.html"; return ASSET_SITE+"modules/"+type+"/index.html"; }
  private String titleFor(String t){
   switch(t){case "quran":return "Enciklopedia e Kuranit";case "hadith":return "Hadithi";case "fikh":return "Fikhu Hanefi";case "tefsir":return "Tefsiri";case "akide":return "Akide Maturidije";case "texhvid":return "Texhvidi";case "abetare":return "Abetarja Kuranore";case "hudbe":return "Hudbet";case "pedagogji":return "Pedagogjia Islame";case "histori":return "Historia Islame";case "tema":return "Më bëj një temë";case "admin":return "Administrimi";default:return "Drita Hanefi";}
  }
