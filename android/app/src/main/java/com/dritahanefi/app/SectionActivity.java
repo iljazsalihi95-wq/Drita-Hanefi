@@ -46,6 +46,7 @@ public class SectionActivity extends Activity {
    @Override public void onPageStarted(WebView view,String url,Bitmap favicon){ super.onPageStarted(view,url,favicon); persistLocation(url); }
    @Override public void onPageFinished(WebView view,String url){ super.onPageFinished(view,url); persistLocation(url); }
   });
+  if(b!=null && webView.restoreState(b)!=null) return;
   String resume=getIntent().getStringExtra("resume_url");
   Uri.Builder query=Uri.parse(validResumeUrl(resume)?resume:moduleRoot).buildUpon();
   int surah=getIntent().getIntExtra("surah",0), ayah=getIntent().getIntExtra("ayah",0); String text=getIntent().getStringExtra("query");
@@ -54,6 +55,10 @@ public class SectionActivity extends Activity {
   webView.loadUrl(query.build().toString());
  }
 
+ @Override protected void onSaveInstanceState(Bundle outState){
+  if(webView!=null) webView.saveState(outState);
+  super.onSaveInstanceState(outState);
+ }
  private void persistLocation(String url){
   if(!validResumeUrl(url)) return;
   getSharedPreferences(PREFS,MODE_PRIVATE).edit().putString("last_type",type).putString("last_title",titleFor(type)).putString("last_url",url).apply();
