@@ -3,43 +3,38 @@
 const MODULES=[
  {id:'quran',label:'Kurani',icon:'📖',href:'modules/quran/index.html'},
  {id:'hadith',label:'Hadithi',icon:'📜',href:'modules/hadith/index.html'},
- {id:'fikh',label:'Fikhu',icon:'⚖️',href:'modules/fikh/index.html'},
+ {id:'fikh',label:'Fikhu Hanefi',icon:'⚖️',href:'modules/fikh/index.html'},
  {id:'tefsir',label:'Tefsiri',icon:'📚',href:'modules/tefsir/index.html'},
- {id:'akide',label:'Akide',icon:'✦',href:'modules/akide/index.html'},
- {id:'abetare',label:'Abetarja',icon:'ا',href:'modules/abetare/index.html'}
+ {id:'akide',label:'Akide Maturidije',icon:'✦',href:'modules/akide/index.html'},
+ {id:'abetare',label:'Abetarja Kuranore',icon:'ا',href:'modules/abetare/index.html'},
+ {id:'texhvid',label:'Texhvidi',icon:'🎙️',href:'modules/texhvid/index.html'},
+ {id:'hudbe',label:'Hudbet',icon:'🕌',href:'modules/hudbe/index.html'},
+ {id:'pedagogji',label:'Pedagogji Islame',icon:'🎓',href:'modules/pedagogji/index.html'},
+ {id:'histori',label:'Histori Islame',icon:'🏛️',href:'modules/histori/index.html'},
+ {id:'tema',label:'Më bëj një temë',icon:'✍️',href:'modules/tema/index.html'}
 ];
-const isRoot=location.pathname.endsWith('/')||/\/index\.html$/.test(location.pathname)&&!location.pathname.includes('/modules/')&&!location.pathname.includes('/admin/');
+const isRoot=!location.pathname.includes('/modules/')&&!location.pathname.includes('/admin/');
 const root=isRoot?'':'../../';
 const current=location.pathname.match(/\/modules\/([^/]+)/)?.[1]||'home';
-try{if(current!=='home')localStorage.setItem('dh:lastModule',JSON.stringify({id:current,href:location.pathname,at:Date.now()}));}catch(_){ }
-function installNav(){
- if(document.querySelector('.dh-bottom-nav'))return;
- const nav=document.createElement('nav');nav.className='dh-bottom-nav';nav.setAttribute('aria-label','Navigimi kryesor');
- const primary=[{id:'home',label:'Ballina',icon:'⌂',href:root+'index.html'},...MODULES.slice(0,4).map(x=>({...x,href:root+x.href}))];
- nav.innerHTML=primary.map(x=>`<a class="${current===x.id?'active':''}" href="${x.href}"><span>${x.icon}</span><small>${x.label}</small></a>`).join('');
- document.body.appendChild(nav);
-}
+try{if(current!=='home')localStorage.setItem('dh:lastModule',JSON.stringify({id:current,href:location.pathname+location.search+location.hash,at:Date.now()}));}catch(_){ }
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function installStyles(){
  if(document.getElementById('dh-shell-style'))return;
- const s=document.createElement('style');s.id='dh-shell-style';s.textContent=`.dh-bottom-nav{position:fixed;z-index:95;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(620px,calc(100% - 20px));display:grid;grid-template-columns:repeat(5,1fr);gap:3px;padding:7px;background:#061b18ed;border:1px solid #ffffff20;border-radius:20px;box-shadow:0 14px 45px #0009;backdrop-filter:blur(18px)}.dh-bottom-nav a{min-width:0;padding:7px 3px 6px;border-radius:13px;text-decoration:none;color:#9fc1b8;text-align:center;font:700 10px/1.1 system-ui}.dh-bottom-nav a span{display:block;font-size:19px;line-height:22px;margin-bottom:3px}.dh-bottom-nav a.active{background:#e8c96d;color:#14251f}.dh-continue{margin:0 0 18px;padding:14px 16px;border:1px solid #e8c96d55;border-radius:17px;background:linear-gradient(135deg,#153d33,#09251f);display:flex;align-items:center;gap:12px;text-decoration:none;color:#f8f5e9}.dh-continue b{display:block;color:#f4d978}.dh-continue small{color:#b8cec5}.dh-continue .go{margin-left:auto;color:#e8c96d;font-size:22px}@media(min-width:900px){.dh-bottom-nav{bottom:16px}}`;
- document.head.appendChild(s);
+ const s=document.createElement('style');s.id='dh-shell-style';s.textContent=`
+ .dh-bottom-nav{position:fixed;z-index:95;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(650px,calc(100% - 20px));display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:7px;background:#061b18f2;border:1px solid #ffffff20;border-radius:20px;box-shadow:0 14px 45px #0009;backdrop-filter:blur(18px)}
+ .dh-bottom-nav a,.dh-bottom-nav button{min-width:0;padding:7px 3px 6px;border:0;border-radius:13px;text-decoration:none;color:#9fc1b8;text-align:center;font:700 10px/1.1 system-ui;background:transparent;cursor:pointer}.dh-bottom-nav span{display:block;font-size:19px;line-height:22px;margin-bottom:3px}.dh-bottom-nav .active{background:#e8c96d;color:#14251f}.dh-more{color:#f4d978!important}
+ .dh-drawer-shade{position:fixed;z-index:110;inset:0;background:#000a;backdrop-filter:blur(5px);opacity:0;pointer-events:none;transition:.2s}.dh-drawer-shade.open{opacity:1;pointer-events:auto}
+ .dh-drawer{position:absolute;left:50%;bottom:0;transform:translate(-50%,105%);width:min(760px,100%);max-height:min(82vh,760px);overflow:auto;background:linear-gradient(155deg,#0c332b,#061b1d 72%);border:1px solid #d8bd6655;border-radius:28px 28px 0 0;padding:18px 16px max(26px,env(safe-area-inset-bottom));box-shadow:0 -25px 70px #000b;transition:.25s}.open .dh-drawer{transform:translate(-50%,0)}
+ .dh-drawer-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.dh-drawer-head b{font:900 20px system-ui;color:#f5dc83}.dh-drawer-head small{display:block;margin-top:3px;color:#9fc1b8;font:500 11px system-ui}.dh-close{width:38px;height:38px;border-radius:50%;border:1px solid #ffffff24;background:#ffffff0d;color:#fff;font-size:22px;cursor:pointer}
+ .dh-module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.dh-module-grid a{display:flex;align-items:center;gap:11px;min-height:62px;padding:11px 12px;text-decoration:none;color:#edf8f3;background:#ffffff08;border:1px solid #ffffff14;border-radius:16px;font:800 13px system-ui}.dh-module-grid a span{display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border-radius:12px;background:#e8c96d18;color:#f4d978;font-size:21px}.dh-module-grid a.active{border-color:#e8c96d;background:#e8c96d16}.dh-admin{margin-top:11px;display:flex!important;justify-content:center;border-color:#65b99a55!important;color:#aee2cf!important}
+ .dh-continue{margin:0 0 18px;padding:14px 16px;border:1px solid #e8c96d55;border-radius:17px;background:linear-gradient(135deg,#153d33,#09251f);display:flex;align-items:center;gap:12px;text-decoration:none;color:#f8f5e9}.dh-continue b{display:block;color:#f4d978}.dh-continue small{color:#b8cec5}.dh-continue .go{margin-left:auto;color:#e8c96d;font-size:22px}.dh-related{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 82px}.dh-related a{text-decoration:none;color:#f4d978;border:1px solid #e8c96d55;background:#0b3028;padding:9px 12px;border-radius:12px;font:800 12px system-ui}
+ @media(min-width:700px){.dh-module-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.dh-drawer{padding:22px 24px 32px}.dh-bottom-nav{bottom:16px}}@media(max-width:420px){.dh-bottom-nav small{font-size:9px}.dh-module-grid{grid-template-columns:1fr 1fr}}
+ `;document.head.appendChild(s);
 }
-function continueCard(){
- if(!isRoot)return;
- let last=null;try{last=JSON.parse(localStorage.getItem('dh:lastModule')||'null')}catch(_){ }
- if(!last?.id)return;
- const m=MODULES.find(x=>x.id===last.id);if(!m)return;
- const grid=document.querySelector('.grid');if(!grid)return;
- const a=document.createElement('a');a.className='dh-continue';a.href=m.href;a.innerHTML=`<span style="font-size:28px">${m.icon}</span><span><b>Vazhdo aty ku mbete</b><small>${m.label} · progresi ruhet në këtë pajisje</small></span><span class="go">›</span>`;
- grid.parentNode.insertBefore(a,grid);
-}
-function moduleLinks(){
- if(current==='home')return;
- const host=document.querySelector('main,.wrap,.app');if(!host||document.querySelector('.dh-related'))return;
- const related={quran:['tefsir','fikh'],tefsir:['quran','fikh'],fikh:['quran','hadith'],hadith:['fikh','quran'],akide:['quran','tefsir'],abetare:['quran','texhvid']}[current];if(!related)return;
- const box=document.createElement('div');box.className='dh-related';box.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 70px';
- box.innerHTML=related.map(id=>{const m=MODULES.find(x=>x.id===id)||{id,label:id,icon:'•',href:`modules/${id}/index.html`};return `<a href="${root}${m.href}" style="text-decoration:none;color:#f4d978;border:1px solid #e8c96d55;background:#0b3028;padding:9px 12px;border-radius:12px;font:800 12px system-ui">${m.icon} ${m.label}</a>`}).join('');
- host.appendChild(box);
-}
-installStyles();installNav();continueCard();moduleLinks();
+function openDrawer(open=true){const shade=document.querySelector('.dh-drawer-shade');if(!shade)return;shade.classList.toggle('open',open);shade.setAttribute('aria-hidden',open?'false':'true');document.documentElement.style.overflow=open?'hidden':'';if(open)setTimeout(()=>shade.querySelector('.dh-close')?.focus(),50)}
+function installDrawer(){if(document.querySelector('.dh-drawer-shade'))return;const shade=document.createElement('div');shade.className='dh-drawer-shade';shade.setAttribute('aria-hidden','true');shade.innerHTML=`<section class="dh-drawer" role="dialog" aria-modal="true" aria-label="Të gjitha rubrikat"><div class="dh-drawer-head"><div><b>Drita Hanefi</b><small>Biblioteka dhe mësimi islam në një vend</small></div><button class="dh-close" aria-label="Mbyll">×</button></div><div class="dh-module-grid">${MODULES.map(m=>`<a class="${current===m.id?'active':''}" href="${root+m.href}"><span>${m.icon}</span>${esc(m.label)}</a>`).join('')}</div><a class="dh-admin" href="${root}admin/index.html">⚙ Admin</a></section>`;shade.addEventListener('click',e=>{if(e.target===shade||e.target.closest('.dh-close'))openDrawer(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape')openDrawer(false)});document.body.appendChild(shade)}
+function installNav(){if(document.querySelector('.dh-bottom-nav'))return;const nav=document.createElement('nav');nav.className='dh-bottom-nav';nav.setAttribute('aria-label','Navigimi kryesor');const primary=[{id:'home',label:'Ballina',icon:'⌂',href:root+'index.html'},...MODULES.slice(0,4).map(x=>({...x,href:root+x.href}))];nav.innerHTML=primary.map(x=>`<a class="${current===x.id?'active':''}" href="${x.href}"><span>${x.icon}</span><small>${x.label.replace(' Hanefi','')}</small></a>`).join('')+`<button class="dh-more" type="button" aria-label="Të gjitha rubrikat"><span>☰</span><small>Të tjera</small></button>`;nav.querySelector('.dh-more').onclick=()=>openDrawer(true);document.body.appendChild(nav)}
+function continueCard(){if(!isRoot)return;let last=null;try{last=JSON.parse(localStorage.getItem('dh:lastModule')||'null')}catch(_){ }if(!last?.id)return;const m=MODULES.find(x=>x.id===last.id);if(!m)return;const grid=document.querySelector('.grid');if(!grid)return;const a=document.createElement('a');a.className='dh-continue';a.href=m.href;a.innerHTML=`<span style="font-size:28px">${m.icon}</span><span><b>Vazhdo aty ku mbete</b><small>${esc(m.label)} · progresi ruhet në këtë pajisje</small></span><span class="go">›</span>`;grid.parentNode.insertBefore(a,grid)}
+function moduleLinks(){if(current==='home')return;const host=document.querySelector('main,.wrap,.app');if(!host||document.querySelector('.dh-related'))return;const map={quran:['tefsir','fikh','texhvid'],tefsir:['quran','fikh','akide'],fikh:['quran','hadith','akide'],hadith:['fikh','quran','tefsir'],akide:['quran','tefsir','fikh'],abetare:['quran','texhvid'],texhvid:['quran','abetare'],hudbe:['hadith','fikh'],pedagogji:['akide','histori'],histori:['quran','hadith'],tema:['quran','hadith','fikh']};const related=map[current];if(!related)return;const box=document.createElement('div');box.className='dh-related';box.setAttribute('aria-label','Rubrika të lidhura');box.innerHTML=related.map(id=>{const m=MODULES.find(x=>x.id===id);return m?`<a href="${root+m.href}">${m.icon} ${esc(m.label)}</a>`:''}).join('');host.appendChild(box)}
+installStyles();installDrawer();installNav();continueCard();moduleLinks();
 })();
