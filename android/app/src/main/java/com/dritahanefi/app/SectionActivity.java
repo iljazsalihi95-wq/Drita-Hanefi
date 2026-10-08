@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.WebChromeClient;
@@ -17,6 +18,7 @@ public class SectionActivity extends Activity {
  private static final String PREFS="drita_hanefi_native";
  private WebView webView;
  private String type;
+ private String moduleRoot;
 
  @SuppressLint("SetJavaScriptEnabled")
  @Override public void onCreate(Bundle b){
@@ -27,8 +29,10 @@ public class SectionActivity extends Activity {
   ((TextView)findViewById(R.id.sectionSubtitle)).setText(subtitleFor(type));
   findViewById(R.id.backButton).setOnClickListener(v->goBack());
   findViewById(R.id.homeButton).setOnClickListener(v->goHome());
-  getSharedPreferences(PREFS,MODE_PRIVATE).edit().putString("last_type",type).putString("last_title",title).apply();
+  SharedPreferences prefs=getSharedPreferences(PREFS,MODE_PRIVATE);
+  prefs.edit().putString("last_type",type).putString("last_title",title).apply();
 
+  moduleRoot=assetUrl(type);
   webView=findViewById(R.id.sectionWebView); WebSettings settings=webView.getSettings();
   settings.setJavaScriptEnabled(true); settings.setDomStorageEnabled(true); settings.setDatabaseEnabled(true); settings.setMediaPlaybackRequiresUserGesture(false);
   settings.setAllowFileAccess(true); settings.setAllowContentAccess(true); settings.setAllowFileAccessFromFileURLs(true); settings.setAllowUniversalAccessFromFileURLs(true); settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
@@ -37,14 +41,27 @@ public class SectionActivity extends Activity {
   webView.setWebViewClient(new WebViewClient(){
    @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request){ return openExternalIfNeeded(request.getUrl()); }
    @Override public boolean shouldOverrideUrlLoading(WebView view, String url){ return openExternalIfNeeded(Uri.parse(url)); }
+   @Override public void onPageStarted(WebView view,String url,Bitmap favicon){ super.onPageStarted(view,url,favicon); persistLocation(url); }
+   @Override public void onPageFinished(WebView view,String url){ super.onPageFinished(view,url); persistLocation(url); }
   });
-  Uri.Builder query=Uri.parse(assetUrl(type)).buildUpon();
+  String resume=getIntent().getStringExtra("resume_url");
+  Uri.Builder query=Uri.parse(validResumeUrl(resume)?resume:moduleRoot).buildUpon();
   int surah=getIntent().getIntExtra("surah",0), ayah=getIntent().getIntExtra("ayah",0); String text=getIntent().getStringExtra("query");
   if(surah>0&&ayah>0) query.appendQueryParameter("surah",String.valueOf(surah)).appendQueryParameter("ayah",String.valueOf(ayah)).appendQueryParameter("q",surah+":"+ayah);
   if(text!=null&&!text.trim().isEmpty()) query.appendQueryParameter("q",text.trim());
   webView.loadUrl(query.build().toString());
  }
 
+ private void persistLocation(String url){
+  if(!validResumeUrl(url)) return;
+  getSharedPreferences(PREFS,MODE_PRIVATE).edit().putString("last_type",type).putString("last_title",titleFor(type)).putString("last_url",url).apply();
+ }
+ private boolean validResumeUrl(String url){
+  if(url==null||url.trim().isEmpty()) return false;
+  Uri uri=Uri.parse(url); String scheme=uri.getScheme();
+  if(!"file".equalsIgnoreCase(scheme)) return false;
+  return url.startsWith(moduleRoot==null?assetUrl(type):moduleRoot);
+ }
  private boolean openExternalIfNeeded(Uri uri){
   if(uri==null) return false;
   String scheme=uri.getScheme();
