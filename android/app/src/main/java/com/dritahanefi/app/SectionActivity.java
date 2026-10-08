@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -17,9 +18,11 @@ import android.widget.TextView;
 public class SectionActivity extends Activity {
  private static final String PREFS="drita_hanefi_native";
  private static final String ASSET_SITE="file:///android_asset/site/";
+ private static final int FILE_CHOOSER_REQUEST=4107;
  private WebView webView;
  private String type;
  private String moduleRoot;
+ private ValueCallback<Uri[]> fileChooserCallback;
 
  @SuppressLint("SetJavaScriptEnabled")
  @Override public void onCreate(Bundle b){
@@ -38,7 +41,18 @@ public class SectionActivity extends Activity {
   settings.setJavaScriptEnabled(true); settings.setDomStorageEnabled(true); settings.setDatabaseEnabled(true); settings.setMediaPlaybackRequiresUserGesture(false);
   settings.setAllowFileAccess(true); settings.setAllowContentAccess(true); settings.setAllowFileAccessFromFileURLs(true); settings.setAllowUniversalAccessFromFileURLs(true); settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
   settings.setBuiltInZoomControls(false); settings.setDisplayZoomControls(false); settings.setLoadWithOverviewMode(true); settings.setUseWideViewPort(true); settings.setTextZoom(100); settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-  webView.setWebChromeClient(new WebChromeClient());
+  webView.setWebChromeClient(new WebChromeClient(){
+   @Override public boolean onShowFileChooser(WebView view,ValueCallback<Uri[]> callback,FileChooserParams params){
+    if(fileChooserCallback!=null) fileChooserCallback.onReceiveValue(null);
+    fileChooserCallback=callback;
+    Intent chooser;
+    try { chooser=params.createIntent(); }
+    catch(Exception e){ chooser=new Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("*/*"); }
+    try { startActivityForResult(chooser,FILE_CHOOSER_REQUEST); }
+    catch(Exception e){ fileChooserCallback.onReceiveValue(null); fileChooserCallback=null; return false; }
+    return true;
+   }
+  });
   webView.setDownloadListener((url,userAgent,contentDisposition,mimeType,contentLength)->openExternal(Uri.parse(url)));
   webView.setWebViewClient(new WebViewClient(){
    @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request){ return handleNavigation(request.getUrl()); }
@@ -55,6 +69,13 @@ public class SectionActivity extends Activity {
   webView.loadUrl(query.build().toString());
  }
 
+ @Override protected void onActivityResult(int requestCode,int resultCode,Intent data){
+  super.onActivityResult(requestCode,resultCode,data);
+  if(requestCode!=FILE_CHOOSER_REQUEST||fileChooserCallback==null) return;
+  Uri[] result=WebChromeClient.FileChooserParams.parseResult(resultCode,data);
+  fileChooserCallback.onReceiveValue(result);
+  fileChooserCallback=null;
+ }
  @Override protected void onSaveInstanceState(Bundle outState){
   if(webView!=null) webView.saveState(outState);
   super.onSaveInstanceState(outState);
@@ -122,5 +143,5 @@ public class SectionActivity extends Activity {
  @Override public void onBackPressed(){ goBack(); }
  @Override protected void onPause(){ if(webView!=null) webView.onPause(); super.onPause(); }
  @Override protected void onResume(){ super.onResume(); if(webView!=null) webView.onResume(); }
- @Override protected void onDestroy(){ if(webView!=null){ webView.stopLoading(); webView.setDownloadListener(null); webView.setWebChromeClient(null); webView.setWebViewClient(null); webView.destroy(); webView=null; } super.onDestroy(); }
+ @Override protected void onDestroy(){ if(fileChooserCallback!=null){ fileChooserCallback.onReceiveValue(null); fileChooserCallback=null; } if(webView!=null){ webView.stopLoading(); webView.setDownloadListener(null); webView.setWebChromeClient(null); webView.setWebViewClient(null); webView.destroy(); webView=null; } super.onDestroy(); }
 }
