@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -36,8 +37,9 @@ public class SectionActivity extends Activity {
   webView=findViewById(R.id.sectionWebView); WebSettings settings=webView.getSettings();
   settings.setJavaScriptEnabled(true); settings.setDomStorageEnabled(true); settings.setDatabaseEnabled(true); settings.setMediaPlaybackRequiresUserGesture(false);
   settings.setAllowFileAccess(true); settings.setAllowContentAccess(true); settings.setAllowFileAccessFromFileURLs(true); settings.setAllowUniversalAccessFromFileURLs(true); settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-  settings.setBuiltInZoomControls(false); settings.setDisplayZoomControls(false); settings.setLoadWithOverviewMode(true); settings.setUseWideViewPort(true);
+  settings.setBuiltInZoomControls(false); settings.setDisplayZoomControls(false); settings.setLoadWithOverviewMode(true); settings.setUseWideViewPort(true); settings.setTextZoom(100); settings.setCacheMode(WebSettings.LOAD_DEFAULT);
   webView.setWebChromeClient(new WebChromeClient());
+  webView.setDownloadListener((url,userAgent,contentDisposition,mimeType,contentLength)->openExternal(Uri.parse(url)));
   webView.setWebViewClient(new WebViewClient(){
    @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request){ return openExternalIfNeeded(request.getUrl()); }
    @Override public boolean shouldOverrideUrlLoading(WebView view, String url){ return openExternalIfNeeded(Uri.parse(url)); }
@@ -66,7 +68,11 @@ public class SectionActivity extends Activity {
   if(uri==null) return false;
   String scheme=uri.getScheme();
   if(scheme==null||"file".equalsIgnoreCase(scheme)||"http".equalsIgnoreCase(scheme)||"https".equalsIgnoreCase(scheme)) return false;
-  try { startActivity(new Intent(Intent.ACTION_VIEW,uri)); return true; } catch(Exception ignored){ return true; }
+  openExternal(uri); return true;
+ }
+ private void openExternal(Uri uri){
+  if(uri==null) return;
+  try { startActivity(new Intent(Intent.ACTION_VIEW,uri)); } catch(Exception ignored) { }
  }
  private String safeType(String value){
   if(value==null) return "quran";
@@ -82,5 +88,7 @@ public class SectionActivity extends Activity {
  private void goHome(){ Intent i=new Intent(this,MainActivity.class); i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP); startActivity(i); finish(); }
  private void goBack(){ if(webView!=null&&webView.canGoBack()) webView.goBack(); else finish(); }
  @Override public void onBackPressed(){ goBack(); }
- @Override protected void onDestroy(){ if(webView!=null){ webView.stopLoading(); webView.setWebChromeClient(null); webView.setWebViewClient(null); webView.destroy(); webView=null; } super.onDestroy(); }
+ @Override protected void onPause(){ if(webView!=null) webView.onPause(); super.onPause(); }
+ @Override protected void onResume(){ super.onResume(); if(webView!=null) webView.onResume(); }
+ @Override protected void onDestroy(){ if(webView!=null){ webView.stopLoading(); webView.setDownloadListener(null); webView.setWebChromeClient(null); webView.setWebViewClient(null); webView.destroy(); webView=null; } super.onDestroy(); }
 }
