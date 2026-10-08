@@ -6,7 +6,7 @@
    <TextView android:text="Enciklopedia Hanefi–Maturidije" android:textColor="#C9DDD6" android:textSize="14sp" android:layout_marginTop="3dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
    <TextView android:text="Kërko në bibliotekë" android:textColor="#F1D477" android:textSize="13sp" android:textStyle="bold" android:layout_marginTop="18dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
    <LinearLayout android:orientation="horizontal" android:layout_marginTop="7dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <EditText android:id="@+id/globalSearch" android:hint="Ajet, hadith, fikh, akide, temë…" android:singleLine="true" android:imeOptions="actionSearch" android:textColor="#FFFFFF" android:hintTextColor="#7FA39A" android:backgroundTint="#D5B95F" android:layout_width="0dp" android:layout_weight="1" android:layout_height="48dp"/>
+    <EditText android:id="@+id/globalSearch" android:hint="Ajet, hadith, fikh, akide, temë…" android:singleLine="true" android:imeOptions="actionSearch" android:textColor="#FFFFFF" android:textColorHint="#7FA39A" android:backgroundTint="#D5B95F" android:layout_width="0dp" android:layout_weight="1" android:layout_height="48dp"/>
     <Button android:id="@+id/searchButton" android:text="Kërko" android:textAllCaps="false" android:layout_marginStart="8dp" android:layout_width="wrap_content" android:layout_height="48dp"/>
    </LinearLayout>
   </LinearLayout>
