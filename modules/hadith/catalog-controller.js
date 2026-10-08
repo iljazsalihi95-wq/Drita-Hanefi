@@ -36,9 +36,16 @@ export function buildTopicIndex(rows = []) {
 export function hadithViewModel(raw) {
   const h = normalizeHadith(raw);
   const grade = preferredGrade(h);
+  const hierarchy = {
+    collection: h.collectionLabel || h.collection || 'Pa koleksion',
+    book: h.book || 'Pa libër',
+    chapter: h.chapter || 'Pa kapitull',
+    number: h.number || ''
+  };
   return {
     ...h,
-    hierarchy: sourceHierarchy(h),
+    hierarchy,
+    breadcrumb: sourceHierarchy(h),
     topicTags: topicTags(h),
     preferredGrade: grade,
     audio: audioSources(h),
