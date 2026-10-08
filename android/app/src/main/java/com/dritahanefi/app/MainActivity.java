@@ -3,6 +3,7 @@ package com.dritahanefi.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -30,6 +31,7 @@ public class MainActivity extends Activity {
   @Override public void onCreate(Bundle b) {
     super.onCreate(b); setTheme(R.style.AppTheme); setContentView(R.layout.activity_main);
     GridLayout list=findViewById(R.id.sectionGrid);
+    list.setColumnCount(homeColumns());
     for(String[] s:SECTIONS) list.addView(card(s[0],s[1],s[2]));
     findViewById(R.id.continueCard).setOnClickListener(v->openLast());
     findViewById(R.id.searchButton).setOnClickListener(v->search());
@@ -43,6 +45,15 @@ public class MainActivity extends Activity {
   }
 
   @Override protected void onResume(){ super.onResume(); refreshContinue(); }
+
+  private int homeColumns(){
+    Configuration c=getResources().getConfiguration();
+    int sw=c.smallestScreenWidthDp;
+    if((c.uiMode&Configuration.UI_MODE_TYPE_MASK)==Configuration.UI_MODE_TYPE_TELEVISION) return 4;
+    if(sw>=840) return 4;
+    if(sw>=600) return 3;
+    return 2;
+  }
 
   private void search(){
     EditText q=findViewById(R.id.globalSearch); String text=q.getText().toString().trim();
