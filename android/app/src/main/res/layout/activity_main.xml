@@ -4,9 +4,16 @@
   <LinearLayout android:orientation="vertical" android:padding="20dp" android:background="@drawable/native_card" android:layout_width="match_parent" android:layout_height="wrap_content">
    <TextView android:text="Drita Hanefi" android:textColor="#F1D477" android:textSize="30sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
    <TextView android:text="Enciklopedia Hanefi–Maturidije" android:textColor="#C9DDD6" android:textSize="14sp" android:layout_marginTop="3dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-   <TextView android:text="Mësimi i sotëm" android:textColor="#F1D477" android:textSize="13sp" android:textStyle="bold" android:layout_marginTop="18dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-   <TextView android:text="Kurani • Hifz • Hadithi • Përsëritja" android:textColor="#FFFFFF" android:textSize="17sp" android:textStyle="bold" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-   <TextView android:text="Vazhdo aty ku e ke lënë dhe plotëso objektivin ditor." android:textColor="#AFCBC2" android:textSize="12sp" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+   <TextView android:text="Kërko në bibliotekë" android:textColor="#F1D477" android:textSize="13sp" android:textStyle="bold" android:layout_marginTop="18dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+   <LinearLayout android:orientation="horizontal" android:layout_marginTop="7dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <EditText android:id="@+id/globalSearch" android:hint="Ajet, hadith, fikh, akide, temë…" android:singleLine="true" android:imeOptions="actionSearch" android:textColor="#FFFFFF" android:hintTextColor="#7FA39A" android:backgroundTint="#D5B95F" android:layout_width="0dp" android:layout_weight="1" android:layout_height="48dp"/>
+    <Button android:id="@+id/searchButton" android:text="Kërko" android:textAllCaps="false" android:layout_marginStart="8dp" android:layout_width="wrap_content" android:layout_height="48dp"/>
+   </LinearLayout>
+  </LinearLayout>
+  <LinearLayout android:id="@+id/continueCard" android:clickable="true" android:focusable="true" android:orientation="vertical" android:padding="16dp" android:layout_marginTop="12dp" android:background="@drawable/native_card" android:layout_width="match_parent" android:layout_height="wrap_content">
+   <TextView android:text="Mësimi i fundit" android:textColor="#AFCBC2" android:textSize="12sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+   <TextView android:id="@+id/continueTitle" android:text="Vazhdo: Kurani" android:textColor="#F1D477" android:textSize="18sp" android:textStyle="bold" android:layout_marginTop="3dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+   <TextView android:text="Hape përsëri rubrikën ku e ke lënë." android:textColor="#FFFFFF" android:textSize="13sp" android:layout_marginTop="3dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
   </LinearLayout>
   <TextView android:text="Biblioteka" android:textColor="#F1D477" android:textSize="18sp" android:textStyle="bold" android:layout_marginTop="20dp" android:layout_marginBottom="7dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
   <GridLayout android:id="@+id/sectionGrid" android:columnCount="2" android:alignmentMode="alignMargins" android:useDefaultMargins="false" android:layout_width="match_parent" android:layout_height="wrap_content"/>
