@@ -33,8 +33,14 @@ public class MainActivity extends Activity {
     GridLayout list=findViewById(R.id.sectionGrid);
     list.setColumnCount(homeColumns());
     for(String[] s:SECTIONS) list.addView(card(s[0],s[1],s[2]));
-    findViewById(R.id.continueCard).setOnClickListener(v->openLast());
-    findViewById(R.id.searchButton).setOnClickListener(v->search());
+    View continueCard=findViewById(R.id.continueCard);
+    continueCard.setOnClickListener(v->openLast());
+    View searchButton=findViewById(R.id.searchButton);
+    searchButton.setOnClickListener(v->search());
+    if(isTv()){
+      enableTvFocus(continueCard);
+      enableTvFocus(searchButton);
+    }
     EditText search=findViewById(R.id.globalSearch);
     search.setOnEditorActionListener((v,actionId,event)->{
       boolean enter=event!=null&&event.getKeyCode()==KeyEvent.KEYCODE_ENTER&&event.getAction()==KeyEvent.ACTION_UP;
@@ -46,13 +52,28 @@ public class MainActivity extends Activity {
 
   @Override protected void onResume(){ super.onResume(); refreshContinue(); }
 
+  private boolean isTv(){
+    Configuration c=getResources().getConfiguration();
+    return (c.uiMode&Configuration.UI_MODE_TYPE_MASK)==Configuration.UI_MODE_TYPE_TELEVISION;
+  }
+
   private int homeColumns(){
     Configuration c=getResources().getConfiguration();
     int sw=c.smallestScreenWidthDp;
-    if((c.uiMode&Configuration.UI_MODE_TYPE_MASK)==Configuration.UI_MODE_TYPE_TELEVISION) return 4;
+    if(isTv()) return 4;
     if(sw>=840) return 4;
     if(sw>=600) return 3;
     return 2;
+  }
+
+  private void enableTvFocus(View v){
+    v.setFocusable(true);
+    v.setFocusableInTouchMode(false);
+    v.setOnFocusChangeListener((view,hasFocus)->{
+      float scale=hasFocus?1.045f:1f;
+      view.animate().scaleX(scale).scaleY(scale).setDuration(120).start();
+      view.setElevation(hasFocus?dp(10):dp(2));
+    });
   }
 
   private void search(){
@@ -64,6 +85,7 @@ public class MainActivity extends Activity {
     View v=getLayoutInflater().inflate(R.layout.item_section,null,false);
     ((TextView)v.findViewById(R.id.sectionTitle)).setText(title); ((TextView)v.findViewById(R.id.sectionSubtitle)).setText(subtitle);
     v.setOnClickListener(x->open(title,type));
+    if(isTv()) enableTvFocus(v);
     GridLayout.LayoutParams lp=new GridLayout.LayoutParams(); lp.width=0; lp.height=GridLayout.LayoutParams.WRAP_CONTENT; lp.columnSpec=GridLayout.spec(GridLayout.UNDEFINED,1f); lp.setMargins(dp(5),dp(5),dp(5),dp(5)); v.setLayoutParams(lp); return v;
   }
 
