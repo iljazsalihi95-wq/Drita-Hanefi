@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
   }
 
   private Intent sectionIntent(String title,String type){
-    Intent i=new Intent(this,"quran".equals(type)?QuranActivity.class:SectionActivity.class); i.putExtra("title",title); i.putExtra("type",type); return i;
+    Intent i=new Intent(this,SectionActivity.class); i.putExtra("title",title); i.putExtra("type",type); return i;
   }
 
   private void openLast(){ SharedPreferences p=getSharedPreferences(PREFS,MODE_PRIVATE); open(p.getString("last_title","Kurani"),p.getString("last_type","quran")); }
