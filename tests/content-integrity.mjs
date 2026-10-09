@@ -14,8 +14,6 @@ const forbidden = [
 ];
 const failures = [];
 
-// The application deliberately contains rejection filters for these words in JS.
-// Integrity must inspect user-visible static markup, not the filter source itself.
 function visibleStaticText(html) {
   return html
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
@@ -27,17 +25,37 @@ function visibleStaticText(html) {
     .trim();
 }
 
+const dataContractRx = /https:\/\/script\.google\.com\/macros\/s\/|(?:fetch\s*\(\s*)?["'`](?:\.\.\/|\.\/)*data\/[^"'`]+\.json\b|["'`][^"'`]*\.json\b/;
+
 function hasRealDataContract(name, html) {
-  if (/https:\/\/script\.google\.com\/macros\/s\//.test(html) || /\.json\b/.test(html)) return true;
-  // Some modules keep their real dataset contract in a linked local JS model.
+  if (dataContractRx.test(html)) return true;
+  const moduleRoot = path.resolve(ROOT, 'modules', name);
+  const seen = new Set();
+  const inspectJs = file => {
+    const resolved = path.resolve(file);
+    if (!resolved.startsWith(moduleRoot + path.sep) || seen.has(resolved) || !fs.existsSync(resolved)) return false;
+    seen.add(resolved);
+    const js = fs.readFileSync(resolved, 'utf8');
+    if (dataContractRx.test(js)) return true;
+    const imports = [...js.matchAll(/(?:import[\s\S]*?from\s*|import\s*)["']([^"']+)["']/g)].map(m => m[1]);
+    return imports.some(src => {
+      if (/^https?:\/\//i.test(src)) return true;
+      if (!src.startsWith('.')) return false;
+      const target = path.resolve(path.dirname(resolved), src.split(/[?#]/)[0]);
+      return inspectJs(path.extname(target) ? target : target + '.js');
+    });
+  };
   const scripts = [...html.matchAll(/<script[^>]+src=["']([^"']+)["']/gi)].map(m => m[1]);
-  return scripts.some(src => {
+  const inlineModules = [...html.matchAll(/<script[^>]*type=["']module["'][^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1]);
+  const linked = scripts.some(src => {
     if (/^https?:\/\//i.test(src)) return true;
-    const local = path.resolve(ROOT, 'modules', name, src.split(/[?#]/)[0]);
-    if (!local.startsWith(path.resolve(ROOT, 'modules', name))) return false;
-    if (!fs.existsSync(local)) return false;
-    const js = fs.readFileSync(local, 'utf8');
-    return /https:\/\/script\.google\.com\/macros\/s\//.test(js) || /\.json\b/.test(js) || /fetch\s*\(/.test(js);
+    return inspectJs(path.resolve(moduleRoot, src.split(/[?#]/)[0]));
+  });
+  if (linked) return true;
+  return inlineModules.some(js => {
+    if (dataContractRx.test(js)) return true;
+    const imports = [...js.matchAll(/(?:import[\s\S]*?from\s*|import\s*)["']([^"']+)["']/g)].map(m => m[1]);
+    return imports.some(src => src.startsWith('.') && inspectJs(path.resolve(moduleRoot, src.split(/[?#]/)[0])));
   });
 }
 
