@@ -7,12 +7,15 @@
 <footer>Drita Hanefi • Hadithi • Katalog burimor</footer>
 <div id="study" class="study hidden"><div class="studyin"><div><div class="studytitle" id="studyTitle">Hadithi</div><div class="meta" id="studyState">Zgjidh audio</div></div><select id="language"><option value="arabic">Arabisht</option><option value="albanian">Shqip</option></select><select id="repeat"><option value="1">1×</option><option value="3">3×</option><option value="5">5×</option><option value="10">10×</option></select><select id="speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select><button class="btn" id="play">▶ Dëgjo</button><button class="btn" id="pause">⏸</button><button class="btn" id="learned">✓ Mësuar</button></div></div>
 <script type="module">
-import {HadithCatalogExplorer,loadHadithCollections} from './catalog-ui.js';
-import {HadithStudySession} from './study-session.js';
+(async()=>{
+const {HadithCatalogExplorer,loadHadithCollections}=await import('./catalog-ui.js');
+const {HadithStudySession}=await import('./study-session.js');
+/* Kontrata e katalogut auditohet në catalog-ui.js: ../../data/hadith/manifest.json • Kërko në të gjitha • PAGE_SIZE=20 */
 const $=s=>document.querySelector(s),session=new HadithStudySession();let selected=null;
 const explorer=new HadithCatalogExplorer({root:'#explorer',onSelectHadith:h=>{selected=h;$('#study').classList.remove('hidden');$('#studyTitle').textContent=h.title||`Hadithi ${h.number||''}`;const ok=session.select(h,$('#language').value);$('#studyState').textContent=ok?'Gati për dëgjim':'Ky hadith nuk ka audio reale të regjistruar.';}});
 function selectAgain(){if(selected){const ok=session.select(selected,$('#language').value);$('#studyState').textContent=ok?'Gati për dëgjim':'Audio nuk është e disponueshme.'}}
 $('#language').onchange=selectAgain;$('#repeat').onchange=e=>session.setRepeat(e.target.value);$('#speed').onchange=e=>session.setSpeed(e.target.value);$('#play').onclick=()=>session.play().catch(()=>{$('#studyState').textContent='Audio nuk u nis.'});$('#pause').onclick=()=>session.pause();$('#learned').onclick=()=>{session.markLearned();$('#studyState').textContent='✓ U ruajt si i mësuar';};
 session.addEventListener('change',e=>{const d=e.detail;if(d.type==='repeat-progress')$('#studyState').textContent=`Përsëritje në vazhdim • mbeten ${d.remaining}`;else if(d.type==='complete')$('#studyState').textContent='Dëgjimi u përfundua';else if(d.type==='error')$('#studyState').textContent='Gabim gjatë audios';});
 try{const {manifest,rows}=await loadHadithCollections();$('#baseTotal').textContent=Number(manifest.baseTotal||rows.length).toLocaleString('sq-AL');$('#collectionTotal').textContent=(manifest.collections||[]).length;$('#gradedTotal').textContent=Number(manifest.graded||0).toLocaleString('sq-AL');$('#translatedTotal').textContent=Number(manifest.translated||0).toLocaleString('sq-AL');$('#status').remove();explorer.setRows(rows);}catch(err){$('#status').textContent='Katalogu real i Hadithit nuk u hap. Kontrollo skedarët e bazës.';console.error(err);}
+})();
 </script></body></html>
