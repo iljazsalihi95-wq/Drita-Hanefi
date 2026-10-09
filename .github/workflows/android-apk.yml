@@ -6,6 +6,7 @@ on:
     types: [completed]
   push:
     paths:
+      - ".github/workflows/android-apk.yml"
       - "android/**"
       - "admin/**"
       - "assets/**"
@@ -15,6 +16,9 @@ on:
       - "index.html"
       - "manifest.webmanifest"
       - "sw.js"
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   apk:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
