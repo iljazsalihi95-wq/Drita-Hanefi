@@ -4,6 +4,15 @@ const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;'
 const safeUrl = value => { try { const u = new URL(String(value || ''), location.href); return ['http:','https:'].includes(u.protocol) ? u.href : ''; } catch { return ''; } };
 
 function button(label, attrs = '') { return `<button class="chip" ${attrs}>${esc(label)}</button>`; }
+function parseCollectionJson(text,file='koleksioni'){
+  try{return JSON.parse(text)}catch(originalError){
+    try{
+      const bytes=[];for(const ch of text){const code=ch.codePointAt(0);if(code>0xffff)throw originalError;bytes.push((code>>8)&255,code&255)}
+      while(bytes.length&&bytes[bytes.length-1]===0)bytes.pop();
+      return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(Uint8Array.from(bytes)));
+    }catch{throw new Error(`${file}: JSON i pavlefshëm dhe i parikuperueshëm`)}
+  }
+}
 
 export class HadithCatalogExplorer {
   constructor({ root, onSelectHadith = () => {} } = {}) {
@@ -41,7 +50,7 @@ export class HadithCatalogExplorer {
 
 export async function loadHadithCollections(manifestUrl='../../data/hadith/manifest.json',baseUrl='../../data/hadith/'){
   const manifest=await fetch(manifestUrl).then(r=>{if(!r.ok)throw new Error(`Manifest ${r.status}`);return r.json()});
-  const results=await Promise.allSettled((manifest.collections||[]).map(async c=>{const response=await fetch(baseUrl+c.file);if(!response.ok)throw new Error(`${c.file} ${response.status}`);const text=await response.text();let data;try{data=JSON.parse(text)}catch{throw new Error(`${c.file}: JSON i pavlefshëm`)}return {collection:c,rows:Array.isArray(data.rows)?data.rows:[]}}));
+  const results=await Promise.allSettled((manifest.collections||[]).map(async c=>{const response=await fetch(baseUrl+c.file);if(!response.ok)throw new Error(`${c.file} ${response.status}`);const data=parseCollectionJson(await response.text(),c.file);return {collection:c,rows:Array.isArray(data.rows)?data.rows:[]}}));
   const available=[],unavailable=[];for(const result of results){if(result.status==='fulfilled')available.push(result.value);else unavailable.push(String(result.reason?.message||result.reason||'Koleksion i palexueshëm'));}
   const rows=available.flatMap(group=>group.rows).map(hadithViewModel);
   if(!rows.length)throw new Error('Asnjë koleksion real i Hadithit nuk u lexua');
