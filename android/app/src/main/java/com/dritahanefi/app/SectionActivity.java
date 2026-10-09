@@ -136,9 +136,12 @@ public class SectionActivity extends Activity {
    return false;
   }
   String scheme=uri.getScheme();
-  if(scheme==null) return false;
-  if("http".equalsIgnoreCase(scheme)||"https".equalsIgnoreCase(scheme)) return false;
-  if("file".equalsIgnoreCase(scheme)) return false;
+  if(scheme==null) return true;
+  if("http".equalsIgnoreCase(scheme)||"https".equalsIgnoreCase(scheme)){
+   openExternal(uri);
+   return true;
+  }
+  if("file".equalsIgnoreCase(scheme)) return true;
   openExternal(uri); return true;
  }
  private String typeFromAssetUrl(String url){
