@@ -32,16 +32,25 @@ public class MainActivity extends Activity {
     super.onCreate(b); setTheme(R.style.AppTheme); setContentView(R.layout.activity_main);
     GridLayout list=findViewById(R.id.sectionGrid);
     list.setColumnCount(homeColumns());
-    for(String[] s:SECTIONS) list.addView(card(s[0],s[1],s[2]));
+    View firstCard=null;
+    for(String[] s:SECTIONS){
+      View sectionCard=card(s[0],s[1],s[2]);
+      if(firstCard==null) firstCard=sectionCard;
+      list.addView(sectionCard);
+    }
     View continueCard=findViewById(R.id.continueCard);
+    continueCard.setContentDescription("Vazhdo aty ku e ke lënë");
     continueCard.setOnClickListener(v->openLast());
     View searchButton=findViewById(R.id.searchButton);
+    searchButton.setContentDescription("Kërko në Drita Hanefi");
     searchButton.setOnClickListener(v->search());
     if(isTv()){
       enableTvFocus(continueCard);
       enableTvFocus(searchButton);
+      if(firstCard!=null) firstCard.requestFocus();
     }
     EditText search=findViewById(R.id.globalSearch);
+    search.setContentDescription("Kërkim global në Drita Hanefi");
     search.setOnEditorActionListener((v,actionId,event)->{
       boolean enter=event!=null&&event.getKeyCode()==KeyEvent.KEYCODE_ENTER&&event.getAction()==KeyEvent.ACTION_UP;
       if(actionId!=0||enter){ search(); return true; }
@@ -84,6 +93,7 @@ public class MainActivity extends Activity {
   private View card(String title,String subtitle,String type){
     View v=getLayoutInflater().inflate(R.layout.item_section,null,false);
     ((TextView)v.findViewById(R.id.sectionTitle)).setText(title); ((TextView)v.findViewById(R.id.sectionSubtitle)).setText(subtitle);
+    v.setContentDescription(title+". "+subtitle);
     v.setOnClickListener(x->open(title,type));
     if(isTv()) enableTvFocus(v);
     GridLayout.LayoutParams lp=new GridLayout.LayoutParams(); lp.width=0; lp.height=GridLayout.LayoutParams.WRAP_CONTENT; lp.columnSpec=GridLayout.spec(GridLayout.UNDEFINED,1f); lp.setMargins(dp(5),dp(5),dp(5),dp(5)); v.setLayoutParams(lp); return v;
