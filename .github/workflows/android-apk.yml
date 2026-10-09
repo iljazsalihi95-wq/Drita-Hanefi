@@ -11,6 +11,7 @@ on:
       - "data/**"
       - "modules/**"
       - "tests/**"
+      - "tools/**"
       - "index.html"
       - "manifest.webmanifest"
       - "sw.js"
@@ -35,6 +36,9 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.9"
+      - name: Normalize recoverable packaged JSON
+        working-directory: .
+        run: node tools/normalize-packed-json.mjs data/hadith/bukhari.json
       - name: Verify real content and module integration
         working-directory: .
         run: node tests/content-integrity.mjs
@@ -47,7 +51,7 @@ jobs:
           mkdir -p android/app/src/main/assets/site
           rsync -a --delete \
             --exclude='.git' --exclude='.github' --exclude='android' \
-            --exclude='tests' --exclude='README.md' --exclude='Code.gs' ./ \
+            --exclude='tests' --exclude='tools' --exclude='README.md' --exclude='Code.gs' ./ \
             android/app/src/main/assets/site/
       - run: gradle :app:assembleDebug
       - uses: actions/upload-artifact@v4
