@@ -7,12 +7,15 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class SectionActivity extends Activity {
@@ -23,6 +26,10 @@ public class SectionActivity extends Activity {
  private String type;
  private String moduleRoot;
  private ValueCallback<Uri[]> fileChooserCallback;
+ private FrameLayout fullscreenMedia;
+ private View sectionContent;
+ private View customView;
+ private WebChromeClient.CustomViewCallback customViewCallback;
 
  @SuppressLint("SetJavaScriptEnabled")
  @Override public void onCreate(Bundle b){
@@ -33,6 +40,8 @@ public class SectionActivity extends Activity {
   ((TextView)findViewById(R.id.sectionSubtitle)).setText(subtitleFor(type));
   findViewById(R.id.backButton).setOnClickListener(v->goBack());
   findViewById(R.id.homeButton).setOnClickListener(v->goHome());
+  sectionContent=findViewById(R.id.sectionContent);
+  fullscreenMedia=findViewById(R.id.fullscreenMedia);
   SharedPreferences prefs=getSharedPreferences(PREFS,MODE_PRIVATE);
   prefs.edit().putString("last_type",type).putString("last_title",title).apply();
 
@@ -52,6 +61,16 @@ public class SectionActivity extends Activity {
     catch(Exception e){ fileChooserCallback.onReceiveValue(null); fileChooserCallback=null; return false; }
     return true;
    }
+   @Override public void onShowCustomView(View view,CustomViewCallback callback){
+    if(customView!=null){ callback.onCustomViewHidden(); return; }
+    customView=view; customViewCallback=callback;
+    fullscreenMedia.addView(view,new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT));
+    fullscreenMedia.setVisibility(View.VISIBLE);
+    sectionContent.setVisibility(View.GONE);
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+   }
+   @Override public void onHideCustomView(){ hideCustomView(); }
   });
   webView.setDownloadListener((url,userAgent,contentDisposition,mimeType,contentLength)->openExternal(Uri.parse(url)));
   webView.setWebViewClient(new WebViewClient(){
@@ -69,6 +88,16 @@ public class SectionActivity extends Activity {
   webView.loadUrl(query.build().toString());
  }
 
+ private void hideCustomView(){
+  if(customView==null) return;
+  fullscreenMedia.removeView(customView);
+  customView=null;
+  fullscreenMedia.setVisibility(View.GONE);
+  sectionContent.setVisibility(View.VISIBLE);
+  getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+  getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+  if(customViewCallback!=null){ WebChromeClient.CustomViewCallback callback=customViewCallback; customViewCallback=null; callback.onCustomViewHidden(); }
+ }
  @Override protected void onActivityResult(int requestCode,int resultCode,Intent data){
   super.onActivityResult(requestCode,resultCode,data);
   if(requestCode!=FILE_CHOOSER_REQUEST||fileChooserCallback==null) return;
@@ -138,10 +167,10 @@ public class SectionActivity extends Activity {
  private String subtitleFor(String t){
   switch(t){case "quran":return "114 sure • 6236 ajete • Hifz • Tefsir • Fikh";case "hadith":return "Koleksion • Libër • Kapitull • Hadith";case "fikh":return "Kategori • Temë • Nëntemë • Dispozitë";case "tefsir":return "Ajet • Mufessir • Vepër • Referencë";case "akide":return "Akide Maturidije • Burime • Tema";case "abetare":return "Mësime • Shqiptim • Ushtrime • Progres";case "texhvid":return "Rregulla • Shembuj kuranorë • Praktikë";case "hudbe":return "Hudbe • Tema • Burime";case "pedagogji":return "Edukim • Mësim • Zbatim";case "histori":return "Pejgamberë • Sahabë • Dinasti • Kronologji";case "tema":return "Kërkim i lidhur në burimet e Drita Hanefi";case "admin":return "Menaxhimi i përmbajtjes";default:return "Dituria • Burimi • Praktika";}
  }
- private void goHome(){ Intent i=new Intent(this,MainActivity.class); i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP); startActivity(i); finish(); }
- private void goBack(){ if(webView!=null&&webView.canGoBack()) webView.goBack(); else finish(); }
+ private void goHome(){ if(customView!=null) hideCustomView(); Intent i=new Intent(this,MainActivity.class); i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP); startActivity(i); finish(); }
+ private void goBack(){ if(customView!=null){ hideCustomView(); return; } if(webView!=null&&webView.canGoBack()) webView.goBack(); else finish(); }
  @Override public void onBackPressed(){ goBack(); }
  @Override protected void onPause(){ if(webView!=null) webView.onPause(); super.onPause(); }
  @Override protected void onResume(){ super.onResume(); if(webView!=null) webView.onResume(); }
- @Override protected void onDestroy(){ if(fileChooserCallback!=null){ fileChooserCallback.onReceiveValue(null); fileChooserCallback=null; } if(webView!=null){ webView.stopLoading(); webView.setDownloadListener(null); webView.setWebChromeClient(null); webView.setWebViewClient(null); webView.destroy(); webView=null; } super.onDestroy(); }
+ @Override protected void onDestroy(){ if(customView!=null) hideCustomView(); if(fileChooserCallback!=null){ fileChooserCallback.onReceiveValue(null); fileChooserCallback=null; } if(webView!=null){ webView.stopLoading(); webView.setDownloadListener(null); webView.setWebChromeClient(null); webView.setWebViewClient(null); webView.destroy(); webView=null; } super.onDestroy(); }
 }
