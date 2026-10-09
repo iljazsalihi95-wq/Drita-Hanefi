@@ -17,7 +17,7 @@ on:
       - "manifest.webmanifest"
       - "sw.js"
 concurrency:
-  group: android-apk-${{ github.ref }}
+  group: android-apk-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   apk:
