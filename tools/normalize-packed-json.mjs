@@ -11,7 +11,13 @@ function packedUtf8ToText(text) {
     bytes.push((code >> 8) & 0xff, code & 0xff);
   }
   while (bytes.length && bytes.at(-1) === 0) bytes.pop();
-  return new TextDecoder('utf-8', { fatal: true }).decode(Uint8Array.from(bytes));
+
+  // Disa burime të vjetra janë ruajtur si dy bajte për code-unit dhe
+  // përmbajnë tashmë U+FFFD në metnin arab. Dekodimi fatal e rrëzonte
+  // gjithë build-in edhe pse struktura JSON është e rikuperueshme.
+  // Dekodimi standard ruan strukturën dhe shënon vetëm bajtet burimore
+  // tashmë të humbura me U+FFFD; nuk sajon tekst zëvendësues.
+  return new TextDecoder('utf-8').decode(Uint8Array.from(bytes));
 }
 
 for (const file of files) {
@@ -24,7 +30,13 @@ for (const file of files) {
 
   const repaired = packedUtf8ToText(raw);
   if (!repaired) throw new Error(`${file}: formati i dëmtuar nuk është i rikuperueshëm si packed UTF-8`);
-  JSON.parse(repaired);
+
+  try {
+    JSON.parse(repaired);
+  } catch (error) {
+    throw new Error(`${file}: struktura JSON mbetet e pavlefshme pas rikuperimit: ${error.message}`);
+  }
+
   await writeFile(file, repaired, 'utf8');
   console.log(`JSON NORMALIZED: ${file}`);
 }
