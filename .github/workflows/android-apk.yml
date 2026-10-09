@@ -1,10 +1,8 @@
 name: Build Android APK
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Deploy Web to GitHub Pages"]
-    types: [completed]
   push:
+    branches: [main]
     paths:
       - ".github/workflows/android-apk.yml"
       - "android/**"
@@ -17,11 +15,10 @@ on:
       - "manifest.webmanifest"
       - "sw.js"
 concurrency:
-  group: android-apk-${{ github.event_name }}-${{ github.ref }}
+  group: android-apk-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   apk:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     defaults:
       run:
