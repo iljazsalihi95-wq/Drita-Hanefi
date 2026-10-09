@@ -11,6 +11,7 @@ on:
       - "assets/**"
       - "data/**"
       - "modules/**"
+      - "tests/**"
       - "index.html"
       - "manifest.webmanifest"
       - "sw.js"
@@ -27,16 +28,25 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.9"
+      - name: Verify real content and module integration
+        working-directory: .
+        run: node tests/content-integrity.mjs
+      - name: Verify application pages and live data contracts
+        working-directory: .
+        run: node tests/verify.mjs
       - name: Bundle audited web application
         working-directory: .
         run: |
           mkdir -p android/app/src/main/assets/site
           rsync -a --delete \
             --exclude='.git' --exclude='.github' --exclude='android' \
-            --exclude='tests' --exclude='README.md' ./ \
+            --exclude='tests' --exclude='README.md' --exclude='Code.gs' ./ \
             android/app/src/main/assets/site/
       - run: gradle :app:assembleDebug
       - uses: actions/upload-artifact@v4
