@@ -41,6 +41,9 @@ export class HadithCatalogExplorer {
 
 export async function loadHadithCollections(manifestUrl='../../data/hadith/manifest.json',baseUrl='../../data/hadith/'){
   const manifest=await fetch(manifestUrl).then(r=>{if(!r.ok)throw new Error(`Manifest ${r.status}`);return r.json()});
-  const groups=await Promise.all((manifest.collections||[]).map(async c=>{const data=await fetch(baseUrl+c.file).then(r=>{if(!r.ok)throw new Error(`${c.file} ${r.status}`);return r.json()});return Array.isArray(data.rows)?data.rows:[]}));
-  return {manifest,rows:groups.flat().map(hadithViewModel)};
+  const results=await Promise.allSettled((manifest.collections||[]).map(async c=>{const response=await fetch(baseUrl+c.file);if(!response.ok)throw new Error(`${c.file} ${response.status}`);const text=await response.text();let data;try{data=JSON.parse(text)}catch{throw new Error(`${c.file}: JSON i pavlefshëm`)}return {collection:c,rows:Array.isArray(data.rows)?data.rows:[]}}));
+  const available=[],unavailable=[];for(const result of results){if(result.status==='fulfilled')available.push(result.value);else unavailable.push(String(result.reason?.message||result.reason||'Koleksion i palexueshëm'));}
+  const rows=available.flatMap(group=>group.rows).map(hadithViewModel);
+  if(!rows.length)throw new Error('Asnjë koleksion real i Hadithit nuk u lexua');
+  return {manifest:{...manifest,availableCollections:available.map(group=>group.collection),unavailableCollections:unavailable},rows};
 }
