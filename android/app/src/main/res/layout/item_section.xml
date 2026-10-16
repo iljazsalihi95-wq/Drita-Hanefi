@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:gravity="center_vertical" android:minHeight="118dp" android:padding="14dp" android:background="@drawable/native_card" android:clickable="true" android:focusable="true" android:layout_width="0dp" android:layout_height="wrap_content">
- <TextView android:id="@+id/sectionTitle" android:textColor="#FFF0B4" android:textSize="17sp" android:textStyle="bold" android:maxLines="2" android:layout_width="match_parent" android:layout_height="wrap_content"/>
- <TextView android:id="@+id/sectionSubtitle" android:textColor="#ABC8BF" android:textSize="11sp" android:maxLines="2" android:ellipsize="end" android:layout_marginTop="7dp" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" android:gravity="center_vertical" android:minHeight="142dp"
+ android:padding="16dp" android:background="@drawable/native_card" android:clickable="true" android:focusable="true"
+ android:elevation="3dp" android:layout_width="0dp" android:layout_height="wrap_content">
+ <TextView android:id="@+id/sectionIcon" android:gravity="center" android:textColor="#F1D477" android:textSize="28sp"
+  android:background="@drawable/icon_badge" android:layout_width="54dp" android:layout_height="54dp"/>
+ <TextView android:id="@+id/sectionTitle" android:textColor="#FFF4C9" android:textSize="17sp" android:textStyle="bold"
+  android:maxLines="2" android:layout_marginTop="13dp" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+ <TextView android:id="@+id/sectionSubtitle" android:textColor="#AFCBC2" android:textSize="11sp" android:maxLines="2"
+  android:ellipsize="end" android:layout_marginTop="6dp" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+ <View android:layout_marginTop="13dp" android:background="#5C4B2A" android:layout_width="34dp" android:layout_height="2dp"/>
 </LinearLayout>
