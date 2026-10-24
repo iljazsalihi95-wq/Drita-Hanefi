@@ -7,59 +7,8 @@
   "numberingSystem": "Sunnah.com numbering used by Drita Hanefi",
   "verification": "Teksti arab, numërimi, libri, kapitulli dhe transmetuesit u kontrolluan kundrejt Sahih Muslim/Sunnah.com. Gradimi Sahih lidhet me statusin e koleksionit të Imam Muslimit; Albani nuk përdoret si autoritet kryesor. Nuk është shtuar gradim hanefi i padokumentuar.",
   "rows": [
-    {
-      "number": "85e",
-      "inBook": "1:162",
-      "chapter": "Sqarimi se besimi në Allahun e Lartësuar është prej veprave më të mira",
-      "chapterArabic": "باب بَيَانِ كَوْنِ الإِيمَانِ بِاللَّهِ تَعَالَى أَفْضَلَ الأَعْمَالِ",
-      "narrator": "Abdullah ibn Mes'ud",
-      "isnad": "عثمان بن أبي شيبة ← جرير ← الحسن بن عبيد الله ← أبو عمرو الشيباني ← عبد الله ← النبي ﷺ",
-      "arabic": "حَدَّثَنَا عُثْمَانُ بْنُ أَبِي شَيْبَةَ، حَدَّثَنَا جَرِيرٌ، عَنِ الْحَسَنِ بْنِ عُبَيْدِ اللَّهِ، عَنْ أَبِي عَمْرٍو الشَّيْبَانِيِّ، عَنْ عَبْدِ اللَّهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ: أَفْضَلُ الأَعْمَالِ - أَوِ الْعَمَلِ - الصَّلاَةُ لِوَقْتِهَا وَبِرُّ الْوَالِدَيْنِ.",
-      "translationSq": "Abdullahu transmeton se Profeti ﷺ ka thënë se ndër veprat më të mira janë falja e namazit në kohën e tij dhe mirësia ndaj prindërve.",
-      "grade": "Sahih",
-      "gradeAuthority": "Imam Muslim – statusi i koleksionit Sahih Muslim",
-      "topic": "Imani; Namazi; Mirësia ndaj prindërve",
-      "parallelReferences": "Sahih el-Buhari 527 (variant i temës); Tirmidhi 170 dhe Ebu Davud 426 për namazin në kohën e tij",
-      "comment": "Ky variant i Muslimit përmbledh namazin në kohën e tij dhe mirësinë ndaj prindërve si vepra të dalluara.",
-      "hanafiFiqh": "Lidhet me ruajtjen e kohëve të namazit dhe detyrimin e mirësisë ndaj prindërve; nuk u shtua pretendim specifik hanefi pa referencë të verifikuar.",
-      "audioUrl": null,
-      "sourceUrl": "https://sunnah.com/muslim:85e"
-    },
-    {
-      "number": "86a",
-      "inBook": "1:163",
-      "chapter": "Sqarimi se shirku është mëkati më i rëndë dhe mëkatet e mëdha pas tij",
-      "chapterArabic": "باب كَوْنِ الشِّرْكِ أَقْبَحَ الذُّنُوبِ وَبَيَانِ أَعْظَمِهَا بَعْدَهُ",
-      "narrator": "Abdullah ibn Mes'ud",
-      "isnad": "عثمان بن أبي شيبة وإسحاق بن إبراهيم ← جرير ← منصور ← أبو وائل ← عمرو بن شرحبيل ← عبد الله",
-      "arabic": "حَدَّثَنَا عُثْمَانُ بْنُ أَبِي شَيْبَةَ، وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ، قَالَ إِسْحَاقُ أَخْبَرَنَا جَرِيرٌ، وَقَالَ عُثْمَانُ حَدَّثَنَا جَرِيرٌ، عَنْ مَنْصُورٍ، عَنْ أَبِي وَائِلٍ، عَنْ عَمْرِو بْنِ شُرَحْبِيلَ، عَنْ عَبْدِ اللَّهِ، قَالَ سَأَلْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم أَىُّ الذَّنْبِ أَعْظَمُ عِنْدَ اللَّهِ قَالَ: أَنْ تَجْعَلَ لِلَّهِ نِدًّا وَهُوَ خَلَقَكَ. قَالَ قُلْتُ لَهُ إِنَّ ذَلِكَ لَعَظِيمٌ. قَالَ قُلْتُ ثُمَّ أَىٌّ قَالَ: ثُمَّ أَنْ تَقْتُلَ وَلَدَكَ مَخَافَةَ أَنْ يَطْعَمَ مَعَكَ. قَالَ قُلْتُ ثُمَّ أَىٌّ قَالَ: ثُمَّ أَنْ تُزَانِيَ حَلِيلَةَ جَارِكَ.",
-      "translationSq": "Abdullah ibn Mes'udi e pyeti të Dërguarin e Allahut ﷺ për mëkatin më të rëndë. Ai përmendi së pari t'i bëhet Allahut ortak ndërkohë që Ai të ka krijuar, pastaj cenimin e jetës së fëmijës nga frika e varfërisë dhe më pas shkeljen e rëndë të nderit të fqinjit.",
-      "grade": "Sahih",
-      "gradeAuthority": "Imam Muslim – statusi i koleksionit Sahih Muslim",
-      "topic": "Teuhidi; Shirku; Mëkatet e mëdha; Të drejtat e fqinjit",
-      "parallelReferences": "Sahih el-Buhari 4477, 4761, 6001, 6811, 6861, 7520, 7532; Ebu Davud 2310; Tirmidhi 3182-3183; Nesai 4013-4015",
-      "comment": "Hadithi rendit shirkun si mëkatin më të rëndë dhe vijon me dy shkelje të rënda ndaj jetës dhe nderit.",
-      "hanafiFiqh": "Lidhet me bazat e teuhidit dhe ndalimin e mëkateve të mëdha; nuk u shtua gradim apo hükm specifik hanefi pa burim të dokumentuar.",
-      "audioUrl": null,
-      "sourceUrl": "https://sunnah.com/muslim:86a"
-    },
-    {
-      "number": "86b",
-      "inBook": "1:164",
-      "chapter": "Sqarimi se shirku është mëkati më i rëndë dhe mëkatet e mëdha pas tij",
-      "chapterArabic": "باب كَوْنِ الشِّرْكِ أَقْبَحَ الذُّنُوبِ وَبَيَانِ أَعْظَمِهَا بَعْدَهُ",
-      "narrator": "Abdullah ibn Mes'ud",
-      "isnad": "عثمان بن أبي شيبة وإسحاق بن إبراهيم ← جرير ← الأعمش ← أبو وائل ← عمرو بن شرحبيل ← عبد الله",
-      "arabic": "حَدَّثَنَا عُثْمَانُ بْنُ أَبِي شَيْبَةَ، وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ، جَمِيعًا عَنْ جَرِيرٍ، قَالَ عُثْمَانُ حَدَّثَنَا جَرِيرٌ، عَنِ الأَعْمَشِ، عَنْ أَبِي وَائِلٍ، عَنْ عَمْرِو بْنِ شُرَحْبِيلَ، قَالَ قَالَ عَبْدُ اللَّهِ قَالَ رَجُلٌ يَا رَسُولَ اللَّهِ أَىُّ الذَّنْبِ أَكْبَرُ عِنْدَ اللَّهِ قَالَ: أَنْ تَدْعُوَ لِلَّهِ نِدًّا وَهُوَ خَلَقَكَ. قَالَ ثُمَّ أَىٌّ قَالَ: أَنْ تُقْتَلَ وَلَدَكَ مَخَافَةَ أَنْ يَطْعَمَ مَعَكَ. قَالَ ثُمَّ أَىٌّ قَالَ: أَنْ تُزَانِيَ حَلِيلَةَ جَارِكَ. فَأَنْزَلَ اللَّهُ عَزَّ وَجَلَّ تَصْدِيقَهَا: وَالَّذِينَ لاَ يَدْعُونَ مَعَ اللَّهِ إِلَهًا آخَرَ وَلاَ يَقْتُلُونَ النَّفْسَ الَّتِي حَرَّمَ اللَّهُ إِلاَّ بِالْحَقِّ وَلاَ يَزْنُونَ وَمَنْ يَفْعَلْ ذَلِكَ يَلْقَ أَثَامًا.",
-      "translationSq": "Abdullah ibn Mes'udi transmeton një variant ku pyetet për mëkatin më të madh. Përgjigjja nis me shirkun, vijon me cenimin e jetës së fëmijës nga frika e varfërisë dhe shkeljen e nderit të fqinjit; transmetimi lidhet edhe me ajetin 25:68.",
-      "grade": "Sahih",
-      "gradeAuthority": "Imam Muslim – statusi i koleksionit Sahih Muslim",
-      "topic": "Teuhidi; Shirku; Mëkatet e mëdha; Kurani dhe Hadithi",
-      "parallelReferences": "Kurani 25:68; Sahih Muslim 86a; Sahih el-Buhari 4477, 4761, 6001, 6811, 6861, 7520, 7532; Ebu Davud 2310; Tirmidhi 3182-3183; Nesai 4013-4015",
-      "comment": "Ky variant shton lidhjen e përmbajtjes me ajetin 25:68 dhe ruhet veçmas për shkak të isnadit dhe formulimit të tij.",
-      "hanafiFiqh": "Lidhet me teuhidin dhe ndalimin e mëkateve të mëdha; nuk u shtua gradim apo hükm specifik hanefi pa burim të dokumentuar.",
-      "audioUrl": null,
-      "sourceUrl": "https://sunnah.com/muslim:86b"
-    }
+    {"number":"85e","inBook":"1:162","chapter":"Sqarimi se besimi në Allahun e Lartësuar është prej veprave më të mira","chapterArabic":"باب بَيَانِ كَوْنِ الإِيمَانِ بِاللَّهِ تَعَالَى أَفْضَلَ الأَعْمَالِ","narrator":"Abdullah ibn Mes'ud","isnad":"عثمان بن أبي شيبة ← جرير ← الحسن بن عبيد الله ← أبو عمرو الشيباني ← عبد الله ← النبي ﷺ","arabic":"حَدَّثَنَا عُثْمَانُ بْنُ أَبِي شَيْبَةَ، حَدَّثَنَا جَرِيرٌ، عَنِ الْحَسَنِ بْنِ عُبَيْدِ اللَّهِ، عَنْ أَبِي عَمْرٍو الشَّيْبَانِيِّ، عَنْ عَبْدِ اللَّهِ، عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ: أَفْضَلُ الأَعْمَالِ - أَوِ الْعَمَلِ - الصَّلاَةُ لِوَقْتِهَا وَبِرُّ الْوَالِدَيْنِ.","translationSq":"Abdullahu transmeton se Profeti ﷺ ka thënë se ndër veprat më të mira janë falja e namazit në kohën e tij dhe mirësia ndaj prindërve.","grade":"Sahih","gradeAuthority":"Imam Muslim – statusi i koleksionit Sahih Muslim","topic":"Imani; Namazi; Mirësia ndaj prindërve","parallelReferences":"Sahih el-Buhari 527 (variant i temës); Tirmidhi 170 dhe Ebu Davud 426 për namazin në kohën e tij","comment":"Ky variant i Muslimit përmbledh namazin në kohën e tij dhe mirësinë ndaj prindërve si vepra të dalluara.","hanafiFiqh":"Lidhet me ruajtjen e kohëve të namazit dhe detyrimin e mirësisë ndaj prindërve; nuk u shtua pretendim specifik hanefi pa referencë të verifikuar.","audioUrl":null,"sourceUrl":"https://sunnah.com/muslim:85e"},
+    {"number":"86a","inBook":"1:163","chapter":"Sqarimi se shirku është mëkati më i rëndë dhe mëkatet e mëdha pas tij","chapterArabic":"باب كَوْنِ الشِّرْكِ أَقْبَحَ الذُّنُوبِ وَبَيَانِ أَعْظَمِهَا بَعْدَهُ","narrator":"Abdullah ibn Mes'ud","isnad":"عثمان بن أبي شيبة وإسحاق بن إبراهيم ← جرير ← منصور ← أبو وائل ← عمرو بن شرحبيل ← عبد الله","arabic":"حَدَّثَنَا عُثْمَانُ بْنُ أَبِي شَيْبَةَ، وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ، قَالَ إِسْحَاقُ أَخْبَرَنَا جَرِيرٌ، وَقَالَ عُثْمَانُ حَدَّثَنَا جَرِيرٌ، عَنْ مَنْصُورٍ، عَنْ أَبِي وَائِلٍ، عَنْ عَمْرِو بْنِ شُرَحْبِيلَ، عَنْ عَبْدِ اللَّهِ، قَالَ سَأَلْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم أَىُّ الذَّنْبِ أَعْظَمُ عِنْدَ اللَّهِ قَالَ: أَنْ تَجْعَلَ لِلَّهِ نِدًّا وَهُوَ خَلَقَكَ. قَالَ قُلْتُ لَهُ إِنَّ ذَلِكَ لَعَظِيمٌ. قَالَ قُلْتُ ثُمَّ أَىٌّ قَالَ: ثُمَّ أَنْ تَقْتُلَ وَلَدَكَ مَخَافَةَ أَنْ يَطْعَمَ مَعَكَ. قَالَ قُلْتُ ثُمَّ أَىٌّ قَالَ: ثُمَّ أَنْ تُزَانِيَ حَلِيلَةَ جَارِكَ.","translationSq":"Abdullah ibn Mes'udi e pyeti të Dërguarin e Allahut ﷺ për mëkatin më të rëndë. Ai përmendi së pari t'i bëhet Allahut ortak ndërkohë që Ai të ka krijuar, pastaj cenimin e jetës së fëmijës nga frika e varfërisë dhe më pas shkeljen e rëndë të nderit të fqinjit.","grade":"Sahih","gradeAuthority":"Imam Muslim – statusi i koleksionit Sahih Muslim","topic":"Teuhidi; Shirku; Mëkatet e mëdha; Të drejtat e fqinjit","parallelReferences":"Sahih el-Buhari 4477, 4761, 6001, 6811, 6861, 7520, 7532; Ebu Davud 2310; Tirmidhi 3182-3183; Nesai 4013-4015","comment":"Hadithi rendit shirkun si mëkatin më të rëndë dhe vijon me dy shkelje të rënda ndaj jetës dhe nderit.","hanafiFiqh":"Lidhet me bazat e teuhidit dhe ndalimin e mëkateve të mëdha; nuk u shtua gradim apo hükm specifik hanefi pa burim të dokumentuar.","audioUrl":null,"sourceUrl":"https://sunnah.com/muslim:86a"},
+    {"number":"86b","inBook":"1:164","chapter":"Sqarimi se shirku është mëkati më i rëndë dhe mëkatet e mëdha pas tij","chapterArabic":"باب كَوْنِ الشِّرْكِ أَقْبَحَ الذُّنُوبِ وَبَيَانِ أَعْظَمِهَا بَعْدَهُ","narrator":"Abdullah ibn Mes'ud","isnad":"عثمان بن أبي شيبة وإسحاق بن إبراهيم ← جرير ← الأعمش ← أبو وائل ← عمرو بن شرحبيل ← عبد الله","arabic":"حَدَّثَنَا عُثْمَانُ بْنُ أَبِي شَيْبَةَ، وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ، جَمِيعًا عَنْ جَرِيرٍ، قَالَ عُثْمَانُ حَدَّثَنَا جَرِيرٌ، عَنِ الأَعْمَشِ، عَنْ أَبِي وَائِلٍ، عَنْ عَمْرِو بْنِ شُرَحْبِيلَ، قَالَ قَالَ عَبْدُ اللَّهِ قَالَ رَجُلٌ يَا رَسُولَ اللَّهِ أَىُّ الذَّنْبِ أَكْبَرُ عِنْدَ اللَّهِ قَالَ: أَنْ تَدْعُوَ لِلَّهِ نِدًّا وَهُوَ خَلَقَكَ. قَالَ ثُمَّ أَىٌّ قَالَ: أَنْ تَقْتُلَ وَلَدَكَ مَخَافَةَ أَنْ يَطْعَمَ مَعَكَ. قَالَ ثُمَّ أَىٌّ قَالَ: أَنْ تُزَانِيَ حَلِيلَةَ جَارِكَ. فَأَنْزَلَ اللَّهُ عَزَّ وَجَلَّ تَصْدِيقَهَا: وَالَّذِينَ لاَ يَدْعُونَ مَعَ اللَّهِ إِلَهًا آخَرَ وَلاَ يَقْتُلُونَ النَّفْسَ الَّتِي حَرَّمَ اللَّهُ إِلاَّ بِالْحَقِّ وَلاَ يَزْنُونَ وَمَنْ يَفْعَلْ ذَلِكَ يَلْقَ أَثَامًا.","translationSq":"Abdullah ibn Mes'udi transmeton një variant ku pyetet për mëkatin më të madh. Përgjigjja nis me shirkun, vijon me cenimin e jetës së fëmijës nga frika e varfërisë dhe shkeljen e nderit të fqinjit; transmetimi lidhet edhe me ajetin 25:68.","grade":"Sahih","gradeAuthority":"Imam Muslim – statusi i koleksionit Sahih Muslim","topic":"Teuhidi; Shirku; Mëkatet e mëdha; Kurani dhe Hadithi","parallelReferences":"Kurani 25:68; Sahih Muslim 86a; Sahih el-Buhari 4477, 4761, 6001, 6811, 6861, 7520, 7532; Ebu Davud 2310; Tirmidhi 3182-3183; Nesai 4013-4015","comment":"Ky variant shton lidhjen e përmbajtjes me ajetin 25:68 dhe ruhet veçmas për shkak të isnadit dhe formulimit të tij.","hanafiFiqh":"Lidhet me teuhidin dhe ndalimin e mëkateve të mëdha; nuk u shtua gradim apo hükm specifik hanefi pa burim të dokumentuar.","audioUrl":null,"sourceUrl":"https://sunnah.com/muslim:86b"}
   ]
 }
