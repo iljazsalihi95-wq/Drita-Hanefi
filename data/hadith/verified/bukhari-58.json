@@ -1,0 +1,30 @@
+{
+  "collection": "bukhari",
+  "collectionLabel": "Sahih Buhari",
+  "bookNumber": "2",
+  "book": "Kitab el-Iman",
+  "range": "58",
+  "numberingSystem": "Sunnah.com canonical / in-book numbering",
+  "verification": "Numri, kapitulli, senedi, metni arab dhe transmetuesi u kontrolluan kundrejt Sahih al-Bukhari. Statusi Sahih mbështetet në vetë koleksionin e Imam Buhariut; Albani nuk është përdorur si autoritet kryesor. Nuk është shtuar gradim ose lidhje specifike hanefite pa burim të dokumentuar.",
+  "rows": [
+    {
+      "number": "58",
+      "inBook": "2:51",
+      "chapter": "Fjala e Profetit ﷺ: Feja është sinqeritet dhe këshillë e çiltër për Allahun, të Dërguarin e Tij, udhëheqësit e muslimanëve dhe muslimanët në përgjithësi",
+      "chapterArabic": "بَابُ قَوْلِ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: «الدِّينُ النَّصِيحَةُ لِلَّهِ وَلِرَسُولِهِ وَلأَئِمَّةِ الْمُسْلِمِينَ وَعَامَّتِهِمْ»",
+      "narrator": "Xherir ibn Abdullah, përmes Zijad ibn Ilaka",
+      "isnad": "أبو النعمان ← أبو عوانة ← زياد بن علاقة ← جرير بن عبد الله",
+      "arabic": "حَدَّثَنَا أَبُو النُّعْمَانِ، قَالَ حَدَّثَنَا أَبُو عَوَانَةَ، عَنْ زِيَادِ بْنِ عِلاَقَةَ، قَالَ سَمِعْتُ جَرِيرَ بْنَ عَبْدِ اللَّهِ، يَقُولُ يَوْمَ مَاتَ الْمُغِيرَةُ بْنُ شُعْبَةَ قَامَ فَحَمِدَ اللَّهَ وَأَثْنَى عَلَيْهِ وَقَالَ عَلَيْكُمْ بِاتِّقَاءِ اللَّهِ وَحْدَهُ لاَ شَرِيكَ لَهُ، وَالْوَقَارِ وَالسَّكِينَةِ حَتَّى يَأْتِيَكُمْ أَمِيرٌ، فَإِنَّمَا يَأْتِيكُمُ الآنَ، ثُمَّ قَالَ اسْتَعْفُوا لأَمِيرِكُمْ، فَإِنَّهُ كَانَ يُحِبُّ الْعَفْوَ‏.‏ ثُمَّ قَالَ أَمَّا بَعْدُ، فَإِنِّي أَتَيْتُ النَّبِيَّ صلى الله عليه وسلم قُلْتُ أُبَايِعُكَ عَلَى الإِسْلاَمِ‏.‏ فَشَرَطَ عَلَىَّ وَالنُّصْحِ لِكُلِّ مُسْلِمٍ‏.‏ فَبَايَعْتُهُ عَلَى هَذَا، وَرَبِّ هَذَا الْمَسْجِدِ إِنِّي لَنَاصِحٌ لَكُمْ‏.‏ ثُمَّ اسْتَغْفَرَ وَنَزَلَ‏.‏",
+      "translationSq": "Zijad ibn Ilaka transmeton se e dëgjoi Xherir ibn Abdullahun, ditën kur vdiq Mugire ibn Shu'be, të ngrihej, ta falënderonte e lavdëronte Allahun dhe të thoshte: Kini frikë vetëm Allahun, i Cili nuk ka ortak, dhe qëndroni me dinjitet e qetësi derisa t'ju vijë udhëheqësi i ri, sepse do të vijë së shpejti. Pastaj tha: Kërkoni falje nga Allahu për udhëheqësin tuaj të ndjerë, sepse ai e donte faljen. Më pas tha: Unë shkova te Profeti ﷺ dhe i thashë: Të jap besën për Islamin. Ai ma kushtëzoi besën edhe me sinqeritetin dhe këshillën e çiltër ndaj çdo muslimani, dhe unë ia dhashë besën mbi këtë. Për Zotin e kësaj xhamie, unë jam këshillues i sinqertë ndaj jush. Pastaj kërkoi falje nga Allahu dhe zbriti.",
+      "grade": "Sahih",
+      "gradeAuthority": "Sahih al-Bukhari; Imam al-Bukhari",
+      "gradeReference": "Sahih al-Bukhari 58; Book 2, Hadith 51",
+      "topic": "Nasihati; Sinqeriteti; Besëlidhja; Marrëdhëniet mes muslimanëve",
+      "parallelReferences": null,
+      "commentary": null,
+      "hanafiFiqh": null,
+      "audioUrl": null,
+      "sourceUrl": "https://sunnah.com/bukhari:58"
+    }
+  ]
+}
