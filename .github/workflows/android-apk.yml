@@ -38,7 +38,12 @@ jobs:
           gradle-version: "8.9"
       - name: Normalize recoverable packaged JSON
         working-directory: .
-        run: node tools/normalize-packed-json.mjs data/hadith/bukhari.json
+        run: node tools/normalize-packed-json.mjs data/hadith/bukhari.json data/hadith/tirmidhi.json
+      - name: Verify Arabic alignment and offline application contracts
+        working-directory: .
+        run: |
+          node tests/recitation.mjs
+          node tests/verify.mjs --offline
       - name: Verify real content and module integration
         working-directory: .
         run: node tests/content-integrity.mjs

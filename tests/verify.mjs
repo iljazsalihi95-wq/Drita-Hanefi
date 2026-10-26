@@ -176,7 +176,7 @@ const texhvidPage = await readFile(resolve(ROOT, "modules/texhvid/index.html"), 
 assert(texhvidPage.includes('title:raw(r,"Rregulli","RregulliShqip","Titulli")||first(r,"ruling","title")'), "Texhvidi: rregulli real nuk ka përparësi ndaj titullit të përgjithshëm");
 assert(texhvidPage.includes("Audio shfaqet vetëm kur baza jep URL reale."), "Texhvidi: politika e audios reale nuk është e dukshme");
 const serviceWorker = await readFile(resolve(ROOT, "sw.js"), "utf8");
-assert(serviceWorker.includes('drita-hanefi-v14'), "PWA: cache nuk u ngrit pas bibliotekës së Hadithit");
+assert(Number(serviceWorker.match(/drita-hanefi-v(\d+)/)?.[1]) >= 17, "PWA: cache nuk u ngrit pas bibliotekës së Hadithit");
 assert(serviceWorker.includes('"./data/akide-verified.json"'), "PWA nuk ruan katalogun e Akides për përdorim offline");
 assert(serviceWorker.includes('"./data/hudbe-verified.json"'), "PWA nuk ruan katalogun e Hudbeve për përdorim offline");
 assert(serviceWorker.includes('"./data/hadith/manifest.json"'), "PWA nuk ruan manifestin e bibliotekës së Hadithit");
@@ -186,7 +186,7 @@ const androidManifest = await readFile(resolve(ROOT, "android/app/src/main/Andro
 const splashBackground = await readFile(resolve(ROOT, "android/app/src/main/res/drawable/splash_background.xml"), "utf8");
 assert(androidActivity.includes("package com.dritahanefi.app;"), "Paketa Android nuk përputhet me applicationId");
 assert(androidActivity.includes('"quran"') && androidActivity.includes('"admin"'), "Ballina native nuk i lidh rubrikat kryesore");
-assert(androidSection.includes("file:///android_asset/site/modules/") && androidSection.includes("file:///android_asset/site/admin/index.html"), "Android nuk hap rubrikat e plota të paketuara");
+assert(androidSection.includes('ASSET_SITE="file:///android_asset/site/"') && androidSection.includes('ASSET_SITE+"modules/"') && androidSection.includes('ASSET_SITE+"admin/index.html"'), "Android nuk hap rubrikat e plota të paketuara");
 assert(androidSection.includes("setAllowFileAccessFromFileURLs(true)") && androidSection.includes("setAllowUniversalAccessFromFileURLs(true)"), "Android nuk lejon katalogët lokalë dhe API-të HTTPS nga paketa");
 assert(!await exists(resolve(ROOT, "android/app/src/main/java/com/dritahanefi/app/NativeRepository.java")), "Android përmban ende shtresën provizore të numërimit të rekordeve");
 assert(androidManifest.includes('android.permission.INTERNET'), "Androidit i mungon leja INTERNET");
@@ -197,6 +197,7 @@ for (const density of ["mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"]) {
   assert(await exists(resolve(ROOT, `android/app/src/main/res/mipmap-${density}/ic_launcher.png`)), `Mungon ikona Android ${density}`);
 }
 
+if(process.argv.includes("--offline")){console.log(`PASS OFFLINE: ${pages.length} pages, inline scripts, links, PWA, Android contracts, ${packagedHadiths.length} hadith records`);process.exit(0)}
 const apiResults = [];
 for (let i = 0; i < endpoints.length; i += 2) {
   apiResults.push(...await Promise.all(endpoints.slice(i, i + 2).map(verifyApi)));
