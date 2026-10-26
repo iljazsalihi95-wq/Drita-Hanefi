@@ -7,8 +7,8 @@ android {
         applicationId = "com.dritahanefi.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 10
-        versionName = "0.3.5-native-assets"
+        versionCode = 11
+        versionName = "0.4.0-recitation"
     }
 
     // The native shell loads the real repository modules from
@@ -16,10 +16,12 @@ android {
     sourceSets["main"].assets.srcDir(layout.buildDirectory.dir("generated/dritaAssets"))
 }
 
-val syncDritaWebAssets by tasks.registering(Copy::class) {
+val syncDritaWebAssets by tasks.registering(Sync::class) {
     into(layout.buildDirectory.dir("generated/dritaAssets/site"))
-    from("../../..") {
+    from(rootProject.projectDir.parentFile) {
         include("index.html")
+        include("manifest.webmanifest")
+        include("sw.js")
         include("modules/**")
         include("admin/**")
         include("assets/**")

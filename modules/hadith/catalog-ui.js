@@ -1,3 +1,4 @@
+import { loadVerifiedBatches } from './verified-loader.js';
 import { buildSourceTree, buildTopicIndex, hadithViewModel } from './catalog-controller.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -19,6 +20,7 @@ export class HadithCatalogExplorer {
     this.root = typeof root === 'string' ? document.querySelector(root) : root;
     this.onSelectHadith = onSelectHadith;
     this.rows = [];
+    this.query=new URLSearchParams(location.search).get('q')||'';this.searchPage=0;
     this.mode = 'source';
     this.path = { collection: '', book: '', chapter: '' };
   }
@@ -28,7 +30,14 @@ export class HadithCatalogExplorer {
     if (!this.root) return;
     this.root.innerHTML = `<div class="hadith-explorer-tabs">${button('Koleksionet',`data-mode="source" ${this.mode==='source'?'aria-current="page"':''}`)}${button('Tematikat',`data-mode="topics" ${this.mode==='topics'?'aria-current="page"':''}`)}</div><div class="hadith-explorer-body"></div>`;
     this.root.querySelectorAll('[data-mode]').forEach(el => el.onclick=()=>this.setMode(el.dataset.mode));
-    this.mode === 'topics' ? this.renderTopics() : this.renderSource();
+    const search=document.createElement('div');search.className='hadith-search';search.innerHTML='<label>Kërko në të gjitha <input type="search" aria-label="Kërko në të gjitha" placeholder="Fjalë, transmetues, numër ose referencë…"></label>';const input=search.querySelector('input');input.value=this.query;input.oninput=()=>{this.query=input.value;this.searchPage=0;this.query.trim()?this.renderSearch():this.mode==='topics'?this.renderTopics():this.renderSource()};this.root.prepend(search);
+    this.query.trim()?this.renderSearch():this.mode === 'topics' ? this.renderTopics() : this.renderSource();
+  }
+  renderSearch(){
+    const body=this.root.querySelector('.hadith-explorer-body'),norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('sq'),tokens=norm(this.query).split(/\s+/).filter(Boolean),PAGE_SIZE=20;
+    const results=this.rows.filter(h=>{const hay=norm([h.title,h.collectionLabel,h.book,h.chapter,h.number,h.arabic,h.albanian,h.chain,h.companion,h.commentary,h.hanafiCommentary,h.reference,...(h.topics||[])].join(' '));return tokens.every(t=>hay.includes(t))}),last=Math.max(0,Math.ceil(results.length/PAGE_SIZE)-1);this.searchPage=Math.min(this.searchPage,last);
+    body.innerHTML=`<p class="meta">${results.length} rezultate • Faqja ${this.searchPage+1}/${last+1}</p>${results.slice(this.searchPage*PAGE_SIZE,(this.searchPage+1)*PAGE_SIZE).map(h=>this.hadithCard(h)).join('')}<nav><button class="chip" data-page="prev" ${this.searchPage===0?'disabled':''}>← Mëparshme</button> <button class="chip" data-page="next" ${this.searchPage===last?'disabled':''}>Tjetra →</button></nav>`;
+    body.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{this.searchPage+=b.dataset.page==='next'?1:-1;this.renderSearch();body.scrollIntoView({block:'start'})});this.bindHadiths(body);
   }
   renderSource() {
     const body=this.root.querySelector('.hadith-explorer-body'), tree=buildSourceTree(this.rows), {collection,book,chapter}=this.path;
@@ -52,7 +61,8 @@ export async function loadHadithCollections(manifestUrl='../../data/hadith/manif
   const manifest=await fetch(manifestUrl).then(r=>{if(!r.ok)throw new Error(`Manifest ${r.status}`);return r.json()});
   const results=await Promise.allSettled((manifest.collections||[]).map(async c=>{const response=await fetch(baseUrl+c.file);if(!response.ok)throw new Error(`${c.file} ${response.status}`);const data=parseCollectionJson(await response.text(),c.file);return {collection:c,rows:Array.isArray(data.rows)?data.rows:[]}}));
   const available=[],unavailable=[];for(const result of results){if(result.status==='fulfilled')available.push(result.value);else unavailable.push(String(result.reason?.message||result.reason||'Koleksion i palexueshëm'));}
-  const rows=available.flatMap(group=>group.rows).map(hadithViewModel);
+  const verified=await loadVerifiedBatches(baseUrl+"verified/");unavailable.push(...verified.unavailable);
+  const rows=[...available.flatMap(group=>group.rows),...verified.rows].map(hadithViewModel);
   if(!rows.length)throw new Error('Asnjë koleksion real i Hadithit nuk u lexua');
-  return {manifest:{...manifest,availableCollections:available.map(group=>group.collection),unavailableCollections:unavailable},rows};
+  return {manifest:{...manifest,verifiedRows:verified.rows.length,excludedVerified:verified.excluded,translated:rows.filter(r=>r.albanian).length,graded:rows.filter(r=>r.preferredGrade?.grade).length,availableCollections:available.map(group=>group.collection),unavailableCollections:unavailable},rows};
 }

@@ -1,0 +1,1451 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "file": "abudawud-2449-2463.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2464-2478.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2479-2493.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2494-2508.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2509-2523.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2524-2536.json",
+      "rows": 13
+    },
+    {
+      "file": "abudawud-2537-2551.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2552-2566.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2567-2581.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2582-2598.json",
+      "rows": 17
+    },
+    {
+      "file": "abudawud-2599-2610-safe-travel-batch.json",
+      "rows": 11
+    },
+    {
+      "file": "abudawud-2599-2610.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-2599-2613.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2606-2630-continuation-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-2614-2625.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-2614-2628.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2615-2627.json",
+      "rows": 13
+    },
+    {
+      "file": "abudawud-2619-2626-safe.json",
+      "rows": 7
+    },
+    {
+      "file": "abudawud-2623.json",
+      "rows": 1
+    },
+    {
+      "file": "abudawud-2624-2629-safe-verified.json",
+      "rows": 5
+    },
+    {
+      "file": "abudawud-2626-2642.json",
+      "rows": 17
+    },
+    {
+      "file": "abudawud-2628-2641.json",
+      "rows": 14
+    },
+    {
+      "file": "abudawud-2629-2642.json",
+      "rows": 14
+    },
+    {
+      "file": "abudawud-2631-2648-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-2642-2656.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2643-2658-selected.json",
+      "rows": 14
+    },
+    {
+      "file": "abudawud-2643-2658.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-2657-2671.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2663-2674.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-2672-2686.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2675-2690-selected.json",
+      "rows": 11
+    },
+    {
+      "file": "abudawud-2687-2701.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2701-2716.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-2702-2716.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2717-2731.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2718-2732-selected.json",
+      "rows": 14
+    },
+    {
+      "file": "abudawud-2732-2746.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2733-2744.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-2745-2756.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-2747-2761.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2757-2770.json",
+      "rows": 14
+    },
+    {
+      "file": "abudawud-2762-2776.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2771-2785-selected.json",
+      "rows": 13
+    },
+    {
+      "file": "abudawud-2777-2787.json",
+      "rows": 11
+    },
+    {
+      "file": "abudawud-2788-2795.json",
+      "rows": 8
+    },
+    {
+      "file": "abudawud-2796-2810.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2811-2830.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-2831-2843.json",
+      "rows": 13
+    },
+    {
+      "file": "abudawud-2844-2845.json",
+      "rows": 2
+    },
+    {
+      "file": "abudawud-2846-2861.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-2862-2876.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2877-2891.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2892-2906.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2907-2921.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2922-2936.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2937-2951.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2952-2966.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2967-2981.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2982-2996.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-2997-3011.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3012-3021.json",
+      "rows": 10
+    },
+    {
+      "file": "abudawud-3022-3036.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3037-3051.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3052-3066.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3067-3081.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3082-3106.json",
+      "rows": 25
+    },
+    {
+      "file": "abudawud-3107-3126.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3127-3141.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3142-3162.json",
+      "rows": 21
+    },
+    {
+      "file": "abudawud-3163-3180.json",
+      "rows": 18
+    },
+    {
+      "file": "abudawud-3181-3193.json",
+      "rows": 13
+    },
+    {
+      "file": "abudawud-3194-3208.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3209-3228.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3229-3248.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3249-3268.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3269-3288.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3289-3308.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3309-3325.json",
+      "rows": 17
+    },
+    {
+      "file": "abudawud-3326-3340.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3341-3355.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3356-3375.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3376-3392.json",
+      "rows": 17
+    },
+    {
+      "file": "abudawud-3413-3432.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3433-3447.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3448-3467.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3468-3487.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3488-3499.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-3500-3503.json",
+      "rows": 4
+    },
+    {
+      "file": "abudawud-3504-3518.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3519-3535.json",
+      "rows": 17
+    },
+    {
+      "file": "abudawud-3536-3555.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3556-3570.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3571-3583.json",
+      "rows": 13
+    },
+    {
+      "file": "abudawud-3584-3595.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-3596-3610.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3611-3625.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3626-3640.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3641-3655.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3656-3670.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3671-3685.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3686-3702.json",
+      "rows": 17
+    },
+    {
+      "file": "abudawud-3703-3717.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3718-3732.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3733-3747.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3748-3762.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3763-3777.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3778-3792.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3793-3807.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3808-3822.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3823-3837.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3838-3852.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3853-3867.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3868-3882.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3883-3897.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3898-3912.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3913-3927.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3928-3942.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3943-3957.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3958-3972.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-3973-3992.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-3993-4012.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-4013-4027.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4028-4042.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4043-4057.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4058-4072.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4073-4087.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4088-4102.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4103-4117.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4118-4132.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4133-4148.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4149-4164.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4165-4180.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4181-4196.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4197-4212.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4213-4228.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4229-4244.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4245-4260.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4261-4276.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4277-4292.json",
+      "rows": 17
+    },
+    {
+      "file": "abudawud-4293-4312.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-4313-4327.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4328-4343.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4344-4359.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4360-4371.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-4372-4387.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4388-4398.json",
+      "rows": 11
+    },
+    {
+      "file": "abudawud-4399-4410.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-4411-4422.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-4423-4434.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-4435-4449.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4450-4461.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-4462-4480.json",
+      "rows": 19
+    },
+    {
+      "file": "abudawud-4481-4493.json",
+      "rows": 13
+    },
+    {
+      "file": "abudawud-4494-4504.json",
+      "rows": 11
+    },
+    {
+      "file": "abudawud-4505-4521.json",
+      "rows": 17
+    },
+    {
+      "file": "abudawud-4522-4538.json",
+      "rows": 17
+    },
+    {
+      "file": "abudawud-4539-4555.json",
+      "rows": 17
+    },
+    {
+      "file": "abudawud-4556-4575.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-4576-4587.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-4588-4599.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-4600-4610.json",
+      "rows": 11
+    },
+    {
+      "file": "abudawud-4611-4624.json",
+      "rows": 14
+    },
+    {
+      "file": "abudawud-4625-4639.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4640-4654.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4655-4669.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4670-4684.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4685-4699.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4700-4714.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4715-4729.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4730-4744.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4745-4759.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4760-4772.json",
+      "rows": 13
+    },
+    {
+      "file": "abudawud-4773-4787.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4788-4802.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4803-4817.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4833-4847.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4848-4862.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4863-4877.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4878-4892.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-4893-4903.json",
+      "rows": 11
+    },
+    {
+      "file": "abudawud-4904-4921.json",
+      "rows": 18
+    },
+    {
+      "file": "abudawud-4922-4937.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4938-4950.json",
+      "rows": 13
+    },
+    {
+      "file": "abudawud-4951-4966.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4967-4982.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4983-4998.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-4999-5014.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-5015-5030.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-5031-5046.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-5047-5062.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-5063-5065.json",
+      "rows": 3
+    },
+    {
+      "file": "abudawud-5066-5080.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-5081-5100.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-5101-5120.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-5121-5140.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-5141-5160.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-5161-5180.json",
+      "rows": 20
+    },
+    {
+      "file": "abudawud-5181-5195.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-5196-5207.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-5208-5219.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-5220-5231.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-5232-5246.json",
+      "rows": 15
+    },
+    {
+      "file": "abudawud-5247-5262.json",
+      "rows": 16
+    },
+    {
+      "file": "abudawud-5263-5274.json",
+      "rows": 12
+    },
+    {
+      "file": "abudawud-gaps-2676-2700.json",
+      "rows": 14
+    },
+    {
+      "file": "bukhari-1-6.json",
+      "rows": 6
+    },
+    {
+      "file": "bukhari-100-113-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-114-129-verified-batch.json",
+      "rows": 14
+    },
+    {
+      "file": "bukhari-130-141-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-142-161.json",
+      "rows": 20
+    },
+    {
+      "file": "bukhari-162-173-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-174-186-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-175-198-gap-and-continuation.json",
+      "rows": 13
+    },
+    {
+      "file": "bukhari-19-30.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-199-210-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-211-222-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-223-235-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-236-247-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-248-259-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-260-271-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-272-284-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-285-305-safe-verified.json",
+      "rows": 11
+    },
+    {
+      "file": "bukhari-306-317-verified.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-31-42.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-318-330-verified.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-331-343-verified.json",
+      "rows": 13
+    },
+    {
+      "file": "bukhari-344-355-verified.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-356-367-verified.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-368-380-verified.json",
+      "rows": 13
+    },
+    {
+      "file": "bukhari-381-396-verified.json",
+      "rows": 15
+    },
+    {
+      "file": "bukhari-397-409-verified.json",
+      "rows": 13
+    },
+    {
+      "file": "bukhari-410-421-verified.json",
+      "rows": 11
+    },
+    {
+      "file": "bukhari-422-434-verified.json",
+      "rows": 13
+    },
+    {
+      "file": "bukhari-43-57.json",
+      "rows": 15
+    },
+    {
+      "file": "bukhari-435-449-verified.json",
+      "rows": 14
+    },
+    {
+      "file": "bukhari-450-465-verified.json",
+      "rows": 15
+    },
+    {
+      "file": "bukhari-466-482-verified.json",
+      "rows": 14
+    },
+    {
+      "file": "bukhari-476-477-and-483-496-verified.json",
+      "rows": 16
+    },
+    {
+      "file": "bukhari-497-508-verified.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-509-524-verified.json",
+      "rows": 15
+    },
+    {
+      "file": "bukhari-58.json",
+      "rows": 1
+    },
+    {
+      "file": "bukhari-59-69.json",
+      "rows": 11
+    },
+    {
+      "file": "bukhari-70-84.json",
+      "rows": 15
+    },
+    {
+      "file": "bukhari-8-18.json",
+      "rows": 11
+    },
+    {
+      "file": "bukhari-8-19.json",
+      "rows": 12
+    },
+    {
+      "file": "bukhari-85-99-verified-batch.json",
+      "rows": 12
+    },
+    {
+      "file": "muslim-13a-15b.json",
+      "rows": 5
+    },
+    {
+      "file": "muslim-25a-30d.json",
+      "rows": 11
+    },
+    {
+      "file": "muslim-35b-43c.json",
+      "rows": 15
+    },
+    {
+      "file": "muslim-44a-54a-safe.json",
+      "rows": 12
+    },
+    {
+      "file": "muslim-55a-63b-safe.json",
+      "rows": 12
+    },
+    {
+      "file": "muslim-64a-78-safe.json",
+      "rows": 13
+    },
+    {
+      "file": "muslim-79a-85c-safe.json",
+      "rows": 12
+    },
+    {
+      "file": "muslim-85e-86b-safe.json",
+      "rows": 3
+    },
+    {
+      "file": "muslim-87-94b-safe.json",
+      "rows": 12
+    },
+    {
+      "file": "muslim-8b-11a.json",
+      "rows": 7
+    },
+    {
+      "file": "tirmidhi-1-15.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-1016-1030.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-1031-1045.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-1046-1057.json",
+      "rows": 12
+    },
+    {
+      "file": "tirmidhi-1058-1077.json",
+      "rows": 20
+    },
+    {
+      "file": "tirmidhi-106-120.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-1078-1091.json",
+      "rows": 14
+    },
+    {
+      "file": "tirmidhi-1092-1107.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1108-1118.json",
+      "rows": 11
+    },
+    {
+      "file": "tirmidhi-1119-1134.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1135-1150.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1151-1166.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1167-1182.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1183-1198.json",
+      "rows": 17
+    },
+    {
+      "file": "tirmidhi-1199-1208b.json",
+      "rows": 12
+    },
+    {
+      "file": "tirmidhi-121-135.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-1213-1224.json",
+      "rows": 12
+    },
+    {
+      "file": "tirmidhi-1225-1240.json",
+      "rows": 17
+    },
+    {
+      "file": "tirmidhi-1241-1252.json",
+      "rows": 12
+    },
+    {
+      "file": "tirmidhi-1253-1267.json",
+      "rows": 17
+    },
+    {
+      "file": "tirmidhi-1268-1279.json",
+      "rows": 12
+    },
+    {
+      "file": "tirmidhi-1280-1295.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1296-1310.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1311-1321.json",
+      "rows": 12
+    },
+    {
+      "file": "tirmidhi-1322-1336.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1337-1352.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1353-1364.json",
+      "rows": 12
+    },
+    {
+      "file": "tirmidhi-136-148.json",
+      "rows": 13
+    },
+    {
+      "file": "tirmidhi-1365-1379.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1380-1385.json",
+      "rows": 6
+    },
+    {
+      "file": "tirmidhi-1386-1400.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-1401-1415.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-1416-1430.json",
+      "rows": 18
+    },
+    {
+      "file": "tirmidhi-1431-1439.json",
+      "rows": 12
+    },
+    {
+      "file": "tirmidhi-1440-1452.json",
+      "rows": 13
+    },
+    {
+      "file": "tirmidhi-1453-1463.json",
+      "rows": 12
+    },
+    {
+      "file": "tirmidhi-1473-1479.json",
+      "rows": 8
+    },
+    {
+      "file": "tirmidhi-149-163.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-1505-1517-safe.json",
+      "rows": 13
+    },
+    {
+      "file": "tirmidhi-1524-1535.json",
+      "rows": 13
+    },
+    {
+      "file": "tirmidhi-1536-1547.json",
+      "rows": 13
+    },
+    {
+      "file": "tirmidhi-16-30.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-164-178.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-179-193.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-194-208.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-209-223.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-224-238.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-239-253.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-254-264.json",
+      "rows": 11
+    },
+    {
+      "file": "tirmidhi-265-279.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-280-294.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-295-310.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-31-45.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-311-325.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-326-340.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-341-355.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-356-370.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-371-385.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-386-400.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-401-415.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-416-430.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-431-445.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-446-460.json",
+      "rows": 14
+    },
+    {
+      "file": "tirmidhi-46-60.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-461-475.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-476-490.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-491-505.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-506-520.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-521-540.json",
+      "rows": 20
+    },
+    {
+      "file": "tirmidhi-541-555.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-556-570.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-571-585.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-586-600.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-601-614.json",
+      "rows": 14
+    },
+    {
+      "file": "tirmidhi-61-75.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-615-629.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-630-644.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-645-659.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-660-674.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-675-689.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-690-704.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-705-719.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-720-734.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-735-749.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-750-764.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-76-90.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-765-779.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-780-794.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-795-809.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-810-824.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-825-839.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-840-854.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-855-869.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-870-884.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-885-899.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-900-914.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-91-105.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-915-929.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-930-944.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-965-979.json",
+      "rows": 15
+    },
+    {
+      "file": "tirmidhi-980-995.json",
+      "rows": 16
+    },
+    {
+      "file": "tirmidhi-996-1015.json",
+      "rows": 20
+    }
+  ],
+  "unavailable": [
+    {
+      "file": "abudawud-3393-3412.json",
+      "error": "JSON i pavlefshëm; skedari burimor u ruajt pa ndryshime."
+    },
+    {
+      "file": "abudawud-4818-4832.json",
+      "error": "JSON i pavlefshëm; skedari burimor u ruajt pa ndryshime."
+    },
+    {
+      "file": "tirmidhi-945-964.json",
+      "error": "JSON i pavlefshëm; skedari burimor u ruajt pa ndryshime."
+    }
+  ]
+}

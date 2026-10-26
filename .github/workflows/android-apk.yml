@@ -36,6 +36,9 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.9"
+      - name: Index existing verified Hadith batches
+        working-directory: .
+        run: node tools/index-verified-hadith.mjs
       - name: Normalize recoverable packaged JSON
         working-directory: .
         run: node tools/normalize-packed-json.mjs data/hadith/bukhari.json data/hadith/tirmidhi.json
@@ -43,6 +46,7 @@ jobs:
         working-directory: .
         run: |
           node tests/recitation.mjs
+          node tests/verified-hadith.mjs
           node tests/verify.mjs --offline
       - name: Verify real content and module integration
         working-directory: .
@@ -51,15 +55,24 @@ jobs:
         working-directory: .
         run: node tests/verify.mjs
       - name: Bundle audited web application
-        working-directory: .
-        run: |
-          mkdir -p android/app/src/main/assets/site
-          rsync -a --delete \
-            --exclude='.git' --exclude='.github' --exclude='android' \
-            --exclude='tests' --exclude='tools' --exclude='README.md' --exclude='Code.gs' ./ \
-            android/app/src/main/assets/site/
+        run: gradle :app:syncDritaWebAssets
       - run: gradle :app:assembleDebug
       - uses: actions/upload-artifact@v4
         with:
           name: Drita-Hanefi-Android-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
+
+  web-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install browser test dependency outside repository
+        run: npm install --prefix "$RUNNER_TEMP/drita-browser" --no-package-lock --no-save playwright
+      - name: Test PWA and recitation feedback in Chrome
+        env:
+          DRITA_PLAYWRIGHT_MODULE: ${{ runner.temp }}/drita-browser/node_modules/playwright
+          DRITA_CHROME_PATH: /usr/bin/google-chrome
+        run: node tests/recitation-browser.mjs

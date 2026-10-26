@@ -20,6 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Index existing verified Hadith batches
+        working-directory: .
+        run: node tools/index-verified-hadith.mjs
       - uses: actions/configure-pages@v5
         with:
           enablement: true
