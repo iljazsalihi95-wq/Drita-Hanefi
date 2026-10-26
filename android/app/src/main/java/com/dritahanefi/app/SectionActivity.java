@@ -22,6 +22,7 @@ public class SectionActivity extends Activity {
  private static final String PREFS="drita_hanefi_native";
  private static final String ASSET_SITE="file:///android_asset/site/";
  private static final int FILE_CHOOSER_REQUEST=4107;
+ private static final int SPEECH_REQUEST=4108;
  private WebView webView;
  private String type;
  private String moduleRoot;
@@ -50,6 +51,10 @@ public class SectionActivity extends Activity {
   settings.setJavaScriptEnabled(true); settings.setDomStorageEnabled(true); settings.setDatabaseEnabled(true); settings.setMediaPlaybackRequiresUserGesture(false);
   settings.setAllowFileAccess(true); settings.setAllowContentAccess(true); settings.setAllowFileAccessFromFileURLs(true); settings.setAllowUniversalAccessFromFileURLs(true); settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
   settings.setBuiltInZoomControls(false); settings.setDisplayZoomControls(false); settings.setLoadWithOverviewMode(true); settings.setUseWideViewPort(true); settings.setTextZoom(100); settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+  webView.addJavascriptInterface(new Object(){
+   @android.webkit.JavascriptInterface public void start(){ runOnUiThread(()->{if(webView==null||!validResumeUrl(webView.getUrl()))return;Intent intent=new Intent(android.speech.RecognizerIntent.ACTION_RECOGNIZE_SPEECH);intent.putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE_MODEL,android.speech.RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);intent.putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE,"ar-SA");intent.putExtra(android.speech.RecognizerIntent.EXTRA_PROMPT,"Lexo ajetin ose ushtrimin në arabisht");try{startActivityForResult(intent,SPEECH_REQUEST);}catch(Exception e){speechResult("",-1,"Njohja zanore arabe nuk është e disponueshme në këtë pajisje.");}});}
+   @android.webkit.JavascriptInterface public void cancel(){ runOnUiThread(()->{try{finishActivity(SPEECH_REQUEST);}catch(Exception ignored){}});}
+  },"DritaSpeech");
   webView.setWebChromeClient(new WebChromeClient(){
    @Override public boolean onShowFileChooser(WebView view,ValueCallback<Uri[]> callback,FileChooserParams params){
     if(fileChooserCallback!=null) fileChooserCallback.onReceiveValue(null);
@@ -88,6 +93,10 @@ public class SectionActivity extends Activity {
   webView.loadUrl(query.build().toString());
  }
 
+ private void speechResult(String text,float confidence,String error){
+  if(webView==null||!validResumeUrl(webView.getUrl()))return;
+  webView.evaluateJavascript("window.__dritaSpeechResult && window.__dritaSpeechResult("+org.json.JSONObject.quote(text)+","+confidence+","+org.json.JSONObject.quote(error)+")",null);
+ }
  private void hideCustomView(){
   if(customView==null) return;
   fullscreenMedia.removeView(customView);
@@ -100,6 +109,12 @@ public class SectionActivity extends Activity {
  }
  @Override protected void onActivityResult(int requestCode,int resultCode,Intent data){
   super.onActivityResult(requestCode,resultCode,data);
+  if(requestCode==SPEECH_REQUEST){
+   if(resultCode!=RESULT_OK||data==null){speechResult("",-1,"Nuk u kuptua leximi. Provo përsëri.");return;}
+   java.util.ArrayList<String> texts=data.getStringArrayListExtra(android.speech.RecognizerIntent.EXTRA_RESULTS);
+   float[] scores=data.getFloatArrayExtra(android.speech.RecognizerIntent.EXTRA_CONFIDENCE_SCORES);
+   speechResult(texts!=null&&!texts.isEmpty()?texts.get(0):"",scores!=null&&scores.length>0?scores[0]:-1,"");return;
+  }
   if(requestCode!=FILE_CHOOSER_REQUEST||fileChooserCallback==null) return;
   Uri[] result=WebChromeClient.FileChooserParams.parseResult(resultCode,data);
   fileChooserCallback.onReceiveValue(result);
