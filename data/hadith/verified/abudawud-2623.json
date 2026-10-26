@@ -1,0 +1,30 @@
+{
+  "collection": "abudawud",
+  "collectionLabel": "Sunen Ebu Davud",
+  "bookNumber": "15",
+  "book": "Kitab el-Xhihad / Xhihadi",
+  "range": "2623",
+  "numberingSystem": "Sunnah.com / Abdul-Hamid numbering used by Drita Hanefi",
+  "verification": "Numri, libri, kapitulli, senedi/metni dhe transmetuesi u kontrolluan kundrejt burimit të koleksionit. Për gradimin nuk është përdorur Albani si autoritet kryesor; janë ruajtur vlerësimet e dokumentuara të Muhammad Muhyi al-Din Abd al-Hamid dhe Shuayb al-Arnaut.",
+  "rows": [
+    {
+      "number": "2623",
+      "inBook": "15:147",
+      "chapter": "Për atë që thotë se nuk lejohet të milet kafsha e tjetrit pa lejen e tij",
+      "chapterArabic": "باب فِيمَنْ قَالَ لاَ يَحْبُ",
+      "narrator": "Abdullah ibn Umer",
+      "isnad": "عبد الله بن مسلمة ← مالك ← نافع ← عبد الله بن عمر",
+      "arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مَسْلَمَةَ، عَنْ مَالِكٍ، عَنْ نَافِعٍ، عَنْ عَبْدِ اللَّهِ بْنِ عُمَرَ، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ لاَ يَحْلُبَنَّ أَحَدٌ مَاشِيَةَ أَحَدٍ بِغَيْرِ إِذْنِهِ أَيُحِبُّ أَحَدُكُمْ أَنْ تُؤْتَى مَشْرَبَتُهُ فَتُكْسَرَ خِزَانَتُهُ فَيُنْتَثَلَ طَعَامُهُ فَإِنَّمَا تَخْزُنُ لَهُمْ ضُرُوعُ مَوَاشِيهِمْ أَطْعِمَتَهُمْ فَلاَ يَحْلُبَنَّ أَحَدٌ مَاشِيَةَ أَحَدٍ إِلاَّ بِإِذْنِهِ.",
+      "translationSq": "Abdullah ibn Umeri transmeton se i Dërguari i Allahut ﷺ tha se askush nuk duhet ta mjelë bagëtinë e një tjetri pa lejen e tij. Ai e krahasoi këtë me hyrjen në depon e dikujt dhe marrjen e ushqimit të ruajtur aty, sepse gjinjtë e bagëtive ruajnë ushqimin e pronarëve të tyre. Prandaj bagëtia e tjetrit nuk milet pa lejen e tij.",
+      "grade": "Sahih",
+      "gradeAuthority": "Muhammad Muhyi al-Din Abd al-Hamid: Sahih; Shuayb al-Arnaut: Sahih",
+      "gradeReference": "Vlerësimet e shënuara për Sunen Ebu Davud 2623 në burimin krahasues të gradimeve; paralelizëm: Sahih Buhari 2435 dhe Sahih Muslim 1726.",
+      "topic": "E drejta e pronës; Leja; Etika",
+      "parallelReferences": "Sahih Buhari 2435; Sahih Muslim 1726; Sunen Ibn Maxhe 2302; Muwatta Malik, al-Isti'dhan 17",
+      "commentary": "Hadithi ndalon marrjen e përfitimit nga pasuria e tjetrit pa leje dhe e shpjegon këtë me analogjinë e ushqimit të ruajtur.",
+      "hanafiFiqh": "Lidhet me ruajtjen e pasurisë dhe ndalimin e përfitimit nga prona e tjetrit pa leje; nuk u shtua hükm i posaçëm hanefi pa referencë të verifikuar.",
+      "audioUrl": null,
+      "sourceUrl": "https://sunnah.com/abudawud:2623"
+    }
+  ]
+}
