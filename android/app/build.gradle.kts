@@ -7,8 +7,8 @@ android {
         applicationId = "com.dritahanefi.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 11
-        versionName = "0.4.0-recitation"
+        versionCode = 12
+        versionName = "0.4.1-recitation"
     }
 
     // The native shell loads the real repository modules from
